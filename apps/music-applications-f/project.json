@@ -1,0 +1,84 @@
+{
+  "name": "music-applications-f",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/music-applications-f/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/music-applications-f",
+        "index": "apps/music-applications-f/src/index.html",
+        "baseHref": "/",
+        "main": "apps/music-applications-f/src/main.tsx",
+        "polyfills": "apps/music-applications-f/src/polyfills.ts",
+        "tsConfig": "apps/music-applications-f/tsconfig.app.json",
+        "assets": [
+          "apps/music-applications-f/src/favicon.ico",
+          "apps/music-applications-f/src/assets"
+        ],
+        "styles": ["apps/music-applications-f/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/music-applications-f/src/environments/environment.ts",
+              "with": "apps/music-applications-f/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "music-applications-f:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "music-applications-f:build:development"
+        },
+        "production": {
+          "buildTarget": "music-applications-f:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/music-applications-f/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/music-applications-f"],
+      "options": {
+        "jestConfig": "apps/music-applications-f/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
