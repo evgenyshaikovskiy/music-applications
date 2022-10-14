@@ -52,7 +52,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "music-applications-f:build",
-        "hmr": true
+        "hmr": true,
+        "proxyConfig": "apps/music-applications-f/proxy.conf.json"
       },
       "configurations": {
         "development": {

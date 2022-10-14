@@ -1,0 +1,60 @@
+{
+  "name": "music-applications-b",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/music-applications-b/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/music-applications-b",
+        "main": "apps/music-applications-b/src/main.ts",
+        "tsConfig": "apps/music-applications-b/tsconfig.app.json",
+        "assets": ["apps/music-applications-b/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/music-applications-b/src/environments/environment.ts",
+              "with": "apps/music-applications-b/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "music-applications-b:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "music-applications-b:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/music-applications-b/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/music-applications-b"],
+      "options": {
+        "jestConfig": "apps/music-applications-b/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
