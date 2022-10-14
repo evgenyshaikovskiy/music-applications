@@ -1,13 +1,15 @@
 import { Controller, Get } from '@nestjs/common';
+import { Neo4jService } from 'nest-neo4j/dist';
 
-import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly dbService: Neo4jService) {
+  }
 
   @Get()
-  getData() {
-    return this.appService.getData();
+  async getData() {
+    const res = await this.dbService.read('MATCH (n) RETURN count(n) AS count');
+    return `There are ${res.records[0].get('count')} nodes in db.`
   }
 }
