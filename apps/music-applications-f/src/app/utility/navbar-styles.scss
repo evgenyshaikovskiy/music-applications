@@ -1,0 +1,27 @@
+.navbar-wrapper, .navbar-links, .router-wrapper {
+  width: 100%;
+  height: 75px;
+}
+
+.router-wrapper {
+  border: solid 3px rebeccapurple;
+  border-radius: 10px;
+  background-color: purple;
+}
+
+.navbar-links {
+  display: flex; 
+  align-items: center;
+}
+
+.router-link {
+  padding-left: 150px;
+  padding-right: 150px;
+  color: black;
+  font-size:x-large;
+  text-decoration: none;
+  margin: 10px;
+  &:hover, &:focus {
+    color: rgb(47, 10, 209);
+  }
+}
