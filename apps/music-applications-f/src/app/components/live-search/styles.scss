@@ -1,0 +1,30 @@
+.livesearch-input-container {
+}
+
+.clickable-dropdown-item {
+  background-color: red;
+  text-align: left;
+  padding-left: 10px;
+  padding-top: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+.livesearch-input {
+  border: 0;
+  border-bottom: 3px solid teal;
+  height: 40px;
+  width: 550px;
+  text-align: left;
+  font-size: x-large;
+  padding-left: 10px;
+  &:focus {
+    border-color: aqua;
+    border-bottom: 3px solid aqua;
+  }
+
+  &:focus-visible {
+    outline: 0;
+  }
+}

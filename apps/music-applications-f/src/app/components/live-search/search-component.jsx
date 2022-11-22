@@ -1,35 +1,44 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import ApplicationInput from '../ui-elements/input';
+import InteractiveDropdown from './interactive-dropdown';
+import './styles.scss';
 
 export function LiveSearch() {
-  const [result, setResults] = useState([]);
+  const [results, setResults] = useState([]);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      // use call
-      if (query != '') {
+    const searchDelayTimer = setTimeout(() => {
+      if (query !== '') {
         axios
           .get(`http://localhost:4200/api/search?word=${query.toLowerCase()}`)
           .then((response) => {
-            console.log(
+            setResults(
               response.data.records.map((value) => value['_fields'][0])
             );
           });
       }
     }, 500);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(searchDelayTimer);
   }, [query]);
-  
+
   return (
-    <div>
-      <ApplicationInput
-        value={query}
-        type="text"
-        onChange={(e) => setQuery(e.target.value)}
-      ></ApplicationInput>
+    <div className="livesearch-wrapper">
+      <div className="livesearch-input-container">
+        <input
+          className="livesearch-input"
+          value={query}
+          type="text"
+          onChange={(e) => setQuery(e.target.value)}
+        ></input>
+      </div>
+      {query !== '' ? (
+        <InteractiveDropdown list={results}></InteractiveDropdown>
+      ) : (
+        <div>Type</div>
+      )}
     </div>
   );
 }
