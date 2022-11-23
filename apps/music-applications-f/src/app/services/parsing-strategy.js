@@ -1,5 +1,15 @@
 export const Strategy = {
-  ParseNames: function (rawData) {
-    return rawData.map((value) => value['_fields'][0])
+  ParseObj: function (rawData) {
+    return rawData.map((value) => {
+      const record = value['_fields'][0];
+      return {
+        type: [record.labels],
+        properties: record.properties,
+        label:
+          record.properties.title ||
+          record.properties.name ||
+          record.properties.kind,
+      };
+    });
   },
 };

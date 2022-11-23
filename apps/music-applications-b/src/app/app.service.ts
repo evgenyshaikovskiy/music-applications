@@ -7,16 +7,16 @@ export class AppService {
 
   // refactor to one method??
   private searchArtistQuery = (artistName: string) =>
-    `MATCH (obj: Person) WHERE ToLower(obj.name) CONTAINS '${artistName}' return obj.name as label`;
+    `MATCH (obj: Person) WHERE ToLower(obj.name) CONTAINS '${artistName}' return obj`;
 
   private searchAlbumQuery = (albumTitle: string) =>
-    `MATCH (obj: Album) WHERE ToLower(obj.title) CONTAINS '${albumTitle}' return obj.title as label`;
+    `MATCH (obj: Album) WHERE ToLower(obj.title) CONTAINS '${albumTitle}' return obj`;
 
   private searchGenreQuery = (genreKind: string) =>
-    `MATCH (obj: Genre) WHERE ToLower(obj.kind) CONTAINS '${genreKind}' return obj.kind as label`;
+    `MATCH (obj: Genre) WHERE ToLower(obj.kind) CONTAINS '${genreKind}' return obj`;
 
   private searchSongQuery = (songTitle: string) =>
-    `MATCH (obj: Song) WHERE ToLower(obj.title) CONTAINS '${songTitle}' return obj.title as label`;
+    `MATCH (obj: Song) WHERE ToLower(obj.title) CONTAINS '${songTitle}' return obj`;
 
   private searchFunctions = [
     this.searchArtistQuery,

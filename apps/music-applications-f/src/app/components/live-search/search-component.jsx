@@ -48,7 +48,7 @@ export function LiveSearch() {
             setResults(
               RequestParser.parseResponseData(
                 response.data.records,
-                Strategy.ParseNames
+                Strategy.ParseObj
               )
             );
           });
@@ -61,6 +61,7 @@ export function LiveSearch() {
   function callback(item) {
     console.log(`callback for this ${item}`);
     console.log(searchWord);
+    console.log(item);
   }
 
   return (
@@ -79,7 +80,7 @@ export function LiveSearch() {
           className="livesearch-input"
           value={query}
           type="text"
-          placeholder='Write your query here'
+          placeholder="Write your query here"
           onChange={(e) => setQuery(e.target.value)}
         ></input>
       </div>
