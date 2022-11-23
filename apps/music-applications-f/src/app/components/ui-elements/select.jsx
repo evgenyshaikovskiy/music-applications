@@ -2,6 +2,7 @@ const defaultStyles = {};
 
 const ApplicationSelect = ({
   options,
+  defaultValueName,
   defaultValue,
   value,
   onChange,
@@ -14,8 +15,8 @@ const ApplicationSelect = ({
       onChange={(event) => onChange(event.target.value)}
       style={{ ...defaultStyles, ...styles }}
     >
-      <option disabled={isDefaultDisabled} value="">
-        {defaultValue}
+      <option disabled={isDefaultDisabled} value={defaultValue}>
+        {defaultValueName}
       </option>
       {options.map((option) => (
         <option key={option.value} value={option.value}>
