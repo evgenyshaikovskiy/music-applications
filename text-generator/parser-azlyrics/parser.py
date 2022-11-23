@@ -89,6 +89,9 @@ class Azlyrics(object):
 
     def get_current_song(self):
         return self.current_song
+    
+    def print_songs(self):
+        print(f'Unique : {len(set(self.songs))}\n{self.songs}')
 
     # WARNING!
     # Logic of this finc in combination with the while loop in run() does't parse the last song
@@ -110,7 +113,8 @@ def save_lyrics_to_file(path, lirics):
 def set_settings(new_file, artist_name,path_to_cache, path_to_file):
     if path_to_file != 'def':
         if new_file == True:
-            with open(path_to_file+'/'+str(artist_name),'w',encoding = 'utf-8') as f:
+            path_to_file = path_to_file+'/'+str(artist_name)+'.txt'
+            with open(path_to_file,'w',encoding = 'utf-8') as f:
                 f.write('')
     else:
         if new_file == True:
@@ -150,11 +154,12 @@ def run():
     if lyrics is None:
         az.set_songs()
         while az.set_current_song() and num != args.number_of_songs:
-            time.sleep(0.7) # the optimal MIN parameter with which you won't get a ban IS 0.5
+            time.sleep(1.0) # the optimal MIN parameter with which you won't get a ban IS 0.5
             lyrics = az.format_lyrics(az.get_lyrics())
             curr_song = az.get_current_song()
             c.add(cache_key, curr_song+'\n') # add to cache
             save_lyrics_to_file(path_to_file, lyrics) # write to file
+            #az.print_songs()
             print(f'Successful for {curr_song}! Num = {num+1}')
             num += 1
     else:
