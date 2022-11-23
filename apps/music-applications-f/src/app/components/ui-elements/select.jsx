@@ -1,9 +1,4 @@
-import React from 'react';
-
-const defaultStyles = {
-  background: 'transparent',
-  borderRadius: '3px',
-};
+const defaultStyles = {};
 
 const ApplicationSelect = ({
   options,
@@ -11,6 +6,7 @@ const ApplicationSelect = ({
   value,
   onChange,
   styles,
+  isDefaultDisabled,
 }) => {
   return (
     <select
@@ -18,7 +14,7 @@ const ApplicationSelect = ({
       onChange={(event) => onChange(event.target.value)}
       style={{ ...defaultStyles, ...styles }}
     >
-      <option disabled value="">
+      <option disabled={isDefaultDisabled} value="">
         {defaultValue}
       </option>
       {options.map((option) => (
