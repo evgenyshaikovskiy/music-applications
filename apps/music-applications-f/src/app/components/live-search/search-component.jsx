@@ -6,8 +6,8 @@ import ApplicationSelect from '../ui-elements/select';
 import InteractiveDropdown from './interactive-dropdown';
 import './styles.scss';
 
-// consider to add focus and hover effects
-// how??
+// later add default styles by adding module.scss file
+// and injecting it into select component
 const selectorStyles = {
   border: '0px',
   borderBottom: '3px solid #00b8b8',
@@ -16,7 +16,9 @@ const selectorStyles = {
   textAlign: 'center',
   fontSize: 'medium',
   paddingLeft: '5px',
-  paddingTop: '2px',
+  paddingTop: '4px',
+  height: '40px',
+  width: '100px',
 };
 
 export function LiveSearch() {
@@ -77,6 +79,7 @@ export function LiveSearch() {
           className="livesearch-input"
           value={query}
           type="text"
+          placeholder='Write your query here'
           onChange={(e) => setQuery(e.target.value)}
         ></input>
       </div>
