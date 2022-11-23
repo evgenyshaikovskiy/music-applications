@@ -11,6 +11,11 @@
   }
 }
 
+.livesearch-input-container {
+  display: flex;
+  padding-bottom: 10px;
+}
+
 .dropdown-container {
   overflow: scroll;
   height: 500px;
@@ -34,12 +39,13 @@
 
 .livesearch-input {
   border: 0;
-  border-bottom: 3px solid rgb(0, 184, 184);
+  border-bottom: 3px solid #00b8b8;
   height: 40px;
   width: 550px;
   text-align: left;
   font-size: x-large;
   padding-left: 10px;
+  margin-left: 10px;
 
   &:focus {
     border-color: aqua;

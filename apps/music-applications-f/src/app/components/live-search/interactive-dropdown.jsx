@@ -1,18 +1,13 @@
-import React from 'react';
 import InteractiveItemList from './dropdown-item';
 
-const InteractiveDropdown = ({ list }) => {
-  function callback(item) {
-    console.log(`callback for this ${item}`);
-  }
-
+const InteractiveDropdown = ({ list, onClickCallback }) => {
   if (list.length === 0) {
     return <div>Nothing was found</div>;
   } else {
     return list.map((item, index) => (
       <InteractiveItemList
         item={item}
-        onItemClickCallback={callback}
+        onItemClickCallback={onClickCallback}
         key={index}
       ></InteractiveItemList>
     ));
