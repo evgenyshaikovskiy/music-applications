@@ -6,8 +6,7 @@ class Cache(object):
     
     def  __init__(self, CACHEDIR=None):
         if CACHEDIR is None:
-            #self.CACHEDIR = os.path.join(os.path.expanduser("~"), ".cache", "azlyrics")
-            self.CACHEDIR = os.path.join(os.path.dirname(abspath(__file__)), "cache", "azlyrics")
+            self.CACHEDIR = os.path.join(os.path.dirname(abspath(__file__)), "cache", "azlyrics") # make new dir 'cache' in which already received groups will be stored
         if not os.path.exists(self.CACHEDIR):
             os.makedirs(self.CACHEDIR)
 
@@ -16,7 +15,7 @@ class Cache(object):
 
     def add(self, key, content):
         key_path = self.key_path(key)
-        with open(key_path, "w") as f:
+        with open(key_path, "a") as f:
             f.write(content)
 
     def exists(self, key):
