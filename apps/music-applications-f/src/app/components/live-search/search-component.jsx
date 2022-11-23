@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import ApplicationInput from '../ui-elements/input';
 import InteractiveDropdown from './interactive-dropdown';
 import './styles.scss';
 
@@ -35,9 +34,11 @@ export function LiveSearch() {
         ></input>
       </div>
       {query !== '' ? (
-        <InteractiveDropdown list={results}></InteractiveDropdown>
+        <div className="dropdown-container">
+          <InteractiveDropdown list={results}></InteractiveDropdown>
+        </div>
       ) : (
-        <div>Type</div>
+        <div></div>
       )}
     </div>
   );
