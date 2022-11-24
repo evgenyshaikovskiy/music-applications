@@ -25,6 +25,12 @@ export class AppController {
     return res;
   }
 
+  @Get('play')
+  async play() {
+    const res = await this.appService.spotifyWebApi.play();
+    return res;
+  }
+
   @Get('login')
   async loginToSpotify(@Response() response) {
     response.redirect(
