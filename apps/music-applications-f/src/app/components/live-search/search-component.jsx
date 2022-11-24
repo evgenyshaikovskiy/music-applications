@@ -44,9 +44,10 @@ export function LiveSearch({
       if (query !== '' && searchWord !== '') {
         axios.get(`${endpointUrl}${searchWord}=${query.toLowerCase()}`).then(
           (response) => {
+            console.log(response);
             setResults(
               RequestParser.parseResponseData(
-                response.data.records,
+                response,
                 parsingStrategy
               )
             );

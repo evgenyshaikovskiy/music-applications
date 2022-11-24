@@ -1,6 +1,8 @@
 import { Controller, Get, Query, Request, Response } from '@nestjs/common';
 import { AppService } from './app.service';
 
+import { getLyrics, getSong } from 'genius-lyrics-api';
+
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
@@ -11,12 +13,17 @@ export class AppController {
     return res;
   }
 
+  @Get('web-search')
+  async getWebData(@Query() query) {
+    const res = await this.appService.getWebData(query);
+    return res;
+  }
+
   // test endpoint
   @Get('test')
   async getTest() {
     const res = await this.appService.spotifyWebApi.searchTracks('Sicko Mode');
-    console.log(res.body.tracks.items);
-    return res;
+    return res.body.tracks;
   }
 
   @Get('pause')
@@ -72,7 +79,7 @@ export class AppController {
           this.appService.spotifyWebApi.setAccessToken(access_token);
 
           console.log('refreshed');
-        }, (expires_in / 2) * 1000);
+        }, expires_in / 2);
       })
       .catch((error) => {
         console.log('Error getting tokens', error);

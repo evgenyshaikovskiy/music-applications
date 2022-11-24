@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import LiveSearch from '../components/live-search/search-component';
+import { Strategy } from '../services/parsing-strategy';
 
 export function SearchWebPage() {
   const urlToLogin = 'http://localhost:4200/api/login';
@@ -7,13 +9,19 @@ export function SearchWebPage() {
   const [isSearchingEnabled, setSearchingState] = useState(false);
 
   function onUnlockButtonClick() {
-    setSearchingState(true);
-    setButtonState('disabled');
+    // setSearchingState(true);
 
     window.open(urlToLogin, '_blank');
 
     console.log(isSearchingEnabled);
   }
+
+  function callbackOnInstanceClick(instance) {
+    console.log(`callback for this ${instance}`);
+    console.log(instance);
+  }
+
+  const selectorParamsArray = [{ value: 'song', name: 'Song' }];
 
   return (
     <div className="search-web-page-wrapper">
@@ -25,6 +33,16 @@ export function SearchWebPage() {
           Click to unlock searching
         </button>
       </div>
+      <LiveSearch
+        isInputDisabled={false}
+        selectorParamsArray={selectorParamsArray}
+        instanceClickCallback={callbackOnInstanceClick}
+        isSelectorDefaultValueDisabled={true}
+        defaultSelectorValue=""
+        searchWordInitialState=""
+        endpointUrl="http://localhost:4200/api/web-search?"
+        parsingStrategy={Strategy.ParseWebSpotifyObj}
+      ></LiveSearch>
     </div>
   );
 }

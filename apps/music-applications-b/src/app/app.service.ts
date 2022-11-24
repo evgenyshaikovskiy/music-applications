@@ -84,4 +84,11 @@ export class AppService {
     );
     return result;
   }
+
+  public async getWebData(query) {
+    const [params] = this.unwrapQuery(query);
+    console.log(params);
+    const result = await this.spotifyWebApi.searchTracks(params[0]);
+    return result.body.tracks;
+  }
 }
