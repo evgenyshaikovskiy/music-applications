@@ -1,5 +1,5 @@
 export const Strategy = {
-  ParseObj: function (rawData) {
+  ParseGraphDbObj: function (rawData) {
     return rawData.map((value) => {
       const record = value['_fields'][0];
       return {
