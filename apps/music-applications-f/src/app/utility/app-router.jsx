@@ -22,11 +22,11 @@ function ApplicationRouter() {
             <Link className="router-link" to="/search">
               Explore graph base
             </Link>
-            <Link className="router-link" to="/about">
-              About
-            </Link>
             <Link className="router-link" to="/search-web">
               Explore web
+            </Link>
+            <Link className="router-link" to="/about">
+              About
             </Link>
           </div>
           <Routes>
