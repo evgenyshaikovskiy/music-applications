@@ -1,9 +1,40 @@
 import { Injectable } from '@nestjs/common';
+import { ApplicationConfig } from '../../../config/config';
 import { Neo4jService } from 'nest-neo4j/dist';
+import SpotifyWebApi = require('spotify-web-api-node');
 
 @Injectable()
 export class AppService {
-  constructor(private readonly dbService: Neo4jService) {}
+  public scopes = [
+    'ugc-image-upload',
+    'user-read-playback-state',
+    'user-modify-playback-state',
+    'user-read-currently-playing',
+    'streaming',
+    'app-remote-control',
+    'user-read-email',
+    'user-read-private',
+    'playlist-read-collaborative',
+    'playlist-modify-public',
+    'playlist-read-private',
+    'playlist-modify-private',
+    'user-library-modify',
+    'user-library-read',
+    'user-top-read',
+    'user-read-playback-position',
+    'user-read-recently-played',
+    'user-follow-read',
+    'user-follow-modify',
+  ];
+  public spotifyWebApi!: SpotifyWebApi;
+
+  constructor(private readonly dbService: Neo4jService) {
+    this.spotifyWebApi = new SpotifyWebApi({
+      clientId: ApplicationConfig.clientId,
+      clientSecret: ApplicationConfig.clientSecret,
+      redirectUri: 'http://127.0.0.1:4200/api/callback',
+    });
+  }
 
   // refactor to one method??
   private searchArtistQuery = (artistName: string) =>
