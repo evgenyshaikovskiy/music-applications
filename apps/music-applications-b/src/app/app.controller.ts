@@ -11,9 +11,17 @@ export class AppController {
     return res;
   }
 
+  // test endpoint
   @Get('test')
-  async getTestArtist() {
-    const res = await this.appService.spotifyWebApi.getMe();
+  async getTest() {
+    const res = await this.appService.spotifyWebApi.searchTracks('Sicko Mode');
+    console.log(res.body.tracks.items);
+    return res;
+  }
+
+  @Get('pause')
+  async pause() {
+    const res = await this.appService.spotifyWebApi.pause();
     return res;
   }
 
