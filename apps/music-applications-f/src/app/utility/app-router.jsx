@@ -4,6 +4,7 @@ import AboutPage from '../pages/about';
 import HomePage from '../pages/home';
 import NeuralNetworksPage from '../pages/neural-networks';
 import SearchPage from '../pages/search';
+import SearchWebPage from '../pages/search-web';
 import './navbar-styles.scss';
 
 function ApplicationRouter() {
@@ -19,10 +20,13 @@ function ApplicationRouter() {
               Neural Networks
             </Link>
             <Link className="router-link" to="/search">
-              Explore
+              Explore graph base
             </Link>
             <Link className="router-link" to="/about">
               About
+            </Link>
+            <Link className="router-link" to="/search-web">
+              Explore web
             </Link>
           </div>
           <Routes>
@@ -33,6 +37,7 @@ function ApplicationRouter() {
               element={<NeuralNetworksPage />}
             ></Route>
             <Route path="/search" element={<SearchPage />}></Route>
+            <Route path="/search-web" element={<SearchWebPage />}></Route>
           </Routes>
         </BrowserRouter>
       </div>
