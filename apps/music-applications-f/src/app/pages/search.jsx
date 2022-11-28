@@ -33,6 +33,9 @@ export function SearchPage() {
         searchWordInitialState={searchWordInitialState}
         endpointUrl={endpointUrl}
         parsingStrategy={parsingStrategy}
+        viewCallback={() => {
+          console.log('not available');
+        }}
       ></LiveSearch>
     </div>
   );

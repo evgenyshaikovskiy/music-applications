@@ -28,7 +28,7 @@ export function LiveSearch({
   searchWordInitialState,
   endpointUrl,
   parsingStrategy,
-  viewCallback
+  viewCallback,
 }) {
   const [results, setResults] = useState([]);
   const [query, setQuery] = useState('');
@@ -92,7 +92,7 @@ export function LiveSearch({
           ></InteractiveDropdown>
         </div>
       ) : (
-        <div>{requestErrorText}</div>
+        <div className="error-message">{requestErrorText}</div>
       )}
     </div>
   );

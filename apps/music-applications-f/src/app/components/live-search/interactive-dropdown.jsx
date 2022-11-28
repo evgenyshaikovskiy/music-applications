@@ -2,7 +2,7 @@ import InteractiveItemList from './dropdown-item';
 
 const InteractiveDropdown = ({ list, onClickCallback, onViewCallback }) => {
   if (list.length === 0) {
-    return <div>Nothing was found</div>;
+    return <div className='error-message'>Nothing was found</div>;
   } else {
     return list.map((item, index) => (
       <InteractiveItemList

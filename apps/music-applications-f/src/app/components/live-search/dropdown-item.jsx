@@ -14,7 +14,7 @@ const InteractiveItemList = ({ item, onItemClickCallback, onViewCallback }) => {
         className="view-all-details-btn"
         onClick={() => onViewCallback(item)}
       >
-        View web version
+        More details
       </button>
     </div>
   );
