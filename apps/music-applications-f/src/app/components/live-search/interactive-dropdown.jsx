@@ -1,6 +1,6 @@
 import InteractiveItemList from './dropdown-item';
 
-const InteractiveDropdown = ({ list, onClickCallback }) => {
+const InteractiveDropdown = ({ list, onClickCallback, onViewCallback }) => {
   if (list.length === 0) {
     return <div>Nothing was found</div>;
   } else {
@@ -8,6 +8,7 @@ const InteractiveDropdown = ({ list, onClickCallback }) => {
       <InteractiveItemList
         item={item}
         onItemClickCallback={onClickCallback}
+        onViewCallback={onViewCallback}
         key={index}
       ></InteractiveItemList>
     ));

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
 import AboutPage from '../pages/about';
 import HomePage from '../pages/home';
+import ItemPage from '../pages/item';
 import NeuralNetworksPage from '../pages/neural-networks';
 import SearchPage from '../pages/search';
 import SearchWebPage from '../pages/search-web';
@@ -38,6 +39,7 @@ function ApplicationRouter() {
             ></Route>
             <Route path="/search" element={<SearchPage />}></Route>
             <Route path="/search-web" element={<SearchWebPage />}></Route>
+            <Route path="/:type/:id" element={<ItemPage />}></Route>
           </Routes>
         </BrowserRouter>
       </div>

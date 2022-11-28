@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LiveSearch from '../components/live-search/search-component';
 import ItemInformation from '../components/ui-elements/info';
 import ApplicationModal from '../components/ui-elements/modal';
 import { Strategy } from '../services/parsing-strategy';
 
 export function SearchWebPage() {
+  const router = useNavigate();
   const [modal, setModal] = useState(false);
   const [focusedItem, setFocusedItem] = useState({ label: 'none' });
 
@@ -14,10 +16,14 @@ export function SearchWebPage() {
     window.open(urlToLogin, '_blank');
   }
 
-  function callbackOnInstanceClick(instance) {
+  function callbackOnDetailsClick(instance) {
     console.log(instance);
     setFocusedItem(instance);
     setModal(true);
+  }
+
+  function callbackOnViewClick(instance) {
+    router(`/${instance.type}/${instance.spotify_id}`);
   }
 
   // add default value later
@@ -41,12 +47,13 @@ export function SearchWebPage() {
       <LiveSearch
         isInputDisabled={false}
         selectorParamsArray={selectorParamsArray}
-        instanceClickCallback={callbackOnInstanceClick}
+        instanceClickCallback={callbackOnDetailsClick}
         isSelectorDefaultValueDisabled={true}
         defaultSelectorValue=""
         searchWordInitialState=""
         endpointUrl="http://localhost:4200/api/web-search?"
         parsingStrategy={Strategy.ParseWebSpotifyObj}
+        viewCallback={callbackOnViewClick}
       ></LiveSearch>
       <ApplicationModal visible={modal} setVisible={setModal}>
         <ItemInformation item={focusedItem}></ItemInformation>
