@@ -46,14 +46,14 @@ export class AppService {
   private searchGenreQuery = (genreKind: string) =>
     `MATCH (obj: Genre) WHERE ToLower(obj.kind) CONTAINS '${genreKind}' return obj`;
 
-  private searchSongQuery = (songTitle: string) =>
+  private searchTrackQuery = (songTitle: string) =>
     `MATCH (obj: Song) WHERE ToLower(obj.title) CONTAINS '${songTitle}' return obj`;
 
   private searchFunctions = [
     this.searchArtistQuery,
     this.searchAlbumQuery,
     this.searchGenreQuery,
-    this.searchSongQuery,
+    this.searchTrackQuery,
   ];
 
   private collectQuery(instance: string, query: string): string {
@@ -62,8 +62,8 @@ export class AppService {
         return this.searchFunctions.map((func) => func(query)).join(' UNION ');
       case 'artist':
         return this.searchArtistQuery(query);
-      case 'song':
-        return this.searchSongQuery(query);
+      case 'track':
+        return this.searchTrackQuery(query);
       case 'album':
         return this.searchAlbumQuery(query);
       case 'genre':
@@ -80,7 +80,7 @@ export class AppService {
           'playlist',
           'track',
         ]);
-      case 'song':
+      case 'track':
         return this.spotifyWebApi.searchTracks(query);
       case 'album':
         return this.spotifyWebApi.searchAlbums(query);

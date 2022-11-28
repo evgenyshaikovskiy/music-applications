@@ -4,10 +4,10 @@ import { Strategy } from '../services/parsing-strategy';
 export function SearchPage() {
   // props to pass
   const selectorParamsArray = [
-    { value: 'artist', name: 'Artist' },
-    { value: 'song', name: 'Song' },
-    { value: 'genre', name: 'Genre' },
-    { value: 'album', name: 'Album' },
+    { value: 'artist', name: 'Artists' },
+    { value: 'track', name: 'Tracks' },
+    { value: 'genre', name: 'Genres' },
+    { value: 'album', name: 'Albums' },
   ];
   const endpointUrl = 'http://localhost:4200/api/search?';
   const parsingStrategy = Strategy.ParseGraphDbObj;

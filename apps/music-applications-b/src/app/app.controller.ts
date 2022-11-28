@@ -1,7 +1,12 @@
-import { Controller, Get, Query, Request, Response } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Query,
+  Request,
+  Response,
+} from '@nestjs/common';
 import { AppService } from './app.service';
-
-import { getLyrics, getSong } from 'genius-lyrics-api';
 
 @Controller()
 export class AppController {
@@ -19,11 +24,41 @@ export class AppController {
     return res;
   }
 
-  // test endpoint
-  @Get('test')
-  async getTest() {
-    const res = await this.appService.spotifyWebApi.searchTracks('Sicko Mode');
-    return res.body.tracks;
+  @Get('track')
+  async getTrack(@Param() id) {
+    const res = await this.appService.spotifyWebApi.getTrack(id);
+    return res.body;
+  }
+
+  @Get('playlist')
+  async getPlaylist(@Param() id) {
+    const res = await this.appService.spotifyWebApi.getPlaylist(id);
+    return res.body;
+  }
+
+  // could be redunant
+  @Get('playlist-tracks')
+  async getPlaylistTracks(@Param() id) {
+    const res = await this.appService.spotifyWebApi.getPlaylistTracks(id);
+    return res.body.items;
+  }
+
+  @Get('artist')
+  async getArtist(@Param() id) {
+    const res = await this.appService.spotifyWebApi.getArtist(id);
+    return res.body;
+  }
+
+  @Get('album')
+  async getAlbum(@Param() id) {
+    const res = await this.appService.spotifyWebApi.getAlbum(id);
+    return res.body;
+  }
+
+  @Get('albums-tracks')
+  async getAlbumTracks(@Param() id) {
+    const res = await this.appService.spotifyWebApi.getAlbumTracks(id);
+    return res.body;
   }
 
   @Get('pause')

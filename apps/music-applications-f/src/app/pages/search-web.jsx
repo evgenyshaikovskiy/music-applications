@@ -15,10 +15,10 @@ export function SearchWebPage() {
 
   // add default value later
   const selectorParamsArray = [
-    { value: 'song', name: 'Song' },
-    { value: 'artist', name: 'Artist' },
-    { value: 'playlist', name: 'Playlist' },
-    { value: 'album', name: 'Album' },
+    { value: 'track', name: 'Tracks' },
+    { value: 'artist', name: 'Artists' },
+    { value: 'playlist', name: 'Playlists' },
+    { value: 'album', name: 'Albums' },
   ];
 
   return (
