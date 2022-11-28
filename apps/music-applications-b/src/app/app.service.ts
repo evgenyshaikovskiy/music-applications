@@ -32,7 +32,7 @@ export class AppService {
     this.spotifyWebApi = new SpotifyWebApi({
       clientId: ApplicationConfig.clientId,
       clientSecret: ApplicationConfig.clientSecret,
-      redirectUri: 'http://127.0.0.1:4200/api/callback',
+      redirectUri: 'http://localhost:4200/api/callback',
     });
   }
 

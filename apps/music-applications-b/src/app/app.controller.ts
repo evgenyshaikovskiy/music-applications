@@ -114,7 +114,7 @@ export class AppController {
           this.appService.spotifyWebApi.setAccessToken(access_token);
 
           console.log('refreshed');
-        }, expires_in / 2);
+        }, (expires_in / 2) * 1000);
       })
       .catch((error) => {
         console.log('Error getting tokens', error);
