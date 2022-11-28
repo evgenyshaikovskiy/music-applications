@@ -11,7 +11,7 @@ body {
   background-color: #E7ECFF ;
 }
 
-.search-page-wrapper {
+.search-page-wrapper, .search-web-page-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,9 +19,19 @@ body {
   margin-top: 50px;
 }
 
-.search-page-title {
+.search-page-title, .search-web-page-title {
   margin-top: 10px;
   margin-bottom: 50px;
   font-weight: 700;
   font-size: xx-large;
+}
+
+.receive-token-btn {
+  border: 3px solid black;
+  background-color: aquamarine;
+  color: black;
+  font-size: medium;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 10px;
 }

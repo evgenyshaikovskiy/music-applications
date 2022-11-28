@@ -71,6 +71,26 @@ export class AppService {
     }
   }
 
+  private searchFromWeb(instance: string, query: string) {
+    switch (instance) {
+      case 'all':
+        return this.spotifyWebApi.search(query, [
+          'album',
+          'artist',
+          'playlist',
+          'track',
+        ]);
+      case 'song':
+        return this.spotifyWebApi.searchTracks(query);
+      case 'album':
+        return this.spotifyWebApi.searchAlbums(query);
+      case 'playlist':
+        return this.spotifyWebApi.searchPlaylists(query);
+      case 'artist':
+        return this.spotifyWebApi.searchArtists(query);
+    }
+  }
+
   private unwrapQuery(query) {
     return Object.keys(query).map((key) => {
       return [query[key].toString(), key.toString()];
@@ -88,7 +108,8 @@ export class AppService {
   public async getWebData(query) {
     const [params] = this.unwrapQuery(query);
     console.log(params);
-    const result = await this.spotifyWebApi.searchTracks(params[0]);
-    return result.body.tracks;
+
+    const result = await this.searchFromWeb(params[1], params[0]);
+    return result.body;
   }
 }

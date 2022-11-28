@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { RequestParser } from '../../services/request-parser';
+import { ResponseParser } from '../../services/response-parser';
 import ApplicationSelect from '../ui-elements/select';
 import InteractiveDropdown from './interactive-dropdown';
 import './styles.scss';
@@ -44,12 +44,8 @@ export function LiveSearch({
       if (query !== '' && searchWord !== '') {
         axios.get(`${endpointUrl}${searchWord}=${query.toLowerCase()}`).then(
           (response) => {
-            console.log(response);
             setResults(
-              RequestParser.parseResponseData(
-                response,
-                parsingStrategy
-              )
+              ResponseParser.parseResponseData(response, parsingStrategy)
             );
           },
           (reason) => {

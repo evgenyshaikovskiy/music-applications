@@ -1,19 +1,11 @@
-import { useState } from 'react';
 import LiveSearch from '../components/live-search/search-component';
 import { Strategy } from '../services/parsing-strategy';
 
 export function SearchWebPage() {
   const urlToLogin = 'http://localhost:4200/api/login';
 
-  const [buttonState, setButtonState] = useState('');
-  const [isSearchingEnabled, setSearchingState] = useState(false);
-
   function onUnlockButtonClick() {
-    // setSearchingState(true);
-
     window.open(urlToLogin, '_blank');
-
-    console.log(isSearchingEnabled);
   }
 
   function callbackOnInstanceClick(instance) {
@@ -21,7 +13,13 @@ export function SearchWebPage() {
     console.log(instance);
   }
 
-  const selectorParamsArray = [{ value: 'song', name: 'Song' }];
+  // add default value later
+  const selectorParamsArray = [
+    { value: 'song', name: 'Song' },
+    { value: 'artist', name: 'Artist' },
+    { value: 'playlist', name: 'Playlist' },
+    { value: 'album', name: 'Album' },
+  ];
 
   return (
     <div className="search-web-page-wrapper">
@@ -29,8 +27,8 @@ export function SearchWebPage() {
         <p>Type to search from web...</p>
       </div>
       <div className="search-web-conn-block">
-        <button onClick={onUnlockButtonClick} disabled={buttonState}>
-          Click to unlock searching
+        <button className="receive-token-btn" onClick={onUnlockButtonClick}>
+          Click to receive authenticity token from Spotify
         </button>
       </div>
       <LiveSearch
