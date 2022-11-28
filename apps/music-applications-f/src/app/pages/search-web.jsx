@@ -1,7 +1,13 @@
+import { useState } from 'react';
 import LiveSearch from '../components/live-search/search-component';
+import ItemInformation from '../components/ui-elements/info';
+import ApplicationModal from '../components/ui-elements/modal';
 import { Strategy } from '../services/parsing-strategy';
 
 export function SearchWebPage() {
+  const [modal, setModal] = useState(false);
+  const [focusedItem, setFocusedItem] = useState({ label: 'none' });
+
   const urlToLogin = 'http://localhost:4200/api/login';
 
   function onUnlockButtonClick() {
@@ -9,8 +15,9 @@ export function SearchWebPage() {
   }
 
   function callbackOnInstanceClick(instance) {
-    console.log(`callback for this ${instance}`);
     console.log(instance);
+    setFocusedItem(instance);
+    setModal(true);
   }
 
   // add default value later
@@ -41,6 +48,9 @@ export function SearchWebPage() {
         endpointUrl="http://localhost:4200/api/web-search?"
         parsingStrategy={Strategy.ParseWebSpotifyObj}
       ></LiveSearch>
+      <ApplicationModal visible={modal} setVisible={setModal}>
+        <ItemInformation item={focusedItem}></ItemInformation>
+      </ApplicationModal>
     </div>
   );
 }

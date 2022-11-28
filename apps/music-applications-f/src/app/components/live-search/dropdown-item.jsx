@@ -4,9 +4,10 @@ const InteractiveItemList = ({ item, onItemClickCallback }) => {
   return (
     <div
       className="clickable-dropdown-item"
-      onClick={() => onItemClickCallback(item)}
     >
       {item.type}: {item.label}
+      <button className="view-details-btn" onClick={() => onItemClickCallback(item)}>View details</button>
+      <button className="view-all-details-btn">View web version</button>
     </div>
   );
 };
