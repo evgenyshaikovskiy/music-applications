@@ -24,40 +24,43 @@ export class AppController {
     return res;
   }
 
-  @Get('track')
-  async getTrack(@Param() id) {
-    const res = await this.appService.spotifyWebApi.getTrack(id);
-    return res.body;
+  @Get('track/:id')
+  async getTrack(@Param() params) {
+    console.log(params);
+    const result = await this.appService.spotifyWebApi.getTrack(params.id);
+    return result.body;
   }
 
-  @Get('playlist')
-  async getPlaylist(@Param() id) {
-    const res = await this.appService.spotifyWebApi.getPlaylist(id);
+  @Get('playlist/:id')
+  async getPlaylist(@Param() params) {
+    const res = await this.appService.spotifyWebApi.getPlaylist(params.id);
     return res.body;
   }
 
   // could be redunant
   @Get('playlist-tracks')
-  async getPlaylistTracks(@Param() id) {
-    const res = await this.appService.spotifyWebApi.getPlaylistTracks(id);
+  async getPlaylistTracks(@Param() params) {
+    const res = await this.appService.spotifyWebApi.getPlaylistTracks(
+      params.id
+    );
     return res.body.items;
   }
 
-  @Get('artist')
-  async getArtist(@Param() id) {
-    const res = await this.appService.spotifyWebApi.getArtist(id);
+  @Get('artist/:id')
+  async getArtist(@Param() params) {
+    const res = await this.appService.spotifyWebApi.getArtist(params.id);
     return res.body;
   }
 
-  @Get('album')
-  async getAlbum(@Param() id) {
-    const res = await this.appService.spotifyWebApi.getAlbum(id);
+  @Get('album/:id')
+  async getAlbum(@Param() params) {
+    const res = await this.appService.spotifyWebApi.getAlbum(params.id);
     return res.body;
   }
 
   @Get('albums-tracks')
-  async getAlbumTracks(@Param() id) {
-    const res = await this.appService.spotifyWebApi.getAlbumTracks(id);
+  async getAlbumTracks(@Param() params) {
+    const res = await this.appService.spotifyWebApi.getAlbumTracks(params.id);
     return res.body;
   }
 
