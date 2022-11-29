@@ -31,14 +31,44 @@ function ItemPage() {
 
   const parsingStrategy = recognizeParsingStrategy(params.type);
 
+  function postItem() {
+    const selectStrategy = (type) => {
+      switch (type) {
+        case 'track':
+          return Strategy.CollectTrack;
+        case 'album':
+          return Strategy.CollectAlbum;
+        case 'playlist':
+          return Strategy.CollectPlaylist;
+        case 'artist':
+          return Strategy.CollectArtist;
+        default:
+          return undefined;
+      }
+    };
+
+    const strategy = selectStrategy(params.type);
+    if (strategy) {
+      const obj = ResponseParser.collectData(item, strategy);
+      axios
+        .post(`http://localhost:4200/api/${params.type}`, obj)
+        .then((response) => {
+          console.log(response.statusText);
+        });
+    }
+  }
+
   useEffect(() => {
-    axios
-      .get(`http://localhost:4200/api/${params.type}/${params.id}`)
-      .then((response) => {
-        setItem(
-          ResponseParser.parseResponseData(response.data, parsingStrategy)
-        );
-      });
+    if (recognizeParsingStrategy) {
+      axios
+        .get(`http://localhost:4200/api/${params.type}/${params.id}`)
+        .then((response) => {
+          setItem(
+            ResponseParser.parseResponseData(response.data, parsingStrategy)
+          );
+        });
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id, params.type]);
 
@@ -48,7 +78,7 @@ function ItemPage() {
         <button onClick={() => router(-1)} className="go-back-btn">
           Back
         </button>
-        <button className="save-to-db-btn" onClick={() => console.log(item)}>
+        <button className="save-to-db-btn" onClick={() => postItem()}>
           Save to db
         </button>
       </div>
