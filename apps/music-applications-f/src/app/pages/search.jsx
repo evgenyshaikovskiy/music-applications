@@ -33,6 +33,7 @@ export function SearchPage() {
         searchWordInitialState={searchWordInitialState}
         endpointUrl={endpointUrl}
         parsingStrategy={parsingStrategy}
+        selectorClassName="livesearch-selector"
       ></LiveSearch>
     </div>
   );

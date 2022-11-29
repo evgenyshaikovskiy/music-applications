@@ -42,6 +42,7 @@ export function SearchWebPage() {
         endpointUrl="http://localhost:4200/api/web-search?"
         parsingStrategy={Strategy.ParseWebSpotifyObj}
         instanceClickCallback={callbackDetailsView}
+        selectorClassName="livesearch-selector"
       ></LiveSearch>
     </div>
   );

@@ -1,19 +1,17 @@
-const defaultStyles = {};
-
 const ApplicationSelect = ({
   options,
   defaultValueName,
   defaultValue,
   value,
   onChange,
-  styles,
   isDefaultDisabled,
+  selectorClassName,
 }) => {
   return (
     <select
       value={value}
       onChange={(event) => onChange(event.target.value)}
-      style={{ ...defaultStyles, ...styles }}
+      className={selectorClassName}
     >
       <option disabled={isDefaultDisabled} value={defaultValue}>
         {defaultValueName}
