@@ -1,13 +1,17 @@
 import { Controller, Get, Query, Request, Response } from '@nestjs/common';
-import { AppService } from './app.service';
+import { AppService } from '../app.service';
+import { DatabaseManager } from '../db-manager.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly dbManager: DatabaseManager
+  ) {}
   // refactor controllers to different files later
   @Get('search')
   async getData(@Query() query) {
-    const res = await this.appService.getData(query);
+    const res = await this.dbManager.getData(query);
     return res;
   }
 

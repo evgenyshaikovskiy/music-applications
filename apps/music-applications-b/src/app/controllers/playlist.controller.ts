@@ -1,10 +1,14 @@
 import { Controller, Get, Param, Post, Req } from '@nestjs/common';
-import { AppService } from './app.service';
-import { Playlist } from './models/playlist.model';
+import { AppService } from '../app.service';
+import { DatabaseManager } from '../db-manager.service';
+import { Playlist } from '../models/playlist.model';
 
 @Controller('playlist')
 export class PlaylistController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly dbManager: DatabaseManager
+  ) {}
 
   @Get('/:id')
   async get(@Param() params) {
