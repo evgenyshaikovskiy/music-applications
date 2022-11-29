@@ -107,8 +107,6 @@ export class AppService {
 
   public async getWebData(query) {
     const [params] = this.unwrapQuery(query);
-    console.log(params);
-
     const result = await this.searchFromWeb(params[1], params[0]);
     return result.body;
   }

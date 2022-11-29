@@ -1,5 +1,6 @@
 import { Controller, Get, Param, Post, Req } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Playlist } from './models/playlist.model';
 
 @Controller('playlist')
 export class PlaylistController {
@@ -13,7 +14,8 @@ export class PlaylistController {
 
   @Post()
   async post(@Req() request: Request) {
-    console.log(request.body);
-    return request;
+    const playlist: Playlist = request.body as unknown as Playlist;
+    console.log(playlist);
+    return undefined;
   }
 }

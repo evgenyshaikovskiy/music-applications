@@ -1,5 +1,6 @@
 import { Controller, Get, Param, Post, Req } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Track } from './models/track.model';
 
 @Controller('track')
 export class TrackController {
@@ -12,10 +13,10 @@ export class TrackController {
     return result.body;
   }
 
-  @Post('/track')
+  @Post()
   async post(@Req() request: Request) {
-    console.log(request.body);
-
-    return request;
+    const track: Track = request.body as unknown as Track;
+    console.log(track);
+    return undefined;
   }
 }

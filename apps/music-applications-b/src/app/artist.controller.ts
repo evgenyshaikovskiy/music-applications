@@ -1,5 +1,6 @@
 import { Controller, Get, Param, Post, Req } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Artist } from './models/artist.model';
 
 @Controller('artist')
 export class ArtistController {
@@ -13,7 +14,8 @@ export class ArtistController {
 
   @Post()
   async post(@Req() request) {
-    console.log(request.body);
-    return request;
+    const artist: Artist = request.body as unknown as Artist;
+    console.log(artist);
+    return undefined;
   }
 }
