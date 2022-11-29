@@ -13,11 +13,12 @@ const PlaylistInfo = ({ playlist }) => {
         <p>Playlist contains {playlist.tracks.length} tracks</p>
         <p>
           Featured tracks:
+          {/* needs to be fixed by giving key props for each child */}
           {playlist.tracks.map((track) => {
             return (
               <div>
                 <p>
-                  {track.artists.map((artist) => artist.label).join(' ')} -{' '}
+                  {track.artists.map((artist) => artist.label).join(' ')} - {' '}
                   {track.label} album {track.album.label}
                 </p>
                 <p>Duration: {convertDuration(track.duration_ms)}</p>

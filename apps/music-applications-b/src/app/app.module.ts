@@ -5,6 +5,10 @@ import { AppService } from './app.service';
 
 import { Neo4jModule, Neo4jScheme } from 'nest-neo4j/dist';
 import { ApplicationConfig } from '../../../config/config';
+import { TrackController } from './track.controller';
+import { PlaylistController } from './playlist.controller';
+import { AlbumController } from './album.controller';
+import { ArtistController } from './artist.controller';
 @Module({
   imports: [
     Neo4jModule.forRoot({
@@ -15,7 +19,13 @@ import { ApplicationConfig } from '../../../config/config';
       password: ApplicationConfig.password,
     }),
   ],
-  controllers: [AppController],
+  controllers: [
+    AppController,
+    TrackController,
+    PlaylistController,
+    AlbumController,
+    ArtistController,
+  ],
   providers: [AppService],
 })
 export class AppModule {}
