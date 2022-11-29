@@ -9,10 +9,13 @@ import ArtistInfo from '../utility/pages/artist-info';
 import PlaylistInfo from '../utility/pages/playlist-info';
 
 function ItemPage() {
+  const urlToLogin = 'http://localhost:4200/api/login';
+
   const router = useNavigate();
   const params = useParams();
 
   const [item, setItem] = useState({});
+  const [error, setError] = useState('');
 
   const recognizeParsingStrategy = (type) => {
     switch (type) {
@@ -60,17 +63,41 @@ function ItemPage() {
 
   useEffect(() => {
     if (recognizeParsingStrategy) {
-      axios
-        .get(`http://localhost:4200/api/${params.type}/${params.id}`)
-        .then((response) => {
+      axios.get(`http://localhost:4200/api/${params.type}/${params.id}`).then(
+        (response) => {
           setItem(
             ResponseParser.parseResponseData(response.data, parsingStrategy)
           );
-        });
+        },
+        () => {
+          setError(
+            'Unauthorized access. Before visiting this page you need to acquire or refresh access token.'
+          );
+        }
+      );
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id, params.type]);
+
+  if (error !== '') {
+    return (
+      <div className="item-error-wrapper">
+        <div className="item-error-text">{error}</div>
+        <div>
+          <p
+            className="item-error-link-to-token"
+            onClick={() => {
+              window.open(urlToLogin, '_blank');
+              window.location.reload();
+            }}
+          >
+            Acquire token
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="item-page-wrapper">

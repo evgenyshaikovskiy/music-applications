@@ -34,7 +34,8 @@ export function LiveSearch({
   const [searchWord, setSearchWord] = useState(
     searchWordInitialState.toLowerCase()
   );
-  const [requestErrorText, setRequestErrorText] = useState('');
+
+  const [errorText, setErrorText] = useState('');
 
   const disableTag = (isDisabled) => (isDisabled ? 'disabled' : '');
 
@@ -47,9 +48,13 @@ export function LiveSearch({
             setResults(
               ResponseParser.parseResponseData(response, parsingStrategy)
             );
+
+            if (results.length === 0) {
+              setErrorText('Nothing was found');
+            }
           },
           (reason) => {
-            setRequestErrorText(reason);
+            setErrorText('Before using search acquire access token');
           }
         );
       }
@@ -87,10 +92,12 @@ export function LiveSearch({
           <InteractiveDropdown
             onClickCallback={instanceClickCallback}
             list={results}
+            ocurredError={errorText}
+            setOcurredError={setErrorText}
           ></InteractiveDropdown>
         </div>
       ) : (
-        <div className="error-message">{requestErrorText}</div>
+        <div></div>
       )}
     </div>
   );
