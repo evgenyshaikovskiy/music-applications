@@ -3,19 +3,24 @@ const InteractiveItemList = ({ item, onItemClickCallback, onViewCallback }) => {
   // consider using different print strategies for different objects
   return (
     <div className="clickable-dropdown-item">
-      {item.type}: {item.label}
-      <button
-        className="view-details-btn"
-        onClick={() => onItemClickCallback(item)}
-      >
-        View details
-      </button>
-      <button
-        className="view-all-details-btn"
-        onClick={() => onViewCallback(item)}
-      >
-        More details
-      </button>
+      <div className="clickable-dropdown-item-text">
+        {item.type}: {item.label}
+      </div>
+      <div className="clickable-dropdown-item-btns">
+        <button
+          className="view-details-btn"
+          onClick={() => onItemClickCallback(item)}
+        >
+          View details
+        </button>
+        <button
+          className="view-all-details-btn"
+          onClick={() => onViewCallback(item)}
+        >
+          More details
+        </button>
+      </div>
+      
     </div>
   );
 };
