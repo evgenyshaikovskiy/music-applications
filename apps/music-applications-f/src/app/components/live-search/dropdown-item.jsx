@@ -1,5 +1,5 @@
 // this could be extended by passing fields of object instead of object itself
-const InteractiveItemList = ({ item, onItemClickCallback, onViewCallback }) => {
+const InteractiveItemList = ({ item, onItemClickCallback }) => {
   // consider using different print strategies for different objects
   return (
     <div className="clickable-dropdown-item">
@@ -9,12 +9,6 @@ const InteractiveItemList = ({ item, onItemClickCallback, onViewCallback }) => {
         onClick={() => onItemClickCallback(item)}
       >
         View details
-      </button>
-      <button
-        className="view-all-details-btn"
-        onClick={() => onViewCallback(item)}
-      >
-        More details
       </button>
     </div>
   );

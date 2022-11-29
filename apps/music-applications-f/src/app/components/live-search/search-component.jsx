@@ -28,7 +28,6 @@ export function LiveSearch({
   searchWordInitialState,
   endpointUrl,
   parsingStrategy,
-  viewCallback,
 }) {
   const [results, setResults] = useState([]);
   const [query, setQuery] = useState('');
@@ -87,7 +86,6 @@ export function LiveSearch({
         <div className="dropdown-container">
           <InteractiveDropdown
             onClickCallback={instanceClickCallback}
-            onViewCallback={viewCallback}
             list={results}
           ></InteractiveDropdown>
         </div>
