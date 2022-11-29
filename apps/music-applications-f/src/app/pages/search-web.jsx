@@ -11,7 +11,7 @@ export function SearchWebPage() {
     window.open(urlToLogin, '_blank');
   }
 
-  function callbackOnViewClick(instance) {
+  function callbackDetailsView(instance) {
     router(`/${instance.type}/${instance.spotify_id}`);
   }
 
@@ -41,7 +41,7 @@ export function SearchWebPage() {
         searchWordInitialState=""
         endpointUrl="http://localhost:4200/api/web-search?"
         parsingStrategy={Strategy.ParseWebSpotifyObj}
-        viewCallback={callbackOnViewClick}
+        instanceClickCallback={callbackDetailsView}
       ></LiveSearch>
     </div>
   );
