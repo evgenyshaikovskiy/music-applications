@@ -1,13 +1,8 @@
-import React from 'react';
+import { convertDuration } from "../utils";
+
 
 const TrackInfo = ({ track }) => {
   // const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
-  const convertDuration = (ms) => {
-    let minutes = Math.floor(ms / 60000);
-    let seconds = ((ms % 60000) / 1000).toFixed(0);
-    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-  };
-
   // styles are in app styles.
   return (
     <div className="item-page-content">

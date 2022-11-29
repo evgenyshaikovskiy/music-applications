@@ -1,10 +1,6 @@
+import { convertDuration } from '../utils';
+
 const PlaylistInfo = ({ playlist }) => {
-  console.log(playlist);
-  const convertDuration = (ms) => {
-    let minutes = Math.floor(ms / 60000);
-    let seconds = ((ms % 60000) / 1000).toFixed(0);
-    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-  };
   return (
     <div className="item-page-content">
       <div className="item-page-title">

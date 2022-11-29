@@ -1,10 +1,6 @@
-const AlbumInfo = ({ album }) => {
-  const convertDuration = (ms) => {
-    let minutes = Math.floor(ms / 60000);
-    let seconds = ((ms % 60000) / 1000).toFixed(0);
-    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-  };
+import { convertDuration } from "../utils";
 
+const AlbumInfo = ({ album }) => {
   return (
     <div className="item-page-content">
       <div className="item-page-title">
