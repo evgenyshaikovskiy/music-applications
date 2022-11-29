@@ -1,14 +1,9 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LiveSearch from '../components/live-search/search-component';
-import ItemInformation from '../components/ui-elements/info';
-import ApplicationModal from '../components/ui-elements/modal';
 import { Strategy } from '../services/parsing-strategy';
 
 export function SearchWebPage() {
   const router = useNavigate();
-  const [modal, setModal] = useState(false);
-  const [focusedItem, setFocusedItem] = useState({ label: 'none' });
 
   const urlToLogin = 'http://localhost:4200/api/login';
 
@@ -16,13 +11,7 @@ export function SearchWebPage() {
     window.open(urlToLogin, '_blank');
   }
 
-  function callbackOnDetailsClick(instance) {
-    console.log(instance);
-    setFocusedItem(instance);
-    setModal(true);
-  }
-
-  function callbackOnViewClick(instance) {
+  function callbackDetailsView(instance) {
     router(`/${instance.type}/${instance.spotify_id}`);
   }
 
@@ -47,17 +36,13 @@ export function SearchWebPage() {
       <LiveSearch
         isInputDisabled={false}
         selectorParamsArray={selectorParamsArray}
-        instanceClickCallback={callbackOnDetailsClick}
         isSelectorDefaultValueDisabled={true}
         defaultSelectorValue=""
         searchWordInitialState=""
         endpointUrl="http://localhost:4200/api/web-search?"
         parsingStrategy={Strategy.ParseWebSpotifyObj}
-        viewCallback={callbackOnViewClick}
+        instanceClickCallback={callbackDetailsView}
       ></LiveSearch>
-      <ApplicationModal visible={modal} setVisible={setModal}>
-        <ItemInformation item={focusedItem}></ItemInformation>
-      </ApplicationModal>
     </div>
   );
 }

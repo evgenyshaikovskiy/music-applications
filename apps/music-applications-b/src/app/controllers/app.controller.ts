@@ -1,75 +1,23 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Query,
-  Request,
-  Response,
-} from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, Query, Request, Response } from '@nestjs/common';
+import { AppService } from '../app.service';
+import { DatabaseManager } from '../db-manager.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
+  constructor(
+    private readonly appService: AppService,
+    private readonly dbManager: DatabaseManager
+  ) {}
+  // refactor controllers to different files later
   @Get('search')
   async getData(@Query() query) {
-    const res = await this.appService.getData(query);
+    const res = await this.dbManager.getData(query);
     return res;
   }
 
   @Get('web-search')
   async getWebData(@Query() query) {
     const res = await this.appService.getWebData(query);
-    return res;
-  }
-
-  @Get('track')
-  async getTrack(@Param() id) {
-    const res = await this.appService.spotifyWebApi.getTrack(id);
-    return res.body;
-  }
-
-  @Get('playlist')
-  async getPlaylist(@Param() id) {
-    const res = await this.appService.spotifyWebApi.getPlaylist(id);
-    return res.body;
-  }
-
-  // could be redunant
-  @Get('playlist-tracks')
-  async getPlaylistTracks(@Param() id) {
-    const res = await this.appService.spotifyWebApi.getPlaylistTracks(id);
-    return res.body.items;
-  }
-
-  @Get('artist')
-  async getArtist(@Param() id) {
-    const res = await this.appService.spotifyWebApi.getArtist(id);
-    return res.body;
-  }
-
-  @Get('album')
-  async getAlbum(@Param() id) {
-    const res = await this.appService.spotifyWebApi.getAlbum(id);
-    return res.body;
-  }
-
-  @Get('albums-tracks')
-  async getAlbumTracks(@Param() id) {
-    const res = await this.appService.spotifyWebApi.getAlbumTracks(id);
-    return res.body;
-  }
-
-  @Get('pause')
-  async pause() {
-    const res = await this.appService.spotifyWebApi.pause();
-    return res;
-  }
-
-  @Get('play')
-  async play() {
-    const res = await this.appService.spotifyWebApi.play();
     return res;
   }
 
@@ -113,7 +61,7 @@ export class AppController {
           const access_token = data.body['access_token'];
           this.appService.spotifyWebApi.setAccessToken(access_token);
 
-          console.log('refreshed');
+          console.log('token was refreshed!');
         }, (expires_in / 2) * 1000);
       })
       .catch((error) => {

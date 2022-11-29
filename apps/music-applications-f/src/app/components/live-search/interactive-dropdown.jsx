@@ -1,14 +1,18 @@
 import InteractiveItemList from './dropdown-item';
 
-const InteractiveDropdown = ({ list, onClickCallback, onViewCallback }) => {
+const InteractiveDropdown = ({
+  list,
+  ocurredError,
+  setOcurredError,
+  onClickCallback,
+}) => {
   if (list.length === 0) {
-    return <div className='error-message'>Nothing was found</div>;
+    return <div className="error-message">{ocurredError}</div>;
   } else {
     return list.map((item, index) => (
       <InteractiveItemList
         item={item}
         onItemClickCallback={onClickCallback}
-        onViewCallback={onViewCallback}
         key={index}
       ></InteractiveItemList>
     ));

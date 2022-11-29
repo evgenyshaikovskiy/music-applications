@@ -4,14 +4,15 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Helvetica, Arial , sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 body {
-  background-color: #E7ECFF ;
+  background-color: #E7ECFF;
 }
 
-.search-page-wrapper, .search-web-page-wrapper {
+.search-page-wrapper,
+.search-web-page-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,7 +20,8 @@ body {
   margin-top: 50px;
 }
 
-.search-page-title, .search-web-page-title {
+.search-page-title,
+.search-web-page-title {
   margin-top: 10px;
   margin-bottom: 50px;
   font-weight: 700;
@@ -34,4 +36,75 @@ body {
   cursor: pointer;
   padding: 5px;
   border-radius: 10px;
+}
+
+.item-page-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-page-btns {
+  display: flex;
+  padding-bottom: 70px;
+  padding-top: 5px;
+}
+
+.go-back-btn {
+  width: 100px;
+  margin-left: 10px;
+}
+
+.save-to-db-btn {
+  margin-left: 30px;
+}
+
+.go-back-btn,
+.save-to-db-btn {
+  height: 40px;
+  padding: 10px;
+  font-size: medium;
+  background-color: #C6D8FF;
+  border: 3px solid rgb(40, 145, 145);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+// ivan4ik delay stili tyt
+.item-page-content p {
+  // padding: 7px;
+}
+
+.item-page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item-page-details {
+  text-align: left;
+}
+
+.item-error-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-error-text {
+  font-weight: bold;
+  font-size: xx-large;
+  padding-top: 5%;
+  color: darkred;
+}
+
+.item-error-link-to-token {
+  font-weight: 700;
+  font-size: x-large;
+  margin-top: 30%;
+  cursor: pointer;
+  color: darkred;
+  &:hover {
+    color: blue;
+  }
 }
