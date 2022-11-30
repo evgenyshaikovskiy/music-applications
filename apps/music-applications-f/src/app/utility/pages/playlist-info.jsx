@@ -14,16 +14,9 @@ const PlaylistInfo = ({ playlist }) => {
         <p>
           Featured tracks:
           {/* needs to be fixed by giving key props for each child */}
-          {playlist.tracks.map((track) => {
+          {playlist.tracks.map((track, index) => {
             return (
-              <div>
-                <p>
-                  {track.artists.map((artist) => artist.label).join(' ')} - {' '}
-                  {track.label} album {track.album.label}
-                </p>
-                <p>Duration: {convertDuration(track.duration_ms)}</p>
-                <p>Explicit: {track.explicit ? 'Yes' : 'No'}</p>
-              </div>
+              <PlaylistTrackInfo track={track} key={index}/>
             );
           })}
         </p>
@@ -37,6 +30,17 @@ const PlaylistInfo = ({ playlist }) => {
         ></img>
         <p>Playlist cover</p>
       </div>
+    </div>
+  );
+};
+
+const PlaylistTrackInfo = ({ track }) => {
+  return (
+    <div>
+      {track.artists.map((artist) => artist.label).join(' ')} - {' '}
+      {track.label} album {track.album.label}
+      Duration: {convertDuration(track.duration_ms)}
+      Explicit: {track.explicit ? 'Yes' : 'No'}
     </div>
   );
 };
