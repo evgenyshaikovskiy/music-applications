@@ -1,4 +1,4 @@
-import { convertDuration } from "../utils";
+import { convertDuration } from '../utils';
 
 const AlbumInfo = ({ album }) => {
   return (
@@ -7,50 +7,37 @@ const AlbumInfo = ({ album }) => {
         <div className="album-item-page-details-header">
           <div className="album-item-page-images">
             <img
-                src={album.images[1].url}
-                height={album.images[1].height}
-                width={album.images[1].width}
-                alt="album-cover"
+              src={album.images[1].url}
+              height={album.images[1].height}
+              width={album.images[1].width}
+              alt="album-cover"
             ></img>
           </div>
           <div className="album-item-page-title">
             <div className="album-type-text">
-              <p>
-                ALBUM
-              </p>
+              <p>{album.album_type.toUpperCase()}</p>
             </div>
             <div className="album-label-text">
-              <p>
-                {album.label}
-              </p>
+              <p>{album.label}</p>
             </div>
             <div className="album-info-text">
-              <p>
-                {' '} 
-                {album.artist.map((artist) => artist.label).join(' ')}
-              </p>
+              <p> {album.artist.map((artist) => artist.label).join(' ')}</p>
               <p className="symbol">&#9679;</p>
-              <p>
-                {album.release_date.slice(0,4)}
-              </p>
+              <p>{album.release_date.slice(0, 4)}</p>
               <p className="symbol">&#9679;</p>
-              <p>
-              {album.tracks_num} tracks
-              </p>
+              <p>{album.tracks_num} tracks</p>
             </div>
           </div>
-        </div>  
-        <p>
+        </div>
+        <div>
           <p className="featured-tracks-label">Featured tracks:</p>{' '}
           {album.tracks.map((track, index) => {
-            return (
-              <AlbumTrackInfo track={track} key={index}/>
-            );
+            return <AlbumTrackInfo track={track} key={index} />;
           })}
-        </p>
+        </div>
         <div className="album-item-page-details-textbox">
-            <p>Album label: {album.actual_label}</p>
-            <p>Album was released at {album.release_date}</p>
+          <p>Album label: {album.actual_label}</p>
+          <p>Album was released at {album.release_date}</p>
         </div>
       </div>
     </div>
@@ -61,8 +48,8 @@ const AlbumTrackInfo = ({ track }) => {
   return (
     <div className="album-track-text">
       <p className="album-track-name">
-                {track.track_num}.{track.artists.map((artist) => artist.label).join(' ')} -{' '}
-                {track.label}
+        {track.track_num}.{' '}
+        {track.artists.map((artist) => artist.label).join(', ')} - {track.label}
       </p>
       <div className="album-track-info">
         <p>Duration: {convertDuration(track.duration_ms)}</p>
