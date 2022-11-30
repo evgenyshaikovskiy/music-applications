@@ -31,9 +31,11 @@ const TrackInfo = ({ track }) => {
             </p>
           </div>
           <div className="track-item-footer">
-            <p className="track-artist-name">
-              {track.artists.map((artist) => artist.label).join(', ')}
-            </p>
+            <div>
+              <p className="track-artist-name">
+                {track.artists.map((artist) => artist.label).join(', ')}
+              </p>
+            </div>
             <p className="symbol">&#9679;</p>
             <p>{track.album.release_date.slice(0, 4)}</p>
             <p className="symbol">&#9679;</p>

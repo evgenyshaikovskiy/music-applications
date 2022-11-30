@@ -161,6 +161,12 @@ p {
   font-weight: 600;
 }
 
+.album-track-info,
+.playlist-track-info {
+  margin-right: 2rem;
+}
+
+
 .featured-tracks-wrapper {
   display: flex;
   flex-direction: column;
