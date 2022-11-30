@@ -19,7 +19,7 @@ export class ArtistController {
   @Post()
   async post(@Req() request) {
     const artist: Artist = request.body as unknown as Artist;
-    const result = this.dbManager.addArtist(artist);
+    // const result = this.dbManager.addArtist(artist);
     return undefined;
   }
 }

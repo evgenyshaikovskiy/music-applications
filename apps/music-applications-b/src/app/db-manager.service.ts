@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { Neo4jService } from 'nest-neo4j/dist';
-import { Album } from './models/album.model';
-import { Artist } from './models/artist.model';
 import { SpotifyService } from './spotify.service';
 
 @Injectable()
@@ -65,12 +63,16 @@ export class DatabaseManager {
       `MATCH (n) RETURN count(n) as count`
     );
 
-    /*
+    return result;
+  }
+
+  /*
      list of instances: artist, track, album, playlist, genre
-     list of relations:  :author between artist and track(or album)
-                         :appeared between secondary artist and track(or album) <- fits for subinstances
-                         :performsIn between artist and genre
-                         :contains between album or playlist and track
+     list of relations:
+        :author between artist and track(or album)
+        :appeared between secondary artist and track(or album) <- fits for sub instances
+        :performsIn between artist and genre
+        :contains between album or playlist and track
 
      algorithm for adding instances:
       1. Check whether instance is already existing in db.
@@ -80,83 +82,204 @@ export class DatabaseManager {
       5. Provide relations.
      */
 
-    return result;
-  }
+  // its in the past:)
+  // // add functions
+  // public async addAlbum(album: Album) {
+  //   const checkForExistence = await this.dbService.read(
+  //     `MATCH (obj: Album) WHERE obj.spotify_id = '${album.spotify_id}' RETURN obj`
+  //   );
 
-  // add functions
-  public async addAlbum(album: Album) {
-    const checkForExistence = await this.dbService.read(
-      `MATCH (obj: Album) WHERE obj.spotify_id = '${album.spotify_id}' RETURN obj`
-    );
+  //   // record does not exist
+  //   if (checkForExistence.records.length == 0) {
+  //     await this.dbService.write(
+  //       `CREATE (album:Album {
+  //         name: '${album.name}',
+  //         label: '${album.label}',
+  //         album_type: '${album.album_type}',
+  //         release_date: '${album.release_date}',
+  //         tracks_num: '${album.tracks_num}',
+  //         spotify_id: '${album.spotify_id}'})`
+  //     );
 
-    console.log(checkForExistence, 'step 1');
+  //     // add all possible tracks
+  //     const tracksOnAlbum = (
+  //       await Promise.all(
+  //         album.tracks.map((track) =>
+  //           this.spotifyService.getTrackById(track.spotify_id)
+  //         )
+  //       )
+  //     ).map((track) => {
+  //       return {
+  //         name: track.name,
+  //         spotify_id: track.id,
+  //         duration_ms: track.duration_ms,
+  //         artists: track.artists.map((artist) => {
+  //           return { name: artist.name, spotify_id: artist.id };
+  //         }),
+  //         album: album,
+  //       };
+  //     }) as unknown as Track[];
 
-    // check sub instances block
-    console.log(album.tracks);
+  //     /*
+  //           MATCH
+  //             (artist: Artist {spotify_id: '${artist.spotify_id}'}),
+  //             (track: Track {spotify_id: '${track.spotify_id}'})
+  //           MERGE (artist)-[r:Author]->(track)
+  //           RETURN type(r)`);
+  //     */
+  //     await Promise.all(tracksOnAlbum.map((track) => this.addTrack(track)));
 
-    // record does not exist
-    if (checkForExistence.records.length == 0) {
-      const addQuery = await this.dbService.read(
-        `CREATE (album:Album {
-          name: '${album.name}',
-          label: '${album.label}',
-          album_type: '${album.album_type}',
-          release_date: '${album.release_date}',
-          tracks_num: '${album.tracks_num}',
-          spotify_id: '${album.spotify_id}'})`
-      );
+  //     // draw all relations
+  //     await Promise.all(
+  //       tracksOnAlbum.map((track) => {
+  //         return this.dbService.write(`
+  //         MATCH
+  //           (album: Album {spotify_id: '${album.spotify_id}'}),
+  //           (track: Track {spotify_id: '${track.spotify_id}'})
+  //         MERGE (album)-[r:Contains]->(track)
+  //         RETURN type(r)`);
+  //       })
+  //     );
+  //     return true;
+  //   }
 
-      console.log(addQuery, 'step - 3');
-    }
+  //   return false;
+  // }
 
-    return true;
-  }
+  // public async addTrack(track: Track) {
+  //   const checkForExistence = await this.dbService.read(
+  //     `MATCH (obj: Track) WHERE obj.spotify_id = '${track.spotify_id}' RETURN obj`
+  //   );
 
-  public async addArtist(artist: Artist) {
-    const checkForExistence = await this.dbService.read(
-      `MATCH(obj: Artist) WHERE obj.spotify_id = '${artist.spotify_id}' RETURN obj;`
-    );
+  //   if (checkForExistence.records.length == 0) {
+  //     await this.dbService.write(`CREATE (track: Track {
+  //       name: '${track.name}',
+  //       duration_ms: '${track.duration_ms}',
+  //       spotify_id: '${track.spotify_id}'
+  //       })`);
 
-    if (checkForExistence.records.length === 0) {
-      await this.dbService.write(`CREATE (artist: Artist {
-        name: '${artist.name}',
-        spotify_id: '${artist.spotify_id}',
-        type: '${artist.type}'})`);
+  //     const artistsOnTrackPromises = track.artists.map((artist) => {
+  //       return this.spotifyService.getArtistById(artist.spotify_id);
+  //     });
 
-      await Promise.all(
-        artist.genres.map((genre) => this.addGenreIfNotExists(genre))
-      );
+  //     const artistsOnTrack = (await Promise.all(artistsOnTrackPromises)).map(
+  //       (artist) => artist as unknown as Artist
+  //     );
 
-      await Promise.all(
-        artist.genres.map((genre) =>
-          this.dbService.write(`
-        MATCH
-          (artist: Artist {spotify_id: '${artist.spotify_id}'}),
-          (genre: Genre {name: '${genre}'})
-        MERGE (artist)-[r:PerformsIn]->(genre)
-        RETURN type(r)`)
-        )
-      );
+  //     // add all artists that are not created yet
+  //     await Promise.all(artistsOnTrack.map((artist) => this.addArtist(artist)));
 
-      return true;
-    }
+  //     // draw relations between artists and track(1 - author, other - appeared at)
+  //     await Promise.all(
+  //       artistsOnTrack.map((artist, index) => {
+  //         if (index == 0) {
+  //           return this.dbService.write(`
+  //           MATCH
+  //             (artist: Artist {spotify_id: '${artist.spotify_id}'}),
+  //             (track: Track {spotify_id: '${track.spotify_id}'})
+  //           MERGE (artist)-[r:Author]->(track)
+  //           RETURN type(r)`);
+  //         } else {
+  //           return this.dbService.write(`
+  //           MATCH
+  //             (artist: Artist {spotify_id: '${artist.spotify_id}'}),
+  //             (track: Track {spotify_id: '${track.spotify_id}'})
+  //           MERGE (artist)-[r:AppearedIn]->(track)
+  //           RETURN type(r)`);
+  //         }
+  //       })
+  //     );
 
-    return false;
-  }
+  //     // check album in db
+  //     const checkAlbumForExistence = await this.dbService.read(
+  //       `MATCH (obj: Album) WHERE obj.spotify_id = '${track.album.spotify_id}' RETURN obj`
+  //     );
 
-  public async addGenreIfNotExists(genreName: string) {
-    const checkForExistence = await this.dbService.read(
-      `MATCH (obj: Genre) WHERE obj.name = '${genreName}' return obj`
-    );
+  //     if (checkAlbumForExistence.records.length == 0) {
+  //       const album = await this.spotifyService.getAlbumById(
+  //         track.album.spotify_id
+  //       );
 
-    if (checkForExistence.records.length == 0) {
-      const addQuery = await this.dbService.read(
-        `CREATE (genre: Genre {name: '${genreName}'})`
-      );
+  //       // eto polniy pizdec, o4en' ploxo
+  //       const parsedAlbum: Album = {
+  //         album_type: album.album_type,
+  //         artists: album.artists.map((artist) => {
+  //           return {
+  //             name: artist.name,
+  //             spotify_id: artist.id,
+  //           };
+  //         }),
+  //         label: album.label,
+  //         name: album.name,
+  //         release_date: album.release_date,
+  //         spotify_id: album.id,
+  //         tracks: album.tracks.items.map((track) => {
+  //           return {
+  //             artists: track.artists.map((artist) => {
+  //               return { name: artist.name, spotify_id: artist.id };
+  //             }),
+  //             name: track.name,
+  //             spotify_id: track.id,
+  //             track_num: track.track_number,
+  //           };
+  //         }),
+  //         tracks_num: album.total_tracks,
+  //       };
 
-      return true;
-    }
+  //       await this.addAlbum(parsedAlbum);
+  //     }
 
-    return false;
-  }
+  //     return true;
+  //   }
+
+  //   return false;
+  // }
+
+  // public async addArtist(artist: Artist) {
+  //   const checkForExistence = await this.dbService.read(
+  //     `MATCH(obj: Artist) WHERE obj.spotify_id = '${artist.spotify_id}' RETURN obj;`
+  //   );
+
+  //   if (checkForExistence.records.length === 0) {
+  //     await this.dbService.write(`CREATE (artist: Artist {
+  //       name: '${artist.name}',
+  //       spotify_id: '${artist.spotify_id}',
+  //       type: '${artist.type}'})`);
+
+  //     await Promise.all(
+  //       artist.genres.map((genre) => this.addGenreIfNotExists(genre))
+  //     );
+
+  //     await Promise.all(
+  //       artist.genres.map((genre) =>
+  //         this.dbService.write(`
+  //       MATCH
+  //         (artist: Artist {spotify_id: '${artist.spotify_id}'}),
+  //         (genre: Genre {name: '${genre}'})
+  //       MERGE (artist)-[r:PerformsIn]->(genre)
+  //       RETURN type(r)`)
+  //       )
+  //     );
+
+  //     return true;
+  //   }
+
+  //   return false;
+  // }
+
+  // public async addGenreIfNotExists(genreName: string) {
+  //   const checkForExistence = await this.dbService.read(
+  //     `MATCH (obj: Genre) WHERE obj.name = '${genreName}' return obj`
+  //   );
+
+  //   if (checkForExistence.records.length == 0) {
+  //     const addQuery = await this.dbService.read(
+  //       `CREATE (genre: Genre {name: '${genreName}'})`
+  //     );
+
+  //     return true;
+  //   }
+
+  //   return false;
+  // }
 }

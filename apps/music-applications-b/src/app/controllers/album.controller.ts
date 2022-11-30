@@ -19,7 +19,7 @@ export class AlbumController {
   @Post()
   async post(@Req() request) {
     const album: Album = request.body as unknown as Album;
-    const adding = await this.dbManager.addAlbum(album);
+    // const adding = await this.dbManager.addAlbum(album);
     return undefined;
   }
 }

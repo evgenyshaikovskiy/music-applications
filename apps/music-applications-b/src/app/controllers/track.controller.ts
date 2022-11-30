@@ -20,7 +20,7 @@ export class TrackController {
   @Post()
   async post(@Req() request: Request) {
     const track: Track = request.body as unknown as Track;
-    console.log(track);
+    // const res = await this.dbManager.addTrack(track);
     return undefined;
   }
 }
