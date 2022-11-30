@@ -16,10 +16,9 @@ export class PlaylistController {
     return res;
   }
 
-  @Post()
-  async post(@Req() request: Request) {
-    const playlist: Playlist = request.body as unknown as Playlist;
-    console.log(playlist);
+  @Post('/:id')
+  async post(@Param() params) {
+    console.log(params.id);
     return undefined;
   }
 }

@@ -17,9 +17,9 @@ export class TrackController {
     return result;
   }
 
-  @Post()
-  async post(@Req() request: Request) {
-    const track: Track = request.body as unknown as Track;
+  @Post('/:id')
+  async post(@Param() params) {
+    console.log(params.id);
     // const res = await this.dbManager.addTrack(track);
     return undefined;
   }
