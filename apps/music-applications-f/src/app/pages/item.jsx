@@ -54,7 +54,7 @@ function ItemPage() {
     if (strategy) {
       const obj = ResponseParser.collectData(item, strategy);
       axios
-        .post(`http://localhost:4200/api/${params.type}`, obj)
+        .post(`http://localhost:4200/api/${params.type}/${item.spotify_id}`)
         .then((response) => {
           console.log(response.statusText);
         });
