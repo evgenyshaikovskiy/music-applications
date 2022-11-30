@@ -1,6 +1,5 @@
 import { Controller, Get, Param, Post, Req } from '@nestjs/common';
 import { DatabaseManager } from '../db-manager.service';
-import { Playlist } from '../models/playlist.model';
 import { SpotifyService } from '../spotify.service';
 
 @Controller('playlist')
