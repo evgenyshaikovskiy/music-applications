@@ -27,7 +27,7 @@
   padding-top: 3px;
 
   &:focus {
-    border-bottom: 3px solid aqua;
+    border-color: aqua;
   }
 
   &:focus-visible {
@@ -46,10 +46,9 @@
   padding-top: 4px;
   height: 40px;
   width: 100px;
-}
-
-.livesearch-selector-on-click {
-  border-color: aqua;
+  &:hover {
+    border-color: aqua;
+  }
 }
 
 .dropdown-container {
