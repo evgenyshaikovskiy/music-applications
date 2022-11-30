@@ -1,13 +1,14 @@
 import { Controller, Get, Query, Request, Response } from '@nestjs/common';
-import { AppService } from '../app.service';
 import { DatabaseManager } from '../db-manager.service';
+import { SpotifyService } from '../spotify.service';
 
 @Controller()
 export class AppController {
   constructor(
-    private readonly appService: AppService,
+    private readonly spotifyService: SpotifyService,
     private readonly dbManager: DatabaseManager
   ) {}
+
   // refactor controllers to different files later
   @Get('search')
   async getData(@Query() query) {
@@ -15,17 +16,23 @@ export class AppController {
     return res;
   }
 
+  @Get('db-test')
+  async testDb() {
+    const res = await this.dbManager.getCountOfNodesInDb();
+    return res;
+  }
+
   @Get('web-search')
   async getWebData(@Query() query) {
-    const res = await this.appService.getWebData(query);
+    const res = await this.spotifyService.getWebData(query);
     return res;
   }
 
   @Get('login')
   async loginToSpotify(@Response() response) {
     response.redirect(
-      this.appService.spotifyWebApi.createAuthorizeURL(
-        this.appService.scopes,
+      this.spotifyService.SpotifyWebApi.createAuthorizeURL(
+        this.spotifyService.scopes,
         'some-state-of-my-choice'
       )
     );
@@ -42,8 +49,7 @@ export class AppController {
       return error;
     }
 
-    this.appService.spotifyWebApi
-      .authorizationCodeGrant(code)
+    this.spotifyService.SpotifyWebApi.authorizationCodeGrant(code)
       .then((data) => {
         const access_token = data.body['access_token'];
         const refresh_token = data.body['refresh_token'];
@@ -51,15 +57,16 @@ export class AppController {
 
         // set up guard to monitor expiring token
 
-        this.appService.spotifyWebApi.setAccessToken(access_token);
-        this.appService.spotifyWebApi.setRefreshToken(refresh_token);
+        this.spotifyService.SpotifyWebApi.setAccessToken(access_token);
+        this.spotifyService.SpotifyWebApi.setRefreshToken(refresh_token);
 
         response.send('Success, close this window now');
 
         setInterval(async () => {
-          const data = await this.appService.spotifyWebApi.refreshAccessToken();
+          const data =
+            await this.spotifyService.SpotifyWebApi.refreshAccessToken();
           const access_token = data.body['access_token'];
-          this.appService.spotifyWebApi.setAccessToken(access_token);
+          this.spotifyService.SpotifyWebApi.setAccessToken(access_token);
 
           console.log('token was refreshed!');
         }, (expires_in / 2) * 1000);

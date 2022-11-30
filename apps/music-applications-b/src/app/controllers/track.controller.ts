@@ -1,20 +1,20 @@
 import { Controller, Get, Param, Post, Req } from '@nestjs/common';
-import { AppService } from '../app.service';
 import { DatabaseManager } from '../db-manager.service';
 import { Track } from '../models/track.model';
+import { SpotifyService } from '../spotify.service';
 
 @Controller('track')
 export class TrackController {
   constructor(
-    private readonly appService: AppService,
+    private readonly spotifyService: SpotifyService,
     private readonly dbManager: DatabaseManager
   ) {}
 
   @Get('/:id')
   async get(@Param() params) {
     console.log(params);
-    const result = await this.appService.spotifyWebApi.getTrack(params.id);
-    return result.body;
+    const result = await this.spotifyService.getTrackById(params.id);
+    return result;
   }
 
   @Post()

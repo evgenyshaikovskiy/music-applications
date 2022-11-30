@@ -12,6 +12,6 @@ export class Album {
     name: string;
     spotify_id: string;
     track_num: number;
-  };
+  }[];
   tracks_num: number;
 }
