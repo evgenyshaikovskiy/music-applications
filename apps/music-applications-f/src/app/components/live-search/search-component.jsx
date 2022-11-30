@@ -5,21 +5,6 @@ import ApplicationSelect from '../ui-elements/select';
 import InteractiveDropdown from './interactive-dropdown';
 import './styles.scss';
 
-// later add default styles by adding module.scss file
-// and injecting it into select component
-const selectorStyles = {
-  border: '0px',
-  borderBottom: '3px solid #00b8b8',
-  backgroundColor: '#ffffff',
-  fontWeight: '500',
-  textAlign: 'center',
-  fontSize: 'medium',
-  paddingLeft: '5px',
-  paddingTop: '4px',
-  height: '40px',
-  width: '100px',
-};
-
 export function LiveSearch({
   isInputDisabled,
   isSelectorDefaultValueDisabled,
@@ -28,6 +13,7 @@ export function LiveSearch({
   searchWordInitialState,
   endpointUrl,
   parsingStrategy,
+  selectorClassName,
 }) {
   const [results, setResults] = useState([]);
   const [query, setQuery] = useState('');
@@ -72,11 +58,10 @@ export function LiveSearch({
           isDefaultDisabled={disableTag(isSelectorDefaultValueDisabled)}
           defaultValueName={searchWordInitialState}
           defaultValue={searchWordInitialState.toLowerCase()}
-          className="livesearch-selector"
           value={searchWord}
           onChange={(value) => setSearchWord(value)}
-          styles={selectorStyles}
           options={selectorParamsArray}
+          selectorClassName={selectorClassName}
         ></ApplicationSelect>
         <input
           disabled={disableTag(isInputDisabled)}
