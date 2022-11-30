@@ -1,31 +1,45 @@
-import { convertDuration } from "../utils";
-
+import { useNavigate } from 'react-router-dom';
+import { convertDuration } from '../utils';
 
 const TrackInfo = ({ track }) => {
-  // const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
-  // styles are in app styles.
+  const router = useNavigate();
+
   return (
     <div className="item-page-content">
-      <div className="item-page-title">
-        <p>
-          Currently viewing {track.type} {track.label} by{' '}
-          {track.artists.map((artist) => artist.label).join(' ')}
-        </p>
-      </div>
-      <div className="item-page-details">
-        <p>Explicit: {track.explicit ? 'Yes' : 'No'}</p>
-        <p>Duration {convertDuration(track.duration_ms)}</p>
-        <p>From album {track.album.label}</p>
-        <p>Album was released at {track.album.release_date}</p>
-      </div>
-      <div className="item-page-images">
-        <img
-          src={track.album.images[1].url}
-          height={track.album.images[1].height}
-          width={track.album.images[1].width}
-          alt="album-cover"
-        ></img>
-        <p>Album cover</p>
+      <div className="track-page-content-wrapper">
+        <div className="track-album-image">
+          <img
+            src={track.album.images[1].url}
+            height={300}
+            width={300}
+            alt="album-cover"
+          ></img>
+        </div>
+        <div className="track-item-info">
+          <div className="track-item-type-text">SONG</div>
+          <div className="track-item-name">{track.label}</div>
+          <div className="track-item-additional-info">
+            <p>Explicit: {track.explicit ? 'Explicit' : 'Not explicit'}</p>
+            <p>
+              Album:{' '}
+              <span
+                className="track-album-name"
+                onClick={() => router(`/album/${track.album.spotify_id}`)}
+              >
+                {track.album.label}
+              </span>
+            </p>
+          </div>
+          <div className="track-item-footer">
+            <p className="track-artist-name">
+              {track.artists.map((artist) => artist.label).join(', ')}
+            </p>
+            <p className="symbol">&#9679;</p>
+            <p>{track.album.release_date.slice(0, 4)}</p>
+            <p className="symbol">&#9679;</p>
+            <p>{convertDuration(track.duration_ms)}</p>
+          </div>
+        </div>
       </div>
     </div>
   );

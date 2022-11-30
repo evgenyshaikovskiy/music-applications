@@ -62,6 +62,7 @@ body {
 
 .go-back-btn,
 .save-to-db-btn {
+  margin-top: 10px;
   height: 40px;
   padding: 10px;
   font-size: medium;
@@ -79,7 +80,6 @@ p {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  align-items: center;
   width: 70%;
   border: 4px solid black;
   border-radius: 5px;
@@ -90,16 +90,29 @@ p {
   text-align: left;
 }
 
-.album-item-page-details-header {
+.playlist-name-label {
+  font-weight: 600;
+  text-align: center;
+  font-size: xx-large;
+}
+.album-item-page-details-header,
+.playlist-item-page-details-header {
   display: flex;
   margin-bottom: 20px;
 }
 
-.album-item-page-images {
+.album-item-page-images,
+.playlist-item-page-images {
   box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.5);
 }
 
-.album-item-page-title {
+.playlist-item-page-images {
+  height: 300px;
+  margin-right: 100px;
+}
+
+.album-item-page-title,
+.playlist-item-page-title {
   display: flex;
   flex-direction: column;
   margin-left: 30px;
@@ -107,17 +120,20 @@ p {
   justify-content: space-between;
 }
 
-.album-type-text {
+.album-type-text,
+.playlist-type-text {
   font-size: medium;
   font-weight: bold;
 }
 
-.album-label-text {
-  font-size: xxx-large;
+.album-label-text,
+.playlist-label-text {
+  font-size: xx-large;
   font-weight: bold;
 }
 
-.album-info-text {
+.album-info-text,
+.playlist-info-text {
   display: flex;
   flex-direction: row;
   font-weight: bold;
@@ -128,27 +144,105 @@ p {
   padding-right: 3px;
 }
 
-.featured-tracks-label {
+.featured-tracks-label,
+.playlist-tracks-label {
   margin-bottom: 10px;
-  font-weight:normal;
+  font-weight: bold;
+  font-size: x-large;
 }
 
-.album-track-text {
+.album-track-text,
+.playlist-track-text {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 10px;
+  margin-right: 30px;
   font-weight: 600;
 }
 
-.album-track-name {
-  margin-right: 200px;
+.featured-tracks-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
 }
 
-.album-item-page-details-textbox {
+.album-track-name,
+.playlist-track-name {
+  font-weight: 600;
+  margin-right: 200px;
+  cursor: pointer;
+
+  &:hover {
+    color: blue;
+  }
+}
+
+.album-item-page-details-textbox,
+.playlist-item-page-details-textbox {
   margin-top: 10px;
   margin-bottom: 20px;
 }
+
+.track-page-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-left: 10px;
+  justify-content: left;
+}
+
+.track-item-info {
+  margin-top: 1rem;
+  margin-left: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.track-item-type-text {
+  font-weight: 600;
+  font-size: medium;
+}
+
+.track-item-name {
+  margin-top: 3rem;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.track-item-additional-info {
+  margin-top: 4rem;
+  font-weight: 600;
+}
+
+.track-album-name {
+  margin-top: 1rem;
+  &:hover {
+    cursor: pointer;
+    color: blue;
+  }
+}
+
+.track-item-footer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 4rem;
+  font-weight: 700;
+  font-size: large;
+}
+
+.track-item-footer p {
+  margin-right: 10px;
+}
+
+.track-artist-name {
+  cursor: pointer;
+  &:hover {
+    color: blue;
+  }
+}
+
+
 
 .item-error-wrapper {
   display: flex;
@@ -175,4 +269,3 @@ p {
     color: blue;
   }
 }
-

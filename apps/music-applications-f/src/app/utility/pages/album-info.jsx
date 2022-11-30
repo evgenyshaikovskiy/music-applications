@@ -1,6 +1,10 @@
 import { convertDuration } from '../utils';
+import { useNavigate } from 'react-router-dom';
 
 const AlbumInfo = ({ album }) => {
+  const router = useNavigate();
+  const trackNameClickCallback = (spotify_id) => router(`/track/${spotify_id}`);
+
   return (
     <div className="item-page-content">
       <div>
@@ -32,7 +36,13 @@ const AlbumInfo = ({ album }) => {
         <div>
           <p className="featured-tracks-label">Featured tracks:</p>{' '}
           {album.tracks.map((track, index) => {
-            return <AlbumTrackInfo track={track} key={index} />;
+            return (
+              <AlbumTrackInfo
+                track={track}
+                key={index}
+                onTrackClickCallback={trackNameClickCallback}
+              />
+            );
           })}
         </div>
         <div className="album-item-page-details-textbox">
@@ -44,10 +54,13 @@ const AlbumInfo = ({ album }) => {
   );
 };
 
-const AlbumTrackInfo = ({ track }) => {
+const AlbumTrackInfo = ({ track, onTrackClickCallback }) => {
   return (
     <div className="album-track-text">
-      <p className="album-track-name">
+      <p
+        className="album-track-name"
+        onClick={() => onTrackClickCallback(track.spotify_id)}
+      >
         {track.track_num}.{' '}
         {track.artists.map((artist) => artist.label).join(', ')} - {track.label}
       </p>
