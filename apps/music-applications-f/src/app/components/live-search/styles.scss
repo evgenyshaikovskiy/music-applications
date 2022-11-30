@@ -82,10 +82,6 @@
   }
 }
 
-.clickable-dropdown-item-text {
-
-}
-
 .clickable-dropdown-item-btns {
   display: flex;
   align-self: end;      
@@ -107,6 +103,13 @@
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
-.view-details-btn{
-  
+.view-details-btn {
+  border-radius: 4px;
+  width: 20%;
+  padding: 7px;
+  font-size: medium;
+  cursor: pointer;
+  &:hover {
+    background-color: #1fdf64;
+  }
 }
