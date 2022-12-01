@@ -28,10 +28,11 @@ const AlbumInfo = ({ album }) => {
               <p>{album.label}</p>
             </div>
             <div className="album-info-text">
-              {album.artist.map((artist) => (
+              {album.artist.map((artist, index) => (
                 <ArtistTrackName
                   artist={artist}
                   onArtistClickCallback={artistNameClickCallback}
+                  key={index}
                 ></ArtistTrackName>
               ))}
               {/* <div>{album.artist.map((artist) => artist.label).join(', ')}</div> */}

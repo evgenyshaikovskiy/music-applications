@@ -68,7 +68,6 @@ export const Strategy = {
     }
   },
   ParseSpotifyTrack: function (track) {
-    console.log(track);
     return {
       type: track.type,
       label: track.name,

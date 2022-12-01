@@ -38,10 +38,11 @@ const TrackInfo = ({ track }) => {
           </div>
           <div className="track-item-footer">
             <div>
-              {track.artists.map((artist) => (
+              {track.artists.map((artist, index) => (
                 <ArtistTrackName
                   artist={artist}
                   onArtistClickCallback={artistNameClickCallback}
+                  key={index}
                 ></ArtistTrackName>
               ))}
             </div>
