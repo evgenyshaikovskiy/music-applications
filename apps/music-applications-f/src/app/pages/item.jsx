@@ -7,7 +7,7 @@ import { ResponseParser } from '../services/response-parser';
 import AlbumInfo from '../utility/pages/album-info';
 import ArtistInfo from '../utility/pages/artist-info';
 import PlaylistInfo from '../utility/pages/playlist-info';
-import { LoadingSpinner } from '../utility/pages/page-utils';
+import { LoadingSpinner, PopupMessage } from '../utility/pages/page-utils';
 import AppModal from '../utility/modal';
 
 function ItemPage() {
@@ -18,7 +18,12 @@ function ItemPage() {
 
   const [item, setItem] = useState({});
   const [error, setError] = useState('');
+
   const [isLoading, setIsLoading] = useState(false);
+  const [popup, setPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+
+  const togglePopup = () => setPopup(!popup);
 
   const recognizeParsingStrategy = (type) => {
     switch (type) {
@@ -46,6 +51,15 @@ function ItemPage() {
           // отрисовать окно о добавлении или не добавлении
           console.log(response.data);
           setIsLoading(false);
+
+          if (response.data) {
+            setPopupMessage('Instance was successfully added!');
+          } else {
+            setPopupMessage('Instance already added!');
+          }
+
+          togglePopup();
+          setTimeout(() => togglePopup, 500);
         })
         .catch(() => {
           setIsLoading(false);
@@ -108,10 +122,16 @@ function ItemPage() {
         >
           Save to db
         </button>
-        <AppModal visible={isLoading} setVisible={setIsLoading}>
-          <LoadingSpinner></LoadingSpinner>
-        </AppModal>
       </div>
+      {popup && (
+        <PopupMessage
+          handleClose={togglePopup}
+          message={popupMessage}
+        ></PopupMessage>
+      )}
+      <AppModal visible={isLoading} setVisible={setIsLoading}>
+        <LoadingSpinner></LoadingSpinner>
+      </AppModal>
       {item.type === 'track' ? (
         <TrackInfo track={item}></TrackInfo>
       ) : (

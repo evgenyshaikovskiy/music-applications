@@ -1,4 +1,4 @@
-import { convertDuration } from "../utils";
+import { convertDuration } from '../utils';
 
 export const ArtistTrackName = ({ artist, onArtistClickCallback }) => {
   return (
@@ -48,7 +48,18 @@ export const PlaylistTrackInfo = ({ track, index, onTrackClickCallback }) => {
 };
 
 export const LoadingSpinner = () => {
-  return <div className="spinner-container">
-    <div className="loading-spinner"></div>
-  </div>
-}
+  return (
+    <div className="spinner-container">
+      <div className="loading-spinner"></div>
+    </div>
+  );
+};
+
+export const PopupMessage = ({ message, handleClose }) => {
+  setTimeout(() => handleClose(), 2000);
+  return (
+    <div className="popup-box">
+      <div className="popup-message">{message}</div>
+    </div>
+  );
+};
