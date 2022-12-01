@@ -328,6 +328,15 @@ p {
   width: 50px;
 }
 
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .popup-box {
   background: #00000050;
   margin-top: auto;
