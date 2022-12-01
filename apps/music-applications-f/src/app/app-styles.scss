@@ -95,12 +95,15 @@ p {
   text-align: center;
   font-size: xx-large;
 }
+
+.artist-item-page-details-header,
 .album-item-page-details-header,
 .playlist-item-page-details-header {
   display: flex;
   margin-bottom: 20px;
 }
 
+.artist-item-page-image,
 .album-item-page-images,
 .playlist-item-page-images {
   box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.5);
@@ -111,6 +114,7 @@ p {
   margin-right: 100px;
 }
 
+.artist-item-page-title,
 .album-item-page-title,
 .playlist-item-page-title {
   display: flex;
@@ -120,18 +124,21 @@ p {
   justify-content: space-between;
 }
 
+.artist-type-text,
 .album-type-text,
 .playlist-type-text {
   font-size: medium;
   font-weight: bold;
 }
 
+.artist-label-text,
 .album-label-text,
 .playlist-label-text {
   font-size: xx-large;
   font-weight: bold;
 }
 
+.artist-genres-text,
 .album-info-text,
 .playlist-info-text {
   display: flex;
