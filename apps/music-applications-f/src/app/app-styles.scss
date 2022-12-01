@@ -95,6 +95,7 @@ p {
   text-align: center;
   font-size: xx-large;
 }
+
 .album-item-page-details-header,
 .playlist-item-page-details-header {
   display: flex;
@@ -223,6 +224,7 @@ p {
 
 .track-album-name {
   margin-top: 1rem;
+
   &:hover {
     cursor: pointer;
     color: blue;
@@ -248,12 +250,11 @@ p {
 .track-artist-name,
 .artist-name {
   cursor: pointer;
+
   &:hover {
     color: blue;
   }
 }
-
-
 
 .item-error-wrapper {
   display: flex;
@@ -279,4 +280,31 @@ p {
   &:hover {
     color: blue;
   }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #383636;
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
 }

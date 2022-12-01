@@ -1,0 +1,21 @@
+.appModal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: none;
+  background: rgba(0,0,0, 0.5);
+}
+
+.appModalContent {
+  padding: 25px;
+  background: #C6D8FF;
+  border-radius: 16px;
+}
+
+.appModal.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

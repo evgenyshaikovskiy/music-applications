@@ -7,6 +7,8 @@ import { ResponseParser } from '../services/response-parser';
 import AlbumInfo from '../utility/pages/album-info';
 import ArtistInfo from '../utility/pages/artist-info';
 import PlaylistInfo from '../utility/pages/playlist-info';
+import { LoadingSpinner } from '../utility/pages/page-utils';
+import AppModal from '../utility/modal';
 
 function ItemPage() {
   const urlToLogin = 'http://localhost:4200/api/login';
@@ -16,6 +18,7 @@ function ItemPage() {
 
   const [item, setItem] = useState({});
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const recognizeParsingStrategy = (type) => {
     switch (type) {
@@ -36,10 +39,16 @@ function ItemPage() {
 
   function postItem() {
     if (item) {
+      setIsLoading(true);
       axios
         .post(`http://localhost:4200/api/${params.type}/${item.spotify_id}`)
         .then((response) => {
-          console.log(response.statusText);
+          // отрисовать окно о добавлении или не добавлении
+          console.log(response.data);
+          setIsLoading(false);
+        })
+        .catch(() => {
+          setIsLoading(false);
         });
     }
   }
@@ -85,12 +94,23 @@ function ItemPage() {
   return (
     <div className="item-page-wrapper">
       <div className="item-page-btns">
-        <button onClick={() => router(-1)} className="go-back-btn">
+        <button
+          onClick={() => router(-1)}
+          className="go-back-btn"
+          disabled={isLoading}
+        >
           Back
         </button>
-        <button className="save-to-db-btn" onClick={() => postItem()}>
+        <button
+          className="save-to-db-btn"
+          onClick={() => postItem()}
+          disabled={isLoading}
+        >
           Save to db
         </button>
+        <AppModal visible={isLoading} setVisible={setIsLoading}>
+          <LoadingSpinner></LoadingSpinner>
+        </AppModal>
       </div>
       {item.type === 'track' ? (
         <TrackInfo track={item}></TrackInfo>

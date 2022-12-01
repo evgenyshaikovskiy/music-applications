@@ -46,3 +46,9 @@ export const PlaylistTrackInfo = ({ track, index, onTrackClickCallback }) => {
     </div>
   );
 };
+
+export const LoadingSpinner = () => {
+  return <div className="spinner-container">
+    <div className="loading-spinner"></div>
+  </div>
+}
