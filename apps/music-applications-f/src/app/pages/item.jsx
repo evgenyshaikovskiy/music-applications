@@ -35,24 +35,7 @@ function ItemPage() {
   const parsingStrategy = recognizeParsingStrategy(params.type);
 
   function postItem() {
-    const selectStrategy = (type) => {
-      switch (type) {
-        case 'track':
-          return Strategy.CollectTrack;
-        case 'album':
-          return Strategy.CollectAlbum;
-        case 'playlist':
-          return Strategy.CollectPlaylist;
-        case 'artist':
-          return Strategy.CollectArtist;
-        default:
-          return undefined;
-      }
-    };
-
-    const strategy = selectStrategy(params.type);
-    if (strategy) {
-      const obj = ResponseParser.collectData(item, strategy);
+    if (item) {
       axios
         .post(`http://localhost:4200/api/${params.type}/${item.spotify_id}`)
         .then((response) => {
@@ -89,7 +72,7 @@ function ItemPage() {
             className="item-error-link-to-token"
             onClick={() => {
               window.open(urlToLogin, '_blank');
-              window.location.reload();
+              setInterval(() => window.location.reload(), 100);
             }}
           >
             Acquire token
