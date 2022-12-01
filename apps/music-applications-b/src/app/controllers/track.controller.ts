@@ -18,6 +18,6 @@ export class TrackController {
   @Post('/:id')
   async post(@Param() params) {
     const res = await this.dbManager.addTrack(params.id);
-    return undefined;
+    return res;
   }
 }
