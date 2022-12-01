@@ -97,11 +97,11 @@ export class DatabaseManager {
       `MATCH (genre: Genre) WHERE genre.name = '${genreName}' RETURN genre`
     );
 
-    if (checkQuery.records.length == 0) {
-      // create genre
+    if (checkQuery.records.length === 0) {
       await this.dbService.write(
         `CREATE (genre: Genre {name: '${genreName}'})`
       );
+
       return true;
     }
 
@@ -109,8 +109,72 @@ export class DatabaseManager {
   }
 
   public async addAlbum(spotify_id: string) {
-    const album = await this.spotifyService.getAlbumById(spotify_id);
-    console.log(album);
+    const alreadyExists = await this.isThereInstanceWithId(spotify_id);
+
+    if (!alreadyExists) {
+      const album = await this.spotifyService.getAlbumById(spotify_id);
+
+      // add album as instance
+      await this.dbService.write(`
+        CREATE (album: Album {
+          name: '${album.name}',
+          spotify_id: '${album.id}',
+          type: '${album.album_type}',
+          count_of_tracks: '${album.total_tracks}',
+          label: '${album.label}',
+          release: '${album.release_date}'
+        })`);
+
+      // add genres
+      for (const genre of album.genres) {
+        // create genre if possible
+        await this.addGenre(genre);
+        await this.dbService.write(`
+          MATCH
+            (album: Album {spotify_id: '${spotify_id}'}),
+            (genre: Genre {name: '${genre}'})
+          MERGE (album)-[r:RelatedToGenre]->(genre)
+          RETURN type(r)`);
+      }
+
+      // add artists
+      for (const artist of album.artists) {
+        await this.addArtist(artist.id);
+      }
+
+      // draw author relation
+      const albumAuthor = album.artists.shift();
+      await this.dbService.write(`
+        MATCH
+          (artist: Artist {spotify_id: '${albumAuthor.id}'}),
+          (album: Album {spotify_id: '${spotify_id}'})
+        MERGE (artist)-[r:Author]->(album)
+        RETURN type(r)`);
+
+      // draw appeared at relation
+      for (const artist of album.artists) {
+        await this.dbService.write(`
+          MATCH
+            (artist: Artist {spotify_id: '${artist.id}'}),
+            (album: Album {spotify_id: '${spotify_id}'})
+          MERGE (artist)-[r:AppearedAt]->(album)
+          RETURN type(r)`);
+      }
+
+      for (const track of album.tracks.items) {
+        await this.addTrack(track.id);
+        await this.dbService.write(`
+          MATCH
+            (album: Album {spotify_id: '${spotify_id}'}),
+            (track: Track {spotify_id: '${track.id}'})
+          MERGE (album)-[r:Contains]->(track)
+          RETURN type(r)`);
+      }
+
+      return true;
+    }
+
+    return false;
   }
 
   public async addArtist(spotify_id: string) {
@@ -127,27 +191,24 @@ export class DatabaseManager {
           type: '${artist.type}'
         })`);
 
-      await Promise.all(
-        artist.genres.map((genre) => {
-          return this.addGenre(genre);
-        })
-      );
+      // sequence
+      for (const genre of artist.genres) {
+        await this.addGenre(genre);
+      }
 
-      await Promise.all(
-        artist.genres.map((genre) => {
-          return this.dbService.write(`
-            MATCH
-              (artist: Artist {spotify_id: '${artist.id}'}),
-              (genre: Genre {name: '${genre}'})
-            MERGE (artist)-[r:PerformsIn]->(genre)
-            RETURN type(r)`);
-        })
-      );
+      for (const genre of artist.genres) {
+        await this.dbService.write(`
+          MATCH
+            (artist: Artist {spotify_id: '${artist.id}'}),
+            (genre: Genre {name: '${genre}'})
+          MERGE (artist)-[r:PerformsInGenre]->(genre)
+          RETURN type(r)`);
+      }
 
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   }
 
   public async addPlaylist(spotify_id: string) {
@@ -156,8 +217,48 @@ export class DatabaseManager {
   }
 
   public async addTrack(spotify_id: string) {
-    const track = await this.spotifyService.getArtistById(spotify_id);
-    console.log(track);
+    const alreadyExists = await this.isThereInstanceWithId(spotify_id);
+
+    if (!alreadyExists) {
+      const track = await this.spotifyService.getTrackById(spotify_id);
+
+      // create track at first
+      await this.dbService.write(`
+        CREATE (track: Track {
+          name: '${track.name}',
+          duration_ms: '${track.duration_ms}',
+          explicit: '${track.explicit}',
+          spotify_id: '${track.id}'
+        })`);
+
+      // relate artists to track
+      // first add artists
+      for (const artist of track.artists) {
+        await this.addArtist(artist.id);
+      }
+
+      // add author relations
+      const trackAuthor = track.artists.shift();
+      await this.dbService.write(`
+        MATCH
+          (artist: Artist {spotify_id: '${trackAuthor.id}'}),
+          (track: Track {spotify_id: '${spotify_id}'})
+        MERGE (artist)-[r:Author]->(track)
+        RETURN type(r)`);
+
+      for (const artist of track.artists) {
+        await this.dbService.write(`
+          MATCH
+            (artist: Artist {spotify_id: '${artist.id}'}),
+            (track: Track {spotify_id: '${spotify_id}'})
+          MERGE (artist)-[r:AppearedAt]->(track)
+          RETURN type(r)`);
+      }
+
+      return true;
+    }
+
+    return false;
   }
 
   // its in the past:)
