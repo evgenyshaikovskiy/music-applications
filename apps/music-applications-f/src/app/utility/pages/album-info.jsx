@@ -22,10 +22,10 @@ const AlbumInfo = ({ album }) => {
           </div>
           <div className="album-item-page-title">
             <div className="album-type-text">
-              <p>{album.album_type.toUpperCase()}</p>
+              <div>{album.album_type.toUpperCase()}</div>
             </div>
             <div className="album-label-text">
-              <p>{album.label}</p>
+              <div>{album.label}</div>
             </div>
             <div className="album-info-text">
               {album.artist.map((artist, index) => (
@@ -36,15 +36,15 @@ const AlbumInfo = ({ album }) => {
                 ></ArtistTrackName>
               ))}
               {/* <div>{album.artist.map((artist) => artist.label).join(', ')}</div> */}
-              <p className="symbol">&#9679;</p>
-              <p>{album.release_date.slice(0, 4)}</p>
-              <p className="symbol">&#9679;</p>
-              <p>{album.tracks_num} tracks</p>
+              <div className="symbol">&#9679;</div>
+              <div>{album.release_date.slice(0, 4)}</div>
+              <div className="symbol">&#9679;</div>
+              <div>{album.tracks_num} tracks</div>
             </div>
           </div>
         </div>
         <div>
-          <p className="featured-tracks-label">Featured tracks:</p>{' '}
+          <div className="featured-tracks-label">Featured tracks:</div>{' '}
           {album.tracks.map((track, index) => {
             return (
               <AlbumTrackInfo
@@ -56,8 +56,8 @@ const AlbumInfo = ({ album }) => {
           })}
         </div>
         <div className="album-item-page-details-textbox">
-          <p>Album label: {album.actual_label}</p>
-          <p>Album was released at {album.release_date}</p>
+          <div>Album label: {album.actual_label}</div>
+          <div>Album was released at {album.release_date}</div>
         </div>
       </div>
     </div>

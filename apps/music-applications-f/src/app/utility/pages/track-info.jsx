@@ -19,14 +19,16 @@ const TrackInfo = ({ track }) => {
           ></img>
         </div>
         <div className="track-item-info">
-          <div className="track-item-type-text">SONG</div>
-          <div className="track-item-name">{track.label}</div>
+          <div className="track-item-title-info">
+            <div className="track-item-type-text">SONG</div>
+            <div className="track-item-name">{track.label}</div>
+          </div>
           <div className="track-item-additional-info">
             <audio controls className="track-preview-audio">
               <source src={track.preview_url}></source>
             </audio>
-            <p>Explicit: {track.explicit ? 'Explicit' : 'Not explicit'}</p>
-            <p>
+            <div>Explicit: {track.explicit ? 'Explicit' : 'Not explicit'}</div>
+            <div>
               Album:{' '}
               <span
                 className="track-album-name"
@@ -34,10 +36,10 @@ const TrackInfo = ({ track }) => {
               >
                 {track.album.label}
               </span>
-            </p>
+            </div>
           </div>
           <div className="track-item-footer">
-            <div>
+            <div className="track-artistlist">
               {track.artists.map((artist, index) => (
                 <ArtistTrackName
                   artist={artist}
@@ -46,10 +48,10 @@ const TrackInfo = ({ track }) => {
                 ></ArtistTrackName>
               ))}
             </div>
-            <p className="symbol">&#9679;</p>
-            <p>{track.album.release_date.slice(0, 4)}</p>
-            <p className="symbol">&#9679;</p>
-            <p>{convertDuration(track.duration_ms)}</p>
+            <div className="symbol">&#9679;</div>
+            <div>{track.album.release_date.slice(0, 4)}</div>
+            <div className="symbol">&#9679;</div>
+            <div>{convertDuration(track.duration_ms)}</div>
           </div>
         </div>
       </div>
