@@ -99,8 +99,11 @@ export const Strategy = {
     };
   },
   ParseSpotifyPlaylist: function (playlist) {
+    console.log(playlist);
     return {
       spotify_id: playlist.id,
+      description: playlist.description,
+      owner_name: playlist.owner.display_name,
       images: playlist.images,
       name: playlist.name,
       collaborative: playlist.collaborative,
@@ -163,82 +166,6 @@ export const Strategy = {
           label: artist.name,
           spotify_id: artist.id,
           type: artist.type,
-        };
-      }),
-    };
-  },
-  CollectTrack: function (item) {
-    return {
-      name: item.label,
-      spotify_id: item.spotify_id,
-      duration_ms: item.duration_ms,
-      artists: item.artists.map((artist) => {
-        return { name: artist.label, spotify_id: artist.spotify_id };
-      }),
-      album: {
-        name: item.album.label,
-        spotify_id: item.album.spotify_id,
-        album_type: item.album.album_type,
-        release_date: item.album.release_date,
-        total_tracks: item.album.total_tracks,
-      },
-    };
-  },
-  CollectArtist: function (item) {
-    return {
-      name: item.label,
-      genres: item.genres,
-      spotify_id: item.spotify_id,
-      type: item.type,
-    };
-  },
-  CollectPlaylist: function (item) {
-    return {
-      name: item.name,
-      spotify_id: item.spotify_id,
-      type: item.type,
-      tracks_num: item.tracks.length,
-      tracks: item.tracks.map((track) => {
-        return {
-          name: track.label,
-          spotify_id: track.spotify_id,
-          artists: track.artists.map((artist) => {
-            return { name: artist.label, spotify_id: artist.spotify_id };
-          }),
-          album: {
-            spotify_id: track.album.spotify_id,
-            name: track.album.label,
-            album_type: track.album.album_type,
-          },
-        };
-      }),
-    };
-  },
-  CollectAlbum: function (item) {
-    return {
-      spotify_id: item.spotify_id,
-      album_type: item.album_type,
-      release_date: item.release_date,
-      tracks_num: item.tracks.length,
-      name: item.label,
-      label: item.actual_label,
-      tracks: item.tracks.map((track) => {
-        return {
-          name: track.label,
-          spotify_id: track.spotify_id,
-          track_num: track.track_num,
-          artists: track.artists.map((artist) => {
-            return {
-              name: artist.label,
-              spotify_id: artist.spotify_id,
-            };
-          }),
-        };
-      }),
-      artists: item.artist.map((value) => {
-        return {
-          name: value.label,
-          spotify_id: value.spotify_id,
         };
       }),
     };
