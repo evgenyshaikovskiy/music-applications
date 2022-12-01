@@ -11,15 +11,13 @@ export class TrackController {
 
   @Get('/:id')
   async get(@Param() params) {
-    console.log(params);
     const result = await this.spotifyService.getTrackById(params.id);
     return result;
   }
 
   @Post('/:id')
   async post(@Param() params) {
-    console.log(params.id);
-    // const res = await this.dbManager.addTrack(track);
-    return undefined;
+    const res = await this.dbManager.addTrack(params.id);
+    return res;
   }
 }

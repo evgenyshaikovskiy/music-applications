@@ -245,6 +245,7 @@ p {
 
 .track-album-name {
   margin-top: 1rem;
+
   &:hover {
     cursor: pointer;
     color: blue;
@@ -262,6 +263,7 @@ p {
   display: flex;
   flex-direction: row;
 }
+
 .artist-name {
   margin-right: 10px;
 }
@@ -277,12 +279,11 @@ p {
 .track-artist-name,
 .artist-name {
   cursor: pointer;
+
   &:hover {
     color: blue;
   }
 }
-
-
 
 .item-error-wrapper {
   display: flex;

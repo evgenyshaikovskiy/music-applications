@@ -80,206 +80,211 @@ export class DatabaseManager {
       3. Create instance if needed.
       4. Create sub instances {also get them from spotify by id, if necessary}.
       5. Provide relations.
-     */
+  */
 
-  // its in the past:)
-  // // add functions
-  // public async addAlbum(album: Album) {
-  //   const checkForExistence = await this.dbService.read(
-  //     `MATCH (obj: Album) WHERE obj.spotify_id = '${album.spotify_id}' RETURN obj`
-  //   );
+  private async isThereInstanceWithId(id: string) {
+    const query = await this.dbService.read(
+      `MATCH (instance) WHERE instance.spotify_id = "${id}" RETURN instance`
+    );
 
-  //   // record does not exist
-  //   if (checkForExistence.records.length == 0) {
-  //     await this.dbService.write(
-  //       `CREATE (album:Album {
-  //         name: '${album.name}',
-  //         label: '${album.label}',
-  //         album_type: '${album.album_type}',
-  //         release_date: '${album.release_date}',
-  //         tracks_num: '${album.tracks_num}',
-  //         spotify_id: '${album.spotify_id}'})`
-  //     );
+    return query.records.length != 0;
+  }
 
-  //     // add all possible tracks
-  //     const tracksOnAlbum = (
-  //       await Promise.all(
-  //         album.tracks.map((track) =>
-  //           this.spotifyService.getTrackById(track.spotify_id)
-  //         )
-  //       )
-  //     ).map((track) => {
-  //       return {
-  //         name: track.name,
-  //         spotify_id: track.id,
-  //         duration_ms: track.duration_ms,
-  //         artists: track.artists.map((artist) => {
-  //           return { name: artist.name, spotify_id: artist.id };
-  //         }),
-  //         album: album,
-  //       };
-  //     }) as unknown as Track[];
+  public async addGenre(genreName: string) {
+    const checkQuery = await this.dbService.read(
+      `MATCH (genre: Genre) WHERE genre.name = "${genreName}" RETURN genre`
+    );
 
-  //     /*
-  //           MATCH
-  //             (artist: Artist {spotify_id: '${artist.spotify_id}'}),
-  //             (track: Track {spotify_id: '${track.spotify_id}'})
-  //           MERGE (artist)-[r:Author]->(track)
-  //           RETURN type(r)`);
-  //     */
-  //     await Promise.all(tracksOnAlbum.map((track) => this.addTrack(track)));
+    if (checkQuery.records.length === 0) {
+      await this.dbService.write(
+        `CREATE (genre: Genre {name: "${genreName}"})`
+      );
 
-  //     // draw all relations
-  //     await Promise.all(
-  //       tracksOnAlbum.map((track) => {
-  //         return this.dbService.write(`
-  //         MATCH
-  //           (album: Album {spotify_id: '${album.spotify_id}'}),
-  //           (track: Track {spotify_id: '${track.spotify_id}'})
-  //         MERGE (album)-[r:Contains]->(track)
-  //         RETURN type(r)`);
-  //       })
-  //     );
-  //     return true;
-  //   }
+      return true;
+    }
 
-  //   return false;
-  // }
+    return false;
+  }
 
-  // public async addTrack(track: Track) {
-  //   const checkForExistence = await this.dbService.read(
-  //     `MATCH (obj: Track) WHERE obj.spotify_id = '${track.spotify_id}' RETURN obj`
-  //   );
+  public async addAlbum(spotify_id: string) {
+    const alreadyExists = await this.isThereInstanceWithId(spotify_id);
 
-  //   if (checkForExistence.records.length == 0) {
-  //     await this.dbService.write(`CREATE (track: Track {
-  //       name: '${track.name}',
-  //       duration_ms: '${track.duration_ms}',
-  //       spotify_id: '${track.spotify_id}'
-  //       })`);
+    if (!alreadyExists) {
+      const album = await this.spotifyService.getAlbumById(spotify_id);
 
-  //     const artistsOnTrackPromises = track.artists.map((artist) => {
-  //       return this.spotifyService.getArtistById(artist.spotify_id);
-  //     });
+      // add album as instance
+      await this.dbService.write(`
+        CREATE (album: Album {
+          name: "${album.name}",
+          spotify_id: "${album.id}",
+          type: "${album.album_type}",
+          count_of_tracks: "${album.total_tracks}",
+          label: "${album.label}",
+          release: "${album.release_date}"
+        })`);
 
-  //     const artistsOnTrack = (await Promise.all(artistsOnTrackPromises)).map(
-  //       (artist) => artist as unknown as Artist
-  //     );
+      // add genres
+      for (const genre of album.genres) {
+        // create genre if possible
+        await this.addGenre(genre);
+        await this.dbService.write(`
+          MATCH
+            (album: Album {spotify_id: "${spotify_id}"}),
+            (genre: Genre {name: "${genre}"})
+          MERGE (album)-[r:RelatedToGenre]->(genre)
+          RETURN type(r)`);
+      }
 
-  //     // add all artists that are not created yet
-  //     await Promise.all(artistsOnTrack.map((artist) => this.addArtist(artist)));
+      // add artists
+      for (const artist of album.artists) {
+        await this.addArtist(artist.id);
+      }
 
-  //     // draw relations between artists and track(1 - author, other - appeared at)
-  //     await Promise.all(
-  //       artistsOnTrack.map((artist, index) => {
-  //         if (index == 0) {
-  //           return this.dbService.write(`
-  //           MATCH
-  //             (artist: Artist {spotify_id: '${artist.spotify_id}'}),
-  //             (track: Track {spotify_id: '${track.spotify_id}'})
-  //           MERGE (artist)-[r:Author]->(track)
-  //           RETURN type(r)`);
-  //         } else {
-  //           return this.dbService.write(`
-  //           MATCH
-  //             (artist: Artist {spotify_id: '${artist.spotify_id}'}),
-  //             (track: Track {spotify_id: '${track.spotify_id}'})
-  //           MERGE (artist)-[r:AppearedIn]->(track)
-  //           RETURN type(r)`);
-  //         }
-  //       })
-  //     );
+      // draw author relation
+      const albumAuthor = album.artists.shift();
+      await this.dbService.write(`
+        MATCH
+          (artist: Artist {spotify_id: "${albumAuthor.id}"}),
+          (album: Album {spotify_id: "${spotify_id}"})
+        MERGE (artist)-[r:Author]->(album)
+        RETURN type(r)`);
 
-  //     // check album in db
-  //     const checkAlbumForExistence = await this.dbService.read(
-  //       `MATCH (obj: Album) WHERE obj.spotify_id = '${track.album.spotify_id}' RETURN obj`
-  //     );
+      // draw appeared at relation
+      for (const artist of album.artists) {
+        await this.dbService.write(`
+          MATCH
+            (artist: Artist {spotify_id: "${artist.id}"}),
+            (album: Album {spotify_id: "${spotify_id}"})
+          MERGE (artist)-[r:AppearedAt]->(album)
+          RETURN type(r)`);
+      }
 
-  //     if (checkAlbumForExistence.records.length == 0) {
-  //       const album = await this.spotifyService.getAlbumById(
-  //         track.album.spotify_id
-  //       );
+      for (const track of album.tracks.items) {
+        await this.addTrack(track.id);
+        await this.dbService.write(`
+          MATCH
+            (album: Album {spotify_id: "${spotify_id}"}),
+            (track: Track {spotify_id: "${track.id}"})
+          MERGE (album)-[r:Contains]->(track)
+          RETURN type(r)`);
+      }
 
-  //       // eto polniy pizdec, o4en' ploxo
-  //       const parsedAlbum: Album = {
-  //         album_type: album.album_type,
-  //         artists: album.artists.map((artist) => {
-  //           return {
-  //             name: artist.name,
-  //             spotify_id: artist.id,
-  //           };
-  //         }),
-  //         label: album.label,
-  //         name: album.name,
-  //         release_date: album.release_date,
-  //         spotify_id: album.id,
-  //         tracks: album.tracks.items.map((track) => {
-  //           return {
-  //             artists: track.artists.map((artist) => {
-  //               return { name: artist.name, spotify_id: artist.id };
-  //             }),
-  //             name: track.name,
-  //             spotify_id: track.id,
-  //             track_num: track.track_number,
-  //           };
-  //         }),
-  //         tracks_num: album.total_tracks,
-  //       };
+      return true;
+    }
 
-  //       await this.addAlbum(parsedAlbum);
-  //     }
+    return false;
+  }
 
-  //     return true;
-  //   }
+  public async addArtist(spotify_id: string) {
+    const alreadyExists = await this.isThereInstanceWithId(spotify_id);
 
-  //   return false;
-  // }
+    if (!alreadyExists) {
+      // create artist
+      const artist = await this.spotifyService.getArtistById(spotify_id);
 
-  // public async addArtist(artist: Artist) {
-  //   const checkForExistence = await this.dbService.read(
-  //     `MATCH(obj: Artist) WHERE obj.spotify_id = '${artist.spotify_id}' RETURN obj;`
-  //   );
+      await this.dbService.write(`
+        CREATE (artist: Artist {
+          name: "${artist.name}",
+          spotify_id: "${artist.id}",
+          type: "${artist.type}"
+        })`);
 
-  //   if (checkForExistence.records.length === 0) {
-  //     await this.dbService.write(`CREATE (artist: Artist {
-  //       name: '${artist.name}',
-  //       spotify_id: '${artist.spotify_id}',
-  //       type: '${artist.type}'})`);
+      // sequence
+      for (const genre of artist.genres) {
+        await this.addGenre(genre);
+      }
 
-  //     await Promise.all(
-  //       artist.genres.map((genre) => this.addGenreIfNotExists(genre))
-  //     );
+      for (const genre of artist.genres) {
+        await this.dbService.write(`
+          MATCH
+            (artist: Artist {spotify_id: "${artist.id}"}),
+            (genre: Genre {name: "${genre}"})
+          MERGE (artist)-[r:PerformsInGenre]->(genre)
+          RETURN type(r)`);
+      }
 
-  //     await Promise.all(
-  //       artist.genres.map((genre) =>
-  //         this.dbService.write(`
-  //       MATCH
-  //         (artist: Artist {spotify_id: '${artist.spotify_id}'}),
-  //         (genre: Genre {name: '${genre}'})
-  //       MERGE (artist)-[r:PerformsIn]->(genre)
-  //       RETURN type(r)`)
-  //       )
-  //     );
+      return true;
+    }
 
-  //     return true;
-  //   }
+    return false;
+  }
 
-  //   return false;
-  // }
+  public async addPlaylist(spotify_id: string) {
+    const alreadyExists = await this.isThereInstanceWithId(spotify_id);
 
-  // public async addGenreIfNotExists(genreName: string) {
-  //   const checkForExistence = await this.dbService.read(
-  //     `MATCH (obj: Genre) WHERE obj.name = '${genreName}' return obj`
-  //   );
+    if (!alreadyExists) {
+      const playlist = await this.spotifyService.getPlaylistById(spotify_id);
 
-  //   if (checkForExistence.records.length == 0) {
-  //     const addQuery = await this.dbService.read(
-  //       `CREATE (genre: Genre {name: '${genreName}'})`
-  //     );
+      await this.dbService.write(`
+        CREATE (playlist: Playlist {
+          name: "${playlist.name}",
+          description: "${playlist.description}",
+          spotify_id: "${playlist.id}",
+          owner_name: "${playlist.owner.display_name}",
+          collaborative: "${playlist.collaborative}"
+        })
+      `);
 
-  //     return true;
-  //   }
+      // add tracks
+      for (const track of playlist.tracks.items) {
+        // if (track.track.id)
+        await this.addTrack(track.track.id);
+        await this.dbService.write(`
+          MATCH
+            (playlist: Playlist {spotify_id: "${spotify_id}"}),
+            (track: Track {spotify_id: "${track.track.id}"})
+          MERGE (playlist)-[r:Contains]->(track)
+          RETURN type(r)`);
+      }
 
-  //   return false;
-  // }
+      return true;
+    }
+
+    return false;
+  }
+
+  public async addTrack(spotify_id: string) {
+    const alreadyExists = await this.isThereInstanceWithId(spotify_id);
+
+    if (!alreadyExists) {
+      const track = await this.spotifyService.getTrackById(spotify_id);
+
+      // create track at first
+      await this.dbService.write(`
+        CREATE (track: Track {
+          name: "${track.name}",
+          duration_ms: "${track.duration_ms}",
+          explicit: "${track.explicit}",
+          spotify_id: "${track.id}"
+        })`);
+
+      // relate artists to track
+      // first add artists
+      for (const artist of track.artists) {
+        await this.addArtist(artist.id);
+      }
+
+      // add author relations
+      const trackAuthor = track.artists.shift();
+      await this.dbService.write(`
+        MATCH
+          (artist: Artist {spotify_id: "${trackAuthor.id}"}),
+          (track: Track {spotify_id: "${spotify_id}"})
+        MERGE (artist)-[r:Author]->(track)
+        RETURN type(r)`);
+
+      for (const artist of track.artists) {
+        await this.dbService.write(`
+          MATCH
+            (artist: Artist {spotify_id: "${artist.id}"}),
+            (track: Track {spotify_id: "${spotify_id}"})
+          MERGE (artist)-[r:AppearedAt]->(track)
+          RETURN type(r)`);
+      }
+
+      return true;
+    }
+
+    return false;
+  }
 }

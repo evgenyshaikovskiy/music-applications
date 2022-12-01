@@ -17,8 +17,7 @@ export class AlbumController {
 
   @Post('/:id')
   async post(@Param() params) {
-    console.log(params.id);
-    // const adding = await this.dbManager.addAlbum(album);
-    return undefined;
+    const res = await this.dbManager.addAlbum(params.id);
+    return res;
   }
 }

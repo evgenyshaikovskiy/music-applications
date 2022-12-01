@@ -5,12 +5,16 @@ const ArtistInfo = ({ artist }) => {
     <div className="item-page-content">
       <div className="artist-item-page-details-header">
         <div className="artist-item-page-image">
-          <img
+          {artist.images[1] ? (
+            <img
               src={artist.images[1].url}
               height={artist.images[1].height}
               width={artist.images[1].width}
               alt="artist-cover"
-          ></img>
+            ></img>
+          ) : (
+            <div></div>
+          )}
         </div>
         <div className="artist-item-page-title">
           <div className="artist-type-text">

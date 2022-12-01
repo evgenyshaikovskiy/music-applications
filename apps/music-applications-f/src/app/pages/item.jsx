@@ -7,6 +7,8 @@ import { ResponseParser } from '../services/response-parser';
 import AlbumInfo from '../utility/pages/album-info';
 import ArtistInfo from '../utility/pages/artist-info';
 import PlaylistInfo from '../utility/pages/playlist-info';
+import { LoadingSpinner, PopupMessage } from '../utility/pages/page-utils';
+import AppModal from '../utility/modal';
 
 function ItemPage() {
   const urlToLogin = 'http://localhost:4200/api/login';
@@ -16,6 +18,12 @@ function ItemPage() {
 
   const [item, setItem] = useState({});
   const [error, setError] = useState('');
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [popup, setPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+
+  const togglePopup = () => setPopup(!popup);
 
   const recognizeParsingStrategy = (type) => {
     switch (type) {
@@ -36,10 +44,22 @@ function ItemPage() {
 
   function postItem() {
     if (item) {
+      setIsLoading(true);
       axios
         .post(`http://localhost:4200/api/${params.type}/${item.spotify_id}`)
         .then((response) => {
-          console.log(response.statusText);
+          setIsLoading(false);
+          if (response.data) {
+            setPopupMessage('Instance was successfully added!');
+          } else {
+            setPopupMessage('Instance already added!');
+          }
+
+          togglePopup();
+          setTimeout(() => togglePopup, 500);
+        })
+        .catch(() => {
+          setIsLoading(false);
         });
     }
   }
@@ -52,10 +72,14 @@ function ItemPage() {
             ResponseParser.parseResponseData(response.data, parsingStrategy)
           );
         },
-        () => {
-          setError(
-            'Unauthorized access. Before visiting this page you need to acquire or refresh access token.'
-          );
+        (reason) => {
+          if (reason.response.status === 400) {
+            setError('Not found!');
+          } else {
+            setError(
+              'Unauthorized access. Before visiting this page you need to acquire or refresh access token.'
+            );
+          }
         }
       );
     }
@@ -72,7 +96,7 @@ function ItemPage() {
             className="item-error-link-to-token"
             onClick={() => {
               window.open(urlToLogin, '_blank');
-              setInterval(() => window.location.reload(), 100);
+              setInterval(() => window.location.reload(), 300);
             }}
           >
             Acquire token
@@ -85,13 +109,30 @@ function ItemPage() {
   return (
     <div className="item-page-wrapper">
       <div className="item-page-btns">
-        <button onClick={() => router(-1)} className="go-back-btn">
+        <button
+          onClick={() => router(-1)}
+          className="go-back-btn"
+          disabled={isLoading}
+        >
           Back
         </button>
-        <button className="save-to-db-btn" onClick={() => postItem()}>
+        <button
+          className="save-to-db-btn"
+          onClick={() => postItem()}
+          disabled={isLoading}
+        >
           Save to db
         </button>
       </div>
+      {popup && (
+        <PopupMessage
+          handleClose={togglePopup}
+          message={popupMessage}
+        ></PopupMessage>
+      )}
+      <AppModal visible={isLoading} setVisible={setIsLoading}>
+        <LoadingSpinner></LoadingSpinner>
+      </AppModal>
       {item.type === 'track' ? (
         <TrackInfo track={item}></TrackInfo>
       ) : (
