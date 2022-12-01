@@ -72,7 +72,7 @@ function ItemPage() {
             className="item-error-link-to-token"
             onClick={() => {
               window.open(urlToLogin, '_blank');
-              setInterval(() => window.location.reload(), 100);
+              setInterval(() => window.location.reload(), 300);
             }}
           >
             Acquire token
