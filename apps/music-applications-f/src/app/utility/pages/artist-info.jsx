@@ -1,6 +1,4 @@
 const ArtistInfo = ({ artist }) => {
-  console.log(artist);
-  // fetch all playlist? ??? ? ?
   return (
     <div className="item-page-content">
       <div className="artist-item-page-details-header">

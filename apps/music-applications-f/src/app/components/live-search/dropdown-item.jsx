@@ -3,7 +3,9 @@ const InteractiveItemList = ({ item, onItemClickCallback }) => {
   // consider using different print strategies for different objects
   return (
     <div className="clickable-dropdown-item">
-      {item.type}: {item.label}
+      <div className="clickable-dropdown-item-text">
+        Found {item.type}: {item.label}
+      </div>
       <button
         className="view-details-btn"
         onClick={() => onItemClickCallback(item)}

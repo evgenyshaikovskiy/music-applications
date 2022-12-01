@@ -29,7 +29,6 @@ export function LiveSearch({
     // move request code to different class later
     const searchDelayTimer = setTimeout(() => {
       if (query !== '' && searchWord !== '') {
-        console.log(query, searchWord, 'hahah');
         axios.get(`${endpointUrl}${searchWord}=${query.toLowerCase()}`).then(
           (response) => {
             setResults(

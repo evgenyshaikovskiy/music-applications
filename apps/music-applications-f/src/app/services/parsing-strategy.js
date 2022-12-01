@@ -69,7 +69,6 @@ export const Strategy = {
 
       result.sort((a, b) => a.label > b.label);
 
-      console.log('here');
       return result;
     }
 
@@ -125,7 +124,6 @@ export const Strategy = {
     };
   },
   ParseSpotifyPlaylist: function (playlist) {
-    console.log(playlist);
     return {
       spotify_id: playlist.id,
       description: playlist.description,

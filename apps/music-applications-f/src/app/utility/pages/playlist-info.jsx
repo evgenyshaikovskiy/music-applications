@@ -3,7 +3,6 @@ import { PlaylistTrackInfo } from './page-utils';
 
 const PlaylistInfo = ({ playlist }) => {
   const router = useNavigate();
-  console.log(playlist);
   const trackNameClickCallback = (spotify_id) => router(`/track/${spotify_id}`);
 
   return (
@@ -24,7 +23,7 @@ const PlaylistInfo = ({ playlist }) => {
               {playlist.description}
             </div>
           </div>
-        </div>   
+        </div>
         <div className="featured-tracks-wrapper">
           <div className="playlist-name-label">{playlist.name}</div>
           <div className="featured-tracks-label">Featured tracks:</div>

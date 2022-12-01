@@ -16,7 +16,6 @@ export function SearchPage() {
   // callbacks to pass
   function callbackOnInstanceClick(instance) {
     console.log(`callback for this ${instance}`);
-    console.log(instance);
   }
 
   return (
