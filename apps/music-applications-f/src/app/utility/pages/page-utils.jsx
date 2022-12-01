@@ -14,16 +14,16 @@ export const ArtistTrackName = ({ artist, onArtistClickCallback }) => {
 export const AlbumTrackInfo = ({ track, onTrackClickCallback }) => {
   return (
     <div className="album-track-text">
-      <p
+      <div
         className="album-track-name"
         onClick={() => onTrackClickCallback(track.spotify_id)}
       >
         {track.track_num}.{' '}
         {track.artists.map((artist) => artist.label).join(', ')} - {track.label}
-      </p>
+      </div>
       <div className="album-track-info">
-        <p>Duration: {convertDuration(track.duration_ms)}</p>
-        <p>Explicit: {track.explicit ? 'Yes' : 'No'}</p>
+        <div>Duration: {convertDuration(track.duration_ms)}</div>
+        <div>Explicit: {track.explicit ? 'Yes' : 'No'}</div>
       </div>
     </div>
   );
@@ -32,16 +32,16 @@ export const AlbumTrackInfo = ({ track, onTrackClickCallback }) => {
 export const PlaylistTrackInfo = ({ track, index, onTrackClickCallback }) => {
   return (
     <div className="playlist-track-text">
-      <p
+      <div
         className="playlist-track-name"
         onClick={() => onTrackClickCallback(track.spotify_id)}
       >
         {index}. {track.artists.map((artist) => artist.label).join(', ')} -{' '}
         {track.label}
-      </p>
+      </div>
       <div className="playlist-track-info">
-        <p>Duration: {convertDuration(track.duration_ms)}</p>
-        <p>Explicit: {track.explicit ? 'Yes' : 'No'}</p>
+        <div>Duration: {convertDuration(track.duration_ms)}</div>
+        <div>Explicit: {track.explicit ? 'Yes' : 'No'}</div>
       </div>
     </div>
   );
