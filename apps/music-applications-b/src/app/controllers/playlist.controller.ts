@@ -17,7 +17,7 @@ export class PlaylistController {
 
   @Post('/:id')
   async post(@Param() params) {
-    console.log(params.id);
+    const res = await this.dbManager.addPlaylist(params.id);
     return undefined;
   }
 }

@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { DEFAULT_FACTORY_CLASS_METHOD_KEY } from '@nestjs/common/module-utils/constants';
+import { timeStamp } from 'console';
 import { Neo4jService } from 'nest-neo4j/dist';
 import { SpotifyService } from './spotify.service';
 
@@ -80,7 +82,83 @@ export class DatabaseManager {
       3. Create instance if needed.
       4. Create sub instances {also get them from spotify by id, if necessary}.
       5. Provide relations.
-     */
+  */
+
+  private async isThereInstanceWithId(id: string) {
+    const query = await this.dbService.read(
+      `MATCH (instance) WHERE instance.spotify_id = '${id}' RETURN instance`
+    );
+
+    return query.records.length != 0;
+  }
+
+  public async addGenre(genreName: string) {
+    const checkQuery = await this.dbService.read(
+      `MATCH (genre: Genre) WHERE genre.name = '${genreName}' RETURN genre`
+    );
+
+    if (checkQuery.records.length == 0) {
+      // create genre
+      await this.dbService.write(
+        `CREATE (genre: Genre {name: '${genreName}'})`
+      );
+      return true;
+    }
+
+    return false;
+  }
+
+  public async addAlbum(spotify_id: string) {
+    const album = await this.spotifyService.getAlbumById(spotify_id);
+    console.log(album);
+  }
+
+  public async addArtist(spotify_id: string) {
+    const alreadyExists = await this.isThereInstanceWithId(spotify_id);
+
+    if (!alreadyExists) {
+      // create artist
+      const artist = await this.spotifyService.getArtistById(spotify_id);
+
+      await this.dbService.write(`
+        CREATE (artist: Artist {
+          name: '${artist.name}',
+          spotify_id: '${artist.id}',
+          type: '${artist.type}'
+        })`);
+
+      await Promise.all(
+        artist.genres.map((genre) => {
+          return this.addGenre(genre);
+        })
+      );
+
+      await Promise.all(
+        artist.genres.map((genre) => {
+          return this.dbService.write(`
+            MATCH
+              (artist: Artist {spotify_id: '${artist.id}'}),
+              (genre: Genre {name: '${genre}'})
+            MERGE (artist)-[r:PerformsIn]->(genre)
+            RETURN type(r)`);
+        })
+      );
+
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public async addPlaylist(spotify_id: string) {
+    const playlist = await this.spotifyService.getArtistById(spotify_id);
+    console.log(playlist);
+  }
+
+  public async addTrack(spotify_id: string) {
+    const track = await this.spotifyService.getArtistById(spotify_id);
+    console.log(track);
+  }
 
   // its in the past:)
   // // add functions

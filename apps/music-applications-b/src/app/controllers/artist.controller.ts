@@ -17,8 +17,8 @@ export class ArtistController {
 
   @Post('/:id')
   async post(@Param() params) {
-    console.log(params.id);
-    // const result = this.dbManager.addArtist(artist);
+    const res = await this.dbManager.addArtist(params.id);
+    console.log(res, 'created or not');
     return undefined;
   }
 }
