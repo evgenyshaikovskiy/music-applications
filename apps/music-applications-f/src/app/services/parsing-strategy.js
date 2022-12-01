@@ -68,12 +68,14 @@ export const Strategy = {
     }
   },
   ParseSpotifyTrack: function (track) {
+    console.log(track);
     return {
       type: track.type,
       label: track.name,
       spotify_id: track.id,
       explicit: track.explicit,
       duration_ms: track.duration_ms,
+      preview_url: track.preview_url,
       artists: track.artists.map((artist) => {
         return { label: artist.name, spotify_id: artist.id, type: artist.type };
       }),

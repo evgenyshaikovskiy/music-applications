@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { convertDuration } from '../utils';
+import { ArtistTrackName } from './page-utils';
 
 const TrackInfo = ({ track }) => {
   const router = useNavigate();
+  const artistNameClickCallback = (spotify_id) =>
+    router(`/artist/${spotify_id}`);
 
   return (
     <div className="item-page-content">
@@ -19,6 +22,9 @@ const TrackInfo = ({ track }) => {
           <div className="track-item-type-text">SONG</div>
           <div className="track-item-name">{track.label}</div>
           <div className="track-item-additional-info">
+            <audio controls className="track-preview-audio">
+              <source src={track.preview_url}></source>
+            </audio>
             <p>Explicit: {track.explicit ? 'Explicit' : 'Not explicit'}</p>
             <p>
               Album:{' '}
@@ -32,9 +38,12 @@ const TrackInfo = ({ track }) => {
           </div>
           <div className="track-item-footer">
             <div>
-              <p className="track-artist-name">
-                {track.artists.map((artist) => artist.label).join(', ')}
-              </p>
+              {track.artists.map((artist) => (
+                <ArtistTrackName
+                  artist={artist}
+                  onArtistClickCallback={artistNameClickCallback}
+                ></ArtistTrackName>
+              ))}
             </div>
             <p className="symbol">&#9679;</p>
             <p>{track.album.release_date.slice(0, 4)}</p>

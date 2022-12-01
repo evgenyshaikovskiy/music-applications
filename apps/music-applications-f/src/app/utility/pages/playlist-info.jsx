@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { convertDuration } from '../utils';
+import { PlaylistTrackInfo } from './page-utils';
 
 const PlaylistInfo = ({ playlist }) => {
   const router = useNavigate();
@@ -33,24 +33,6 @@ const PlaylistInfo = ({ playlist }) => {
             })}
           </div>
         </div>
-      </div>
-    </div>
-  );
-};
-
-const PlaylistTrackInfo = ({ track, index, onTrackClickCallback }) => {
-  return (
-    <div className="playlist-track-text">
-      <p
-        className="playlist-track-name"
-        onClick={() => onTrackClickCallback(track.spotify_id)}
-      >
-        {index}. {track.artists.map((artist) => artist.label).join(', ')} -{' '}
-        {track.label}
-      </p>
-      <div className="playlist-track-info">
-        <p>Duration: {convertDuration(track.duration_ms)}</p>
-        <p>Explicit: {track.explicit ? 'Yes' : 'No'}</p>
       </div>
     </div>
   );

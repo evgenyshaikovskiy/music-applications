@@ -211,13 +211,13 @@ p {
 }
 
 .track-item-name {
-  margin-top: 3rem;
+  margin-top: 2rem;
   font-weight: bold;
   font-size: xx-large;
 }
 
 .track-item-additional-info {
-  margin-top: 4rem;
+  margin-top: 2rem;
   font-weight: 600;
 }
 
@@ -241,7 +241,12 @@ p {
   margin-right: 10px;
 }
 
-.track-artist-name {
+.track-preview-audio {
+  margin-bottom: 1rem;
+}
+
+.track-artist-name,
+.artist-name {
   cursor: pointer;
   &:hover {
     color: blue;

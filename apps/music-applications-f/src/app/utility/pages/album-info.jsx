@@ -1,9 +1,12 @@
-import { convertDuration } from '../utils';
 import { useNavigate } from 'react-router-dom';
+import { ArtistTrackName } from './page-utils';
+import { AlbumTrackInfo } from './page-utils';
 
 const AlbumInfo = ({ album }) => {
   const router = useNavigate();
   const trackNameClickCallback = (spotify_id) => router(`/track/${spotify_id}`);
+  const artistNameClickCallback = (spotify_id) =>
+    router(`/artist/${spotify_id}`);
 
   return (
     <div className="item-page-content">
@@ -25,7 +28,13 @@ const AlbumInfo = ({ album }) => {
               <p>{album.label}</p>
             </div>
             <div className="album-info-text">
-              <p> {album.artist.map((artist) => artist.label).join(' ')}</p>
+              {album.artist.map((artist) => (
+                <ArtistTrackName
+                  artist={artist}
+                  onArtistClickCallback={artistNameClickCallback}
+                ></ArtistTrackName>
+              ))}
+              {/* <div>{album.artist.map((artist) => artist.label).join(', ')}</div> */}
               <p className="symbol">&#9679;</p>
               <p>{album.release_date.slice(0, 4)}</p>
               <p className="symbol">&#9679;</p>
@@ -54,22 +63,6 @@ const AlbumInfo = ({ album }) => {
   );
 };
 
-const AlbumTrackInfo = ({ track, onTrackClickCallback }) => {
-  return (
-    <div className="album-track-text">
-      <p
-        className="album-track-name"
-        onClick={() => onTrackClickCallback(track.spotify_id)}
-      >
-        {track.track_num}.{' '}
-        {track.artists.map((artist) => artist.label).join(', ')} - {track.label}
-      </p>
-      <div className="album-track-info">
-        <p>Duration: {convertDuration(track.duration_ms)}</p>
-        <p>Explicit: {track.explicit ? 'Yes' : 'No'}</p>
-      </div>
-    </div>
-  );
-};
+
 
 export default AlbumInfo;
