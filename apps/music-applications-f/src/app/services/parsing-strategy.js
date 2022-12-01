@@ -12,59 +12,85 @@ export const Strategy = {
       };
     });
   },
+  ExtractTrackProperties: function (track) {
+    return {
+      type: track.type,
+      spotify_id: track.id,
+      label: track.name,
+    };
+  },
+  ExtractAlbumProperties: function (album) {
+    return {
+      type: album.type,
+      spotify_id: album.id,
+      label: album.name,
+    };
+  },
+  ExtractArtistProperties: function (artist) {
+    return {
+      type: artist.type,
+      label: artist.name,
+      spotify_id: artist.id,
+    };
+  },
+  ExtractPlaylistProperties: function (playlist) {
+    return {
+      type: playlist.type,
+      spotify_id: playlist.id,
+      label: playlist.name,
+    };
+  },
   ParseWebSpotifyObj: function (rawData) {
+    if (Object.keys(rawData.data).length > 1) {
+      const result = [];
+      result.push(
+        ...rawData.data.tracks.items.map((track) =>
+          Strategy.ExtractTrackProperties(track)
+        )
+      );
+
+      result.push(
+        ...rawData.data.albums.items.map((album) =>
+          Strategy.ExtractAlbumProperties(album)
+        )
+      );
+
+      result.push(
+        ...rawData.data.artists.items.map((artist) =>
+          Strategy.ExtractArtistProperties(artist)
+        )
+      );
+
+      result.push(
+        ...rawData.data.playlists.items.map((playlist) =>
+          Strategy.ExtractPlaylistProperties(playlist)
+        )
+      );
+
+      result.sort((a, b) => a.label > b.label);
+
+      console.log('here');
+      return result;
+    }
+
     const [type] = Object.keys(rawData.data);
     switch (type) {
       case 'tracks':
-        return rawData.data.tracks.items.map((track) => {
-          return {
-            type: track.type,
-            spotify_id: track.id,
-            label: track.name,
-            artists: track.artists.map((artist) => {
-              return { spotify_id: artist.id, label: artist.name };
-            }),
-            album: {
-              album_type: track.album.album_type,
-              spotify_id: track.album.id,
-              label: track.album.name,
-            },
-          };
-        });
+        return rawData.data.tracks.items.map((track) =>
+          Strategy.ExtractTrackProperties(track)
+        );
       case 'albums':
-        return rawData.data.albums.items.map((album) => {
-          return {
-            type: album.type,
-            album_type: album.album_type,
-            tracks_num: album.total_tracks,
-            spotify_id: album.id,
-            artists: album.artists.map((artist) => {
-              return { spotify_id: artist.id, label: artist.name };
-            }),
-            label: album.name,
-            release_date: album.release_date,
-          };
-        });
+        return rawData.data.albums.items.map((album) =>
+          Strategy.ExtractAlbumProperties(album)
+        );
       case 'artists':
-        return rawData.data.artists.items.map((artist) => {
-          return {
-            type: artist.type,
-            label: artist.name,
-            genres: artist.genres,
-            spotify_id: artist.id,
-            images: artist.images,
-          };
-        });
+        return rawData.data.artists.items.map((artist) =>
+          Strategy.ExtractArtistProperties(artist)
+        );
       case 'playlists':
-        return rawData.data.playlists.items.map((playlist) => {
-          return {
-            type: playlist.type,
-            spotify_id: playlist.id,
-            label: playlist.name,
-            description: playlist.description,
-            images: playlist.images,
-          };
-        });
+        return rawData.data.playlists.items.map((playlist) =>
+          Strategy.ExtractPlaylistProperties(playlist)
+        );
     }
   },
   ParseSpotifyTrack: function (track) {

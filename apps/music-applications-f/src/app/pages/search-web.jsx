@@ -15,6 +15,8 @@ export function SearchWebPage() {
     router(`/${instance.type}/${instance.spotify_id}`);
   }
 
+  const searchWordInitialState = 'All';
+
   // add default value later
   const selectorParamsArray = [
     { value: 'track', name: 'Tracks' },
@@ -36,9 +38,9 @@ export function SearchWebPage() {
       <LiveSearch
         isInputDisabled={false}
         selectorParamsArray={selectorParamsArray}
-        isSelectorDefaultValueDisabled={true}
-        defaultSelectorValue=""
-        searchWordInitialState=""
+        isSelectorDefaultValueDisabled={false}
+        defaultSelectorValue={searchWordInitialState}
+        searchWordInitialState={searchWordInitialState}
         endpointUrl="http://localhost:4200/api/web-search?"
         parsingStrategy={Strategy.ParseWebSpotifyObj}
         instanceClickCallback={callbackDetailsView}
