@@ -71,9 +71,9 @@
   justify-content: space-between;
   align-content: stretch;
   flex-direction: row;
-  background-color: #33CC66;
+  background-color: lightblue;
   padding: 10px;
-  border: 2px solid rgb(50, 255, 47);
+  border: 2px solid lavenderblush;
   border-radius: 4px;
   width: 100%;
 
@@ -117,5 +117,7 @@
   font-size: larger;
   font-weight: 400;
   cursor: pointer;
-
+  &:hover {
+    background-color:#1fdf64;
+  }
 }
