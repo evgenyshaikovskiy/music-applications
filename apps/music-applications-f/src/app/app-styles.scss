@@ -110,8 +110,25 @@ p {
 }
 
 .playlist-item-page-images {
-  height: 300px;
+  height: 400px;
   margin-right: 100px;
+}
+
+.playlist-owner-text {
+  font-size: xx-large;
+  margin-top: 5%;
+  font-weight: 600;
+}
+
+.playlist-description-text {
+  margin-top: 10px;
+  width: 400px;
+  font-weight: 600;
+}
+
+.playlist-item-info {
+  display: flex;
+  flex-direction: row;
 }
 
 .artist-item-page-title,
