@@ -48,10 +48,7 @@ function ItemPage() {
       axios
         .post(`http://localhost:4200/api/${params.type}/${item.spotify_id}`)
         .then((response) => {
-          // отрисовать окно о добавлении или не добавлении
-          console.log(response.data);
           setIsLoading(false);
-
           if (response.data) {
             setPopupMessage('Instance was successfully added!');
           } else {
@@ -75,10 +72,14 @@ function ItemPage() {
             ResponseParser.parseResponseData(response.data, parsingStrategy)
           );
         },
-        () => {
-          setError(
-            'Unauthorized access. Before visiting this page you need to acquire or refresh access token.'
-          );
+        (reason) => {
+          if (reason.response.status === 400) {
+            setError('Not found!');
+          } else {
+            setError(
+              'Unauthorized access. Before visiting this page you need to acquire or refresh access token.'
+            );
+          }
         }
       );
     }

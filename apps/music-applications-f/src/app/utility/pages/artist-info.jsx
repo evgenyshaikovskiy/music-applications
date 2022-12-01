@@ -13,12 +13,16 @@ const ArtistInfo = ({ artist }) => {
         <p>Artist performs in these genres: {artist.genres.join(', ')}</p>
       </div>
       <div className="item-page-images">
-        <img
-          src={artist.images[1].url}
-          height={artist.images[1].height}
-          width={artist.images[1].width}
-          alt="artist-cover"
-        ></img>
+        {artist.images[1] ? (
+          <img
+            src={artist.images[1].url}
+            height={artist.images[1].height}
+            width={artist.images[1].width}
+            alt="artist-cover"
+          ></img>
+        ) : (
+          <div></div>
+        )}
         <p>Artist image</p>
       </div>
     </div>
