@@ -32,7 +32,7 @@ export function AboutPage() {
               src="https://sun1.beltelecom-by-minsk.userapi.com/s/v1/ig2/whcgxDytpM-BhHcQ2Q8DnP6QpX6yekXoTm_oguOcAZ_xZfdvaZLZahOjEBACoMTIa7sA-9bLpE5Nkp618yG6Cd_l.jpg?size=880x1506&quality=96&type=album"
               height={300}
               width={300}
-              alt="Хуесос"
+              alt="Вантус"
             ></img>
           </div>
         </div>
@@ -70,7 +70,7 @@ export function AboutPage() {
               src="https://cdn.ebs.newsner.com/wp-content/uploads/sites/2/2018/06/Hund-2.jpg"
               height={300}
               width={300}
-              alt="Ботан ебаный"
+              alt="Ботик"
             ></img>
           </div>
         </div>
