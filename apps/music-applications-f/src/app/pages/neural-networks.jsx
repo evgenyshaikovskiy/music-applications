@@ -4,14 +4,14 @@ import './pages.scss';
 
 export function NeuralNetworksPage() {
   const [comment, setComment] = useState('');
-
+  const [response, setResponse] = useState({});
   useEffect(() => {
     // add spinner and popup window
     const requestDelay = setTimeout(() => {
       if (comment !== '') {
         axios
           .get(`http://localhost:4200/api/network/comment/${comment}`)
-          .then((response) => console.log(response.data, 'received response'));
+          .then((response) => setResponse(response.data));
       }
     }, 1000);
 
@@ -27,6 +27,7 @@ export function NeuralNetworksPage() {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         ></input>
+        <div className="neural-network-rating-label">{response.label}</div>
       </div>
     </div>
   );
