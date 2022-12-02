@@ -4,7 +4,7 @@ export const ArtistTrackName = ({ artist, onArtistClickCallback }) => {
   return (
     <div
       onClick={() => onArtistClickCallback(artist.spotify_id)}
-      className="artist-name"
+      className="artist-track-name"
     >
       {artist.label}
     </div>

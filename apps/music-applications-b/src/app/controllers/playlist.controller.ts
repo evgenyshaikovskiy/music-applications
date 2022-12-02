@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Req } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { DatabaseManager } from '../db-manager.service';
 import { SpotifyService } from '../spotify.service';
 
