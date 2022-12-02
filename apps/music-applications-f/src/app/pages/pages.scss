@@ -1,8 +1,9 @@
 .neural-network-page-wrapper {
   margin-top: 5%;
-  margin-left: 5%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .neural-network-fetch-comments-section {
@@ -12,15 +13,29 @@
   flex-direction: column;
 }
 
+.neural-network-rating {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+}
+
+.image-wrapper {
+  margin-left: 10px;
+}
+
+.neural-network-accuracy {
+  padding-top: 20px;
+  font-size: x-large;
+  font-weight: 700;
+}
+
 .fetch-comments-input {
   border: 0;
   border-bottom: 3px solid #00b8b8;
   height: 40px;
-  width: 400px;
+  width: 550px;
   text-align: left;
   font-size: x-large;
-  padding-left: 10px;
-  margin-left: 10px;
   padding-top: 3px;
 
   &:focus, &:hover {

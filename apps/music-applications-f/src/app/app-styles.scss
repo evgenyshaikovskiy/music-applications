@@ -265,8 +265,8 @@ p {
   margin: 0 -5px;
 }
 
-.artist-name {
-  margin-right: 10px;
+.artist-track-name {
+  padding-right: 10px;
 }
 
 .track-item-footer p {
@@ -365,6 +365,16 @@ p {
   -moz-animation: fadeOut ease 10s;
   -o-animation: fadeOut ease 10s;
   -ms-animation: fadeOut ease 10s;
+}
+
+.neural-network-fetch-comments-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.neural-network-rating-label {
+  margin: 5%;
+  font-size: x-large;
 }
 
 @keyframes fadeOut {

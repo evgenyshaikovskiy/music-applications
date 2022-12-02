@@ -8,6 +8,7 @@ export function SearchPage() {
     { value: 'track', name: 'Tracks' },
     { value: 'genre', name: 'Genres' },
     { value: 'album', name: 'Albums' },
+    { value: 'playlist', name: 'Playlist' },
   ];
   const endpointUrl = 'http://localhost:4200/api/search?';
   const parsingStrategy = Strategy.ParseGraphDbObj;
