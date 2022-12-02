@@ -15,7 +15,6 @@ import { NetworkController } from './controllers/network.controller';
 import { HttpModule } from '@nestjs/axios';
 @Module({
   imports: [
-    HttpModule,
     Neo4jModule.forRoot({
       scheme: ApplicationConfig.scheme as Neo4jScheme,
       host: ApplicationConfig.host,
