@@ -43,31 +43,38 @@ export const Strategy = {
   ParseWebSpotifyObj: function (rawData) {
     if (Object.keys(rawData.data).length > 1) {
       const result = [];
-      result.push(
-        ...rawData.data.tracks.items.map((track) =>
-          Strategy.ExtractTrackProperties(track)
-        )
+
+      const parsedTracks = rawData.data.tracks.items.map((track) =>
+        Strategy.ExtractTrackProperties(track)
       );
 
-      result.push(
-        ...rawData.data.albums.items.map((album) =>
-          Strategy.ExtractAlbumProperties(album)
-        )
+      const parsedAlbums = rawData.data.albums.items.map((album) =>
+        Strategy.ExtractAlbumProperties(album)
       );
 
-      result.push(
-        ...rawData.data.artists.items.map((artist) =>
-          Strategy.ExtractArtistProperties(artist)
-        )
+      const parsedArtists = rawData.data.artists.items.map((artist) =>
+        Strategy.ExtractArtistProperties(artist)
       );
 
-      result.push(
-        ...rawData.data.playlists.items.map((playlist) =>
-          Strategy.ExtractPlaylistProperties(playlist)
-        )
+      const parsedPlaylists = rawData.data.playlists.items.map((playlist) =>
+        Strategy.ExtractPlaylistProperties(playlist)
       );
 
-      result.sort((a, b) => a.label > b.label);
+      let size = Math.min(
+        parsedTracks.length,
+        parsedAlbums.length,
+        parsedArtists.length,
+        parsedPlaylists.length
+      );
+
+      for (let i = 0; i < size; i++) {
+        result.push(
+          parsedTracks[i],
+          parsedAlbums[i],
+          parsedPlaylists[i],
+          parsedArtists[i]
+        );
+      }
 
       return result;
     }
