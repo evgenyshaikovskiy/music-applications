@@ -6,7 +6,7 @@ export class NetworkController {
   constructor(private readonly httpService: HttpService) {}
 
   @Get('comment/:commentText')
-  async postComment(@Param() params) {
+  async fetchComments(@Param() params) {
     console.log('received comment', params.commentText);
 
     return 'bebra';
