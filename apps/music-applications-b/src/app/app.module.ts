@@ -11,6 +11,7 @@ import { AlbumController } from './controllers/album.controller';
 import { ArtistController } from './controllers/artist.controller';
 import { DatabaseManager } from './db-manager.service';
 import { SpotifyService } from './spotify.service';
+import { NetworkController } from './controllers/network.controller';
 @Module({
   imports: [
     Neo4jModule.forRoot({
@@ -27,6 +28,7 @@ import { SpotifyService } from './spotify.service';
     PlaylistController,
     AlbumController,
     ArtistController,
+    NetworkController,
   ],
   providers: [AppService, DatabaseManager, SpotifyService],
 })
