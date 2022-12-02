@@ -12,7 +12,6 @@ import { ArtistController } from './controllers/artist.controller';
 import { DatabaseManager } from './db-manager.service';
 import { SpotifyService } from './spotify.service';
 import { NetworkController } from './controllers/network.controller';
-import { HttpModule } from '@nestjs/axios';
 @Module({
   imports: [
     Neo4jModule.forRoot({
