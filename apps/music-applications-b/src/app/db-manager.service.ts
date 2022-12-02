@@ -11,22 +11,26 @@ export class DatabaseManager {
 
   // need to add search playlist function
   private searchArtistQuery = (artistName: string) =>
-    `MATCH (obj: Person) WHERE ToLower(obj.name) CONTAINS '${artistName}' return obj`;
+    `MATCH (obj: Artist) WHERE ToLower(obj.name) CONTAINS "${artistName}" return obj`;
 
   private searchAlbumQuery = (albumTitle: string) =>
-    `MATCH (obj: Album) WHERE ToLower(obj.title) CONTAINS '${albumTitle}' return obj`;
+    `MATCH (obj: Album) WHERE ToLower(obj.name) CONTAINS "${albumTitle}" return obj`;
 
   private searchGenreQuery = (genreKind: string) =>
-    `MATCH (obj: Genre) WHERE ToLower(obj.kind) CONTAINS '${genreKind}' return obj`;
+    `MATCH (obj: Genre) WHERE ToLower(obj.name) CONTAINS "${genreKind}" return obj`;
 
   private searchTrackQuery = (songTitle: string) =>
-    `MATCH (obj: Song) WHERE ToLower(obj.title) CONTAINS '${songTitle}' return obj`;
+    `MATCH (obj: Track) WHERE ToLower(obj.name) CONTAINS "${songTitle}" return obj`;
+
+  private searchPlaylistQuery = (playlistName: string) =>
+    `MATCH (obj: Playlist) WHERE ToLower(obj.name) CONTAINS "${playlistName}" return obj`;
 
   private searchFunctions = [
     this.searchArtistQuery,
     this.searchAlbumQuery,
     this.searchGenreQuery,
     this.searchTrackQuery,
+    this.searchPlaylistQuery,
   ];
 
   private collectQuery(instance: string, query: string): string {
@@ -41,6 +45,8 @@ export class DatabaseManager {
         return this.searchAlbumQuery(query);
       case 'genre':
         return this.searchGenreQuery(query);
+      case 'playlist':
+        return this.searchPlaylistQuery(query);
     }
   }
 
