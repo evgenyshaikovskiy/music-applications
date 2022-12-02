@@ -56,7 +56,6 @@ export const LoadingSpinner = () => {
 };
 
 export const PopupMessage = ({ message, handleClose }) => {
-  setTimeout(() => handleClose(), 2000);
   return (
     <div className="popup-box">
       <div className="popup-message">{message}</div>

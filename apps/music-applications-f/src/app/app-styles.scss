@@ -262,6 +262,7 @@ p {
 .track-artistlist {
   display: flex;
   flex-direction: row;
+  margin: 0 -5px;
 }
 
 .artist-name {
@@ -332,6 +333,7 @@ p {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -358,11 +360,11 @@ p {
 
 
 .popup-box {
-  animation: fadeOut ease 2s;
-  -webkit-animation: fadeOut ease 2s;
-  -moz-animation: fadeOut ease 2s;
-  -o-animation: fadeOut ease 2s;
-  -ms-animation: fadeOut ease 2s;
+  animation: fadeOut ease 10s;
+  -webkit-animation: fadeOut ease 10s;
+  -moz-animation: fadeOut ease 10s;
+  -o-animation: fadeOut ease 10s;
+  -ms-animation: fadeOut ease 10s;
 }
 
 @keyframes fadeOut {
