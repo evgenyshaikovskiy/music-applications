@@ -125,11 +125,16 @@ export class DatabaseManager {
   }
 
   public async addAlbum(spotify_id: string) {
+    // Исходные данные: id сущности в спотифае
+
+    // проверяем, существует ли данная сущность в базе данных
     const alreadyExists = await this.isThereInstanceWithId(spotify_id);
 
     if (!alreadyExists) {
+      // если сущность не существует
       const album = await this.spotifyService.getAlbumById(spotify_id);
 
+      // записываем сущность как узел в базу данных
       // add album as instance
       await this.dbService.write(`
         CREATE (album: Album {
@@ -142,6 +147,7 @@ export class DatabaseManager {
         })`);
 
       // add genres
+      // добавляем жанры которые привязаны к сущности(альбому)
       for (const genre of album.genres) {
         // create genre if possible
         await this.addGenre(genre);
@@ -154,11 +160,13 @@ export class DatabaseManager {
       }
 
       // add artists
+      // добавляем артистов которые привязаны к сущности(альбому)
       for (const artist of album.artists) {
         await this.addArtist(artist.id);
       }
 
       // draw author relation
+      // проводим отношение авторства (первым артистом в списке) сущностью(альбомом) и артистом
       const albumAuthor = album.artists.shift();
       await this.dbService.write(`
         MATCH
@@ -168,6 +176,7 @@ export class DatabaseManager {
         RETURN type(r)`);
 
       // draw appeared at relation
+      // проводим отношение участия артиста с прочими артистами в сущности(альбоме)
       for (const artist of album.artists) {
         await this.dbService.write(`
           MATCH
@@ -177,6 +186,7 @@ export class DatabaseManager {
           RETURN type(r)`);
       }
 
+      // проводим отношение между треками альбома и сущностью(альбомам)
       for (const track of album.tracks.items) {
         await this.addTrack(track.id);
         await this.dbService.write(`
@@ -187,9 +197,11 @@ export class DatabaseManager {
           RETURN type(r)`);
       }
 
+      // успешное завершение, сущность и соответствующие связи добавлены в базу данных
       return true;
     }
 
+    // успешное завершение, сущность и соответствующие связи уже были добавлены в базу данных
     return false;
   }
 
