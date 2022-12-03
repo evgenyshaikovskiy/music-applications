@@ -38,11 +38,49 @@
   font-size: x-large;
   padding-top: 3px;
 
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     border-color: aqua;
   }
 
   &:focus-visible {
     outline: 0;
   }
+}
+
+.home-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+  flex-direction: column;
+}
+
+.home-page-db-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.db-stats-count-of-nodes,
+.db-stats-count-of-relationships {
+  height: 50px;
+  width: 400px;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 3px;
+  font-size: large;
+}
+
+.refresh-button {
+  margin-top: 10px;
+  height: 40px;
+  width: 200px;
+  padding: 10px;
+  font-size: medium;
+  background-color: #C6D8FF;
+  border: 3px solid rgb(40, 145, 145);
+  border-radius: 10px;
+  cursor: pointer;
 }

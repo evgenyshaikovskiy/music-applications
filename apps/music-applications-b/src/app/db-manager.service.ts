@@ -76,8 +76,9 @@ export class DatabaseManager {
   }
 
   public async getCountOfNodesInDb() {
+    // WARNING: part of following query is deprecated and will be removed in future
     const result = await this.dbService.read(
-      `MATCH (n) RETURN count(n) as count`
+      `match (n) return count(n) as countOfNodes, sum ( size( (n)-[]->())) as counfOfRelationShip`
     );
 
     return result;

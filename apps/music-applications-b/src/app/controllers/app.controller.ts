@@ -32,10 +32,13 @@ export class AppController {
 
     return res;
   }
-  @Get('db-test')
-  async testDb() {
+  @Get('db-stats')
+  async getDatabaseStats() {
     const res = await this.dbManager.getCountOfNodesInDb();
-    return res;
+    const values = res.records[0]['_fields'].map(
+      (obj: { low: number }) => obj.low
+    );
+    return values;
   }
 
   @Get('web-search')
