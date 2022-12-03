@@ -439,8 +439,9 @@ p {
   font-size: 40px;
 }
 .about-item-people {
-  margin-right: 20px;
-  margin-bottom: 20px;
+  margin-right: 1%;
+  margin-left: 1%;
+  margin-bottom: 2%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -449,7 +450,6 @@ p {
   justify-content: space-between;
 }
 .about-item-command {
-  margin-right: 20px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
