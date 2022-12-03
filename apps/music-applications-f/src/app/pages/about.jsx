@@ -4,7 +4,9 @@ export function AboutPage() {
       <div className="about-item-name-command-text">Над проектом работали:</div>
       <div className="about-item-command">
         <div className="about-item-people">
-          <div className="about-item-people-text">&#129332; 1.Шайковский Е.Н.</div>
+          <div className="about-item-people-text">
+            &#129332; 1.Шайковский Е.Н.
+          </div>
           <div className="about-item-peple-img">
             <img
               src="https://sun9-north.userapi.com/sun9-79/s/v1/ig2/O1XV4DCbBUF-pyF1pt-5aYzXFe_S90MrhnKcppC9uRvU9ZynJuLoGqZbr1a7FnawN9ypU8mAV2V7v3hxNEen2tD-.jpg?size=960x1280&quality=96&type=album"
