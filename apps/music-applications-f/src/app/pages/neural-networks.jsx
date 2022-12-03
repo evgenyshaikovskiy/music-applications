@@ -53,11 +53,11 @@ export function NeuralNetworksPage() {
         ></input>
       </div>
       <div className="neural-network-rating">
-        {stars.map((value) => (
-          <StarPng isActive={value}></StarPng>
+        {stars.map((value, index) => (
+          <StarPng isActive={value} key={index}></StarPng>
         ))}
       </div>
-      <div className='neural-network-accuracy'>Accuracy: {accuracy}</div>
+      <div className="neural-network-accuracy">Accuracy: {accuracy}</div>
     </div>
   );
 }

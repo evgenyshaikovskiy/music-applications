@@ -1,5 +1,8 @@
 import LiveSearch from '../components/live-search/search-component';
 import { Strategy } from '../services/parsing-strategy';
+import AppModal from '../utility/modal';
+import { useState } from 'react';
+import axios from 'axios';
 
 export function SearchPage() {
   // props to pass
@@ -14,9 +17,22 @@ export function SearchPage() {
   const parsingStrategy = Strategy.ParseGraphDbObj;
   const searchWordInitialState = 'All';
 
+  const [modal, setModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({});
+
   // callbacks to pass
   function callbackOnInstanceClick(instance) {
-    console.log(`callback for this ${instance}`);
+    console.log(instance);
+
+    axios
+      .get(
+        `http://localhost:4200/api/node-relation/${instance.type[0]}/${instance.label}`
+      )
+      .then((response) => {
+        console.log(response);
+      });
+
+    setModal(true);
   }
 
   return (
@@ -35,6 +51,11 @@ export function SearchPage() {
         parsingStrategy={parsingStrategy}
         selectorClassName="livesearch-selector"
       ></LiveSearch>
+      <div>
+        <AppModal visible={modal} setVisible={setModal} notHideOnClick={false}>
+          {/* Write Classes That decompose item */}
+        </AppModal>
+      </div>
     </div>
   );
 }

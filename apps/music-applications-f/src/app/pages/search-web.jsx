@@ -17,7 +17,6 @@ export function SearchWebPage() {
 
   const searchWordInitialState = 'All';
 
-  // add default value later
   const selectorParamsArray = [
     { value: 'track', name: 'Tracks' },
     { value: 'artist', name: 'Artists' },

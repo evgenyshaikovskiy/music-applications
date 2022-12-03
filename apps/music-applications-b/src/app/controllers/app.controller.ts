@@ -1,4 +1,11 @@
-import { Controller, Get, Query, Request, Response } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Query,
+  Request,
+  Response,
+} from '@nestjs/common';
 import { DatabaseManager } from '../db-manager.service';
 import { SpotifyService } from '../spotify.service';
 
@@ -16,6 +23,15 @@ export class AppController {
     return res;
   }
 
+  @Get('node-relation/:type/:name')
+  async getNodeAndRelations(@Param() params) {
+    const res = await this.dbManager.findNodeAndRelationsByName(
+      params.type,
+      params.name
+    );
+
+    return res;
+  }
   @Get('db-test')
   async testDb() {
     const res = await this.dbManager.getCountOfNodesInDb();

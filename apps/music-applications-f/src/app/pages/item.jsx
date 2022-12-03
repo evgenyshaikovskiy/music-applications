@@ -1,13 +1,16 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import TrackInfo from '../utility/pages/track-info';
+import TrackInfo from '../utility/spotify-pages/track-info';
 import { Strategy } from '../services/parsing-strategy';
 import { ResponseParser } from '../services/response-parser';
-import AlbumInfo from '../utility/pages/album-info';
-import ArtistInfo from '../utility/pages/artist-info';
-import PlaylistInfo from '../utility/pages/playlist-info';
-import { LoadingSpinner, PopupMessage } from '../utility/pages/page-utils';
+import AlbumInfo from '../utility/spotify-pages/album-info';
+import ArtistInfo from '../utility/spotify-pages/artist-info';
+import PlaylistInfo from '../utility/spotify-pages/playlist-info';
+import {
+  LoadingSpinner,
+  PopupMessage,
+} from '../utility/spotify-pages/page-utils';
 import AppModal from '../utility/modal';
 
 function ItemPage() {
@@ -130,7 +133,11 @@ function ItemPage() {
           message={popupMessage}
         ></PopupMessage>
       )}
-      <AppModal visible={isLoading} setVisible={setIsLoading}>
+      <AppModal
+        visible={isLoading}
+        setVisible={setIsLoading}
+        notHideOnClick={true}
+      >
         <LoadingSpinner></LoadingSpinner>
       </AppModal>
       {item.type === 'track' ? (
