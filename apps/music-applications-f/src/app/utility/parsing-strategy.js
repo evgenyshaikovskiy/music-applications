@@ -1,4 +1,8 @@
 export const Strategy = {
+  ParseGraphObjWithRelations: function(data) {
+    console.log(data);
+    return undefined;
+  },
   ParseGraphDbObj: function (rawData) {
     return rawData.data.records.map((value) => {
       const record = value['_fields'][0];
@@ -9,6 +13,7 @@ export const Strategy = {
       };
     });
   },
+  // actually there can be only one method to extract same properties from every instance...
   ExtractTrackProperties: function (track) {
     return {
       type: track.type,

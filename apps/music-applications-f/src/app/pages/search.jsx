@@ -1,5 +1,5 @@
 import LiveSearch from '../components/live-search/search-component';
-import { Strategy } from '../services/parsing-strategy';
+import { Strategy } from '../utility/parsing-strategy';
 import AppModal from '../utility/modal';
 import { useState } from 'react';
 import axios from 'axios';
@@ -29,7 +29,7 @@ export function SearchPage() {
         `http://localhost:4200/api/node-relation/${instance.type[0]}/${instance.label}`
       )
       .then((response) => {
-        console.log(response);
+        Strategy.ParseGraphObjWithRelations(response.data);
       });
 
     setModal(true);
@@ -54,6 +54,7 @@ export function SearchPage() {
       <div>
         <AppModal visible={modal} setVisible={setModal} notHideOnClick={false}>
           {/* Write Classes That decompose item */}
+          <div></div>
         </AppModal>
       </div>
     </div>
