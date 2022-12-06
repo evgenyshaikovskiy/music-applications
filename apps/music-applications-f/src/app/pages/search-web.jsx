@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import LiveSearch from '../components/live-search/search-component';
-import { Strategy } from '../services/parsing-strategy';
+import { Strategy } from '../utility/parsing-strategy';
 
 export function SearchWebPage() {
   const router = useNavigate();

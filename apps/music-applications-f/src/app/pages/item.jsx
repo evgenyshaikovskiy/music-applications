@@ -2,8 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import TrackInfo from '../utility/spotify-pages/track-info';
-import { Strategy } from '../services/parsing-strategy';
-import { ResponseParser } from '../services/response-parser';
+import { Strategy } from '../utility/parsing-strategy';
 import AlbumInfo from '../utility/spotify-pages/album-info';
 import ArtistInfo from '../utility/spotify-pages/artist-info';
 import PlaylistInfo from '../utility/spotify-pages/playlist-info';
@@ -71,9 +70,7 @@ function ItemPage() {
     if (recognizeParsingStrategy) {
       axios.get(`http://localhost:4200/api/${params.type}/${params.id}`).then(
         (response) => {
-          setItem(
-            ResponseParser.parseResponseData(response.data, parsingStrategy)
-          );
+          setItem(parsingStrategy(response.data));
         },
         (reason) => {
           if (reason.response.status === 400) {
