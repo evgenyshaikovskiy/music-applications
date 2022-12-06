@@ -10,6 +10,7 @@ export class DatabaseManager {
   ) {}
 
   // need to add search playlist function
+  // need some serious refactoring
   private searchArtistQuery = (artistName: string) =>
     `MATCH (obj: Artist) WHERE ToLower(obj.name) CONTAINS "${artistName}" return obj`;
 

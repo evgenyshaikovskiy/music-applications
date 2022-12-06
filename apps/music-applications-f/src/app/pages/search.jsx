@@ -22,14 +22,13 @@ export function SearchPage() {
 
   // callbacks to pass
   function callbackOnInstanceClick(instance) {
-    console.log(instance);
-
     axios
       .get(
         `http://localhost:4200/api/node-relation/${instance.type[0]}/${instance.label}`
       )
       .then((response) => {
-        Strategy.ParseGraphObjWithRelations(response.data);
+        setSelectedItem(Strategy.ParseGraphObjWithRelations(response.data));
+        console.log(selectedItem);
       });
 
     setModal(true);
@@ -54,7 +53,7 @@ export function SearchPage() {
       <div>
         <AppModal visible={modal} setVisible={setModal} notHideOnClick={false}>
           {/* Write Classes That decompose item */}
-          <div></div>
+          <div>{selectedItem.type}</div>
         </AppModal>
       </div>
     </div>

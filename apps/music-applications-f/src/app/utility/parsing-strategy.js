@@ -1,7 +1,35 @@
 export const Strategy = {
-  ParseGraphObjWithRelations: function(data) {
+  ParseGraphObjWithRelations: function (data) {
+    // there is a bug, where if node doesn't have any relationships
+
+    // parse main object, that was initially searched
+    let obj = {};
+
     console.log(data);
-    return undefined;
+    if (data.length > 0) {
+      // parse object
+      obj.type = data[0]._fields[0].labels;
+      obj.properties = data[0]._fields[0].properties;
+
+      obj.relations = [];
+
+      // then for each object need to parse relationships
+      // it is not good at all
+      for (const objAndRelation of data) {
+        const relation = objAndRelation._fields[1];
+        const targetNode = objAndRelation._fields[2];
+
+        obj.relations.push({
+          type: relation.type,
+          target: {
+            type: targetNode.labels[0],
+            properties: targetNode.properties,
+          },
+        });
+      }
+    }
+
+    return obj;
   },
   ParseGraphDbObj: function (rawData) {
     return rawData.data.records.map((value) => {
