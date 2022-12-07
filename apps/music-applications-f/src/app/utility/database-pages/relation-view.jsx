@@ -1,7 +1,7 @@
 const RelationViewPage = ({ item }) => {
   console.log(item);
 
-  return <div>{item.type}</div>;
+  return <div>{item.label}</div>;
 };
 
 export default RelationViewPage;
