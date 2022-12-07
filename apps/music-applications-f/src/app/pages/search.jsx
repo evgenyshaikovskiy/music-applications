@@ -3,6 +3,7 @@ import { Strategy } from '../utility/parsing-strategy';
 import AppModal from '../utility/modal';
 import { useState } from 'react';
 import axios from 'axios';
+import DatabaseItemPage from '../utility/database-pages/item-view';
 
 export function SearchPage() {
   // props to pass
@@ -53,7 +54,7 @@ export function SearchPage() {
       <div>
         <AppModal visible={modal} setVisible={setModal} notHideOnClick={false}>
           {/* Write Classes That decompose item */}
-          <div>{selectedItem.type}</div>
+          <DatabaseItemPage item={selectedItem}></DatabaseItemPage>
         </AppModal>
       </div>
     </div>

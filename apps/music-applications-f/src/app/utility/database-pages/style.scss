@@ -1,0 +1,33 @@
+.database-item-page-wrapper {
+  display: flex;
+  flex-direction: row;
+  // fix later to auto adjust
+  width: 100vh;
+  height: 30vw;
+}
+
+.database-item-page-sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+
+.database-item-page-menu {
+  text-align: left;
+  font-weight: 600;
+  font-size: medium;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  &:hover {
+    color: blue;
+  }
+}
+
+.database-item-page-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}

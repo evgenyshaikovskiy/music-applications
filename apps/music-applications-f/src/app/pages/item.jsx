@@ -58,7 +58,6 @@ function ItemPage() {
           }
 
           togglePopup();
-          setTimeout(() => togglePopup, 500);
         })
         .catch(() => {
           setIsLoading(false);

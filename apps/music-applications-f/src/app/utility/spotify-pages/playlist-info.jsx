@@ -4,7 +4,8 @@ import { PlaylistTrackInfo } from './page-utils';
 const PlaylistInfo = ({ playlist }) => {
   const router = useNavigate();
   const trackNameClickCallback = (spotify_id) => router(`/track/${spotify_id}`);
-
+  const artistNameClickCallback = (spotify_id) =>
+    router(`/artist/${spotify_id}`);
   return (
     <div className="item-page-content">
       <div className="playlist-item-page-details-header">
@@ -35,6 +36,7 @@ const PlaylistInfo = ({ playlist }) => {
                   key={index}
                   index={index + 1}
                   onTrackClickCallback={trackNameClickCallback}
+                  onArtistClickCallback={artistNameClickCallback}
                 ></PlaylistTrackInfo>
               );
             })}
