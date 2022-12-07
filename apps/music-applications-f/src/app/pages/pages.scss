@@ -30,8 +30,9 @@
 }
 
 .fetch-comments-input {
+  color:white;
+  background-color: black;
   border: 0;
-  border-bottom: 3px solid #00b8b8;
   height: 40px;
   width: 550px;
   text-align: left;
@@ -41,7 +42,7 @@
 
   &:focus,
   &:hover {
-    border-color: aqua;
+    background-color: #A0A0A0;
   }
 
   &:focus-visible {
@@ -80,8 +81,12 @@
   width: 200px;
   padding: 10px;
   font-size: medium;
-  background-color: #C6D8FF;
-  border: 3px solid rgb(40, 145, 145);
+  color: white;
+  background-color: black;
+  border: none;
   border-radius: 10px;
   cursor: pointer;
+  &:hover {
+    background-color: #A0A0A0;
+  }
 }
