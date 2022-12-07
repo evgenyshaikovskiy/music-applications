@@ -1,6 +1,4 @@
 const InteractiveItemList = ({ item, onItemClickCallback }) => {
-  console.log(item);
-
   // consider using different print strategies for different objects
   return (
     <div className="clickable-dropdown-item">
