@@ -51,6 +51,7 @@ const AlbumInfo = ({ album }) => {
                 track={track}
                 key={index}
                 onTrackClickCallback={trackNameClickCallback}
+                onArtistClickCallback={artistNameClickCallback}
               />
             );
           })}
@@ -63,7 +64,5 @@ const AlbumInfo = ({ album }) => {
     </div>
   );
 };
-
-
 
 export default AlbumInfo;
