@@ -24,7 +24,7 @@ const TrackInfo = ({ track }) => {
             <div className="track-item-name">{track.label}</div>
           </div>
           <div className="track-item-additional-info">
-            <audio controls className="track-preview-audio">
+            <audio controls="true" class="audio-1" className="track-preview-audio">
               <source src={track.preview_url}></source>
             </audio>
             <div>Explicit: {track.explicit ? 'Explicit' : 'Not explicit'}</div>
