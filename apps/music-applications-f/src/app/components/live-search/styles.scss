@@ -26,7 +26,8 @@
   margin-left: 10px;
   padding-top: 3px;
 
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     border-color: aqua;
   }
 
@@ -46,6 +47,7 @@
   padding-top: 4px;
   height: 40px;
   width: 100px;
+
   &:hover {
     border-color: aqua;
   }
@@ -72,14 +74,13 @@
   justify-content: space-between;
   align-content: stretch;
   flex-direction: row;
-  background-color: lightblue;
   padding: 10px;
-  border: 2px solid lavenderblush;
   border-radius: 4px;
   width: 100%;
 
   &:hover {
     cursor: pointer;
+    background-color: #A0A0A0;
   }
 }
 
@@ -112,14 +113,17 @@
 }
 
 .view-details-btn {
+  color: #ffffff;
   border-radius: 5px;
+  border: 1px solid #A0A0A0;
   width: 15%;
   padding: 7px;
   font-size: larger;
   font-weight: 400;
-  border: 2px solid gray;
+  background-color: black;
   cursor: pointer;
+
   &:hover {
-    background-color:#1fdf64;
+    background-color: #1fdf64;
   }
 }
