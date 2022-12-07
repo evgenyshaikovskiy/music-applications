@@ -7,13 +7,15 @@ import {
   Response,
 } from '@nestjs/common';
 import { DatabaseManager } from '../db-manager.service';
+import { GeniusService } from '../genius.service';
 import { SpotifyService } from '../spotify.service';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly spotifyService: SpotifyService,
-    private readonly dbManager: DatabaseManager
+    private readonly dbManager: DatabaseManager,
+    private readonly geniusService: GeniusService
   ) {}
 
   // refactor controllers to different files later
@@ -32,6 +34,18 @@ export class AppController {
 
     return res;
   }
+
+  @Get('lyrics')
+  async getLyrics(@Request() request) {
+    // seems strange, but that's how passing params to axios get works
+    const searchQuery = request.query.query;
+
+    const result = await this.geniusService.getLyricsByQuery(searchQuery);
+    // console.log(searches[0].lyrics());
+
+    return result;
+  }
+
   @Get('db-stats')
   async getDatabaseStats() {
     const res = await this.dbManager.getCountOfNodesInDb();
