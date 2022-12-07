@@ -52,7 +52,6 @@ export const PlaylistTrackInfo = ({
   onTrackClickCallback,
   onArtistClickCallback,
 }) => {
-  console.log(track);
   return (
     <div
       className="playlist-track-text"

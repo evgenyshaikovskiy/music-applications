@@ -29,7 +29,6 @@ export function SearchPage() {
       )
       .then((response) => {
         setSelectedItem(Strategy.ParseGraphObjWithRelations(response.data));
-        console.log(selectedItem);
       });
 
     setModal(true);

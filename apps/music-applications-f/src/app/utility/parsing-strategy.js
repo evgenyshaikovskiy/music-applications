@@ -5,7 +5,6 @@ export const Strategy = {
     // parse main object, that was initially searched
     let obj = {};
 
-    console.log(data);
     if (data.length > 0) {
       // parse object
       obj.type = data[0]._fields[0].labels[0];

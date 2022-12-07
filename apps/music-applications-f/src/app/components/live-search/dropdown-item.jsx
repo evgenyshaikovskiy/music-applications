@@ -1,10 +1,14 @@
-// this could be extended by passing fields of object instead of object itself
+import { capitalize } from '../../utility/utils';
+
 const InteractiveItemList = ({ item, onItemClickCallback }) => {
+  console.log(item);
+
   // consider using different print strategies for different objects
   return (
     <div className="clickable-dropdown-item">
       <div className="clickable-dropdown-item-text">
-        Found {item.type}: {item.label}
+        <div className="dropdown-item-label">{item.label}</div>
+        <div className="dropdown-item-type">{capitalize(item.type)}</div>
       </div>
       <button
         className="view-details-btn"

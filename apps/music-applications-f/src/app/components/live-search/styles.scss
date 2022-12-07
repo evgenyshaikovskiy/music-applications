@@ -115,8 +115,7 @@
 .view-details-btn {
   color: #ffffff;
   border-radius: 5px;
-  border: 1px solid #A0A0A0;
-  width: 15%;
+  border: none;
   padding: 7px;
   font-size: larger;
   font-weight: 400;
@@ -126,4 +125,8 @@
   &:hover {
     background-color: #1fdf64;
   }
+}
+
+.dropdown-item-type {
+  font-weight: 300;
 }
