@@ -73,11 +73,12 @@ body {
   border-color: #000000;
   cursor: pointer;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: #FFFFFF;
     border-color: #808080;
     background-color: #808080;
- }
+  }
 }
 
 p {
@@ -92,8 +93,8 @@ p {
   border: 4px solid black;
   border-radius: 5px;
   margin: 20px;
-  background: rgb(0,0,0);
-  background: linear-gradient(0deg, rgba(0,0,0,1) 23%, rgba(0,255,111,1) 93%);
+  background: rgb(0, 0, 0);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 23%, rgba(0, 255, 111, 1) 93%);
 }
 
 .item-page-details {
@@ -193,17 +194,19 @@ p {
   justify-content: space-between;
   font-weight: 600;
   cursor: pointer;
+
   &:hover {
     background-color: #A0A0A0;
     border-radius: 1.5%;
   }
+
   padding: 0.5%;
 }
 
 .featured-tracks-wrapper {
   display: flex;
   flex-direction: column;
-  width:60%
+  width: 60%
 }
 
 .album-track-name,
@@ -322,6 +325,42 @@ p {
 
   &:hover {
     color: blue;
+  }
+}
+
+audio {
+  &::-webkit-media-controls-panel {
+    background-color: #202020;
+  }
+
+  &::-webkit-media-controls-mute-button,
+  &::-webkit-media-controls-play-button {
+    background-color: #FFFFFF;
+    border-radius: 50%;
+  }
+
+  &::-webkit-media-controls-current-time-display,
+  &::-webkit-media-controls-time-remaining-display {
+    color: #FFFFFF;
+  }
+
+  &::-webkit-media-controls-timeline {
+    background-color: #FFFFFF;
+    border-radius: 25px;
+    margin-left: 4%;
+    margin-right: 4%;
+    padding: 2%;
+  }
+
+  &::-webkit-media-controls-volume-slider {
+    background-color: #FFFFFF;
+    border-radius: 25px;
+    padding: 4%;
+    margin-right: 5%;
+  }
+
+  &::-webkit-media-controls-volume-control-container {
+    align-items: center;
   }
 }
 
@@ -451,6 +490,7 @@ p {
   font-family: serif;
   font-size: 40px;
 }
+
 .about-item-people {
   margin-right: 1%;
   margin-left: 1%;
@@ -462,6 +502,7 @@ p {
   width: 48%;
   justify-content: space-between;
 }
+
 .about-item-command {
   display: flex;
   align-items: center;
