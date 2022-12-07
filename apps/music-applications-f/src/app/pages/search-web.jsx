@@ -9,6 +9,7 @@ export function SearchWebPage() {
 
   function onUnlockButtonClick() {
     window.open(urlToLogin, '_blank');
+    setInterval(() => window.location.reload(), 100);
   }
 
   function callbackDetailsView(instance) {
