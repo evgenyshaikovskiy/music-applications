@@ -1,7 +1,11 @@
 const RelationViewPage = ({ item }) => {
   console.log(item);
 
-  return <div>{item.type}</div>;
+  const timer = setTimeout(() => console.log('vanya pediks'), 5000);
+  const wrapper = async () => await timer;
+
+  wrapper();
+  return <div>{item.label}</div>;
 };
 
 export default RelationViewPage;
