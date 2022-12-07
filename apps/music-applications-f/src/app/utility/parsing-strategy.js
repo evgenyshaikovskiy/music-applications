@@ -8,7 +8,7 @@ export const Strategy = {
     console.log(data);
     if (data.length > 0) {
       // parse object
-      obj.type = data[0]._fields[0].labels;
+      obj.type = data[0]._fields[0].labels[0];
       obj.properties = data[0]._fields[0].properties;
 
       obj.relations = [];
