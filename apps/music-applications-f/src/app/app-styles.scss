@@ -121,7 +121,6 @@ p {
 
 .playlist-item-page-images {
   height: 400px;
-  margin-right: 100px;
 }
 
 .playlist-owner-text {
@@ -139,6 +138,7 @@ p {
 .playlist-item-info {
   display: flex;
   flex-direction: row;
+  width: 40%;
 }
 
 .artist-item-page-title,
@@ -203,7 +203,7 @@ p {
 .featured-tracks-wrapper {
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  width:60%
 }
 
 .album-track-name,
