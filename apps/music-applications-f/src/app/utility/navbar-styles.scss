@@ -4,24 +4,23 @@
 }
 
 .router-wrapper {
-  border: solid 3px #C6D8FF;
   border-radius: 10px;
-  background-color: #C6D8FF;
+  background-color: #000000;
+  color: #FFFFFF;
 }
 
 .navbar-links {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-
 }
 
 .router-link {
-  color: black;
+  color: #A0A0A0;
   font-size: x-large;
   text-decoration: none;
   margin: 10px;
   &:hover, &:focus {
-    color: rgb(47, 10, 209);
+    color: #FFFFFF;
   }
 }
