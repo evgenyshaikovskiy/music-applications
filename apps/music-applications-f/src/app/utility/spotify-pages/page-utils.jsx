@@ -13,11 +13,11 @@ export const ArtistTrackName = ({ artist, onArtistClickCallback }) => {
 
 export const AlbumTrackInfo = ({ track, onTrackClickCallback }) => {
   return (
-    <div className="album-track-text">
-      <div
-        className="album-track-name"
-        onClick={() => onTrackClickCallback(track.spotify_id)}
-      >
+    <div
+      className="album-track-text"
+      onClick={() => onTrackClickCallback(track.spotify_id)}
+    >
+      <div className="album-track-name">
         {track.track_num}.{' '}
         {track.artists.map((artist) => artist.label).join(', ')} - {track.label}
       </div>
