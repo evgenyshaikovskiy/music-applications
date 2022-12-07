@@ -1,16 +1,38 @@
 import { useNavigate } from 'react-router-dom';
-import { convertDuration } from '../utils';
+import { convertDuration, getLyricsFromGenius, translateLyricsToChunks } from '../utils';
 import { ArtistTrackName } from './page-utils';
+import { useState } from 'react';
+import AppModal from '../modal';
+import axios from 'axios';
 
 const TrackInfo = ({ track }) => {
+  const [modal, setModal] = useState(false);
+  const [lyrics, setLyrics] = useState([]);
+
   const router = useNavigate();
   const artistNameClickCallback = (spotify_id) =>
     router(`/artist/${spotify_id}`);
 
+  const onMicrophoneClick = async () => {
+    const wrapper = async () => {
+      axios
+        .get(`http://localhost:4200/api/lyrics/`, {
+          params: { query: `${track.artists[0].label}-${track.label}` },
+        })
+        .then((response) => {
+          // need to handle when there is no lyrics provided
+          setLyrics(translateLyricsToChunks(response.data));
+          setModal(true);
+        });
+    };
+
+    await wrapper();
+  };
+
   return (
     <div className="item-page-content">
       <div className="track-page-content-wrapper">
-        <div className="track-album-image">
+        <div className="track-album-image" onClick={() => onMicrophoneClick()}>
           <img
             src={track.album.images[1].url}
             height={300}
@@ -23,8 +45,23 @@ const TrackInfo = ({ track }) => {
             <div className="track-item-type-text">SONG</div>
             <div className="track-item-name">{track.label}</div>
           </div>
+          <div
+            className="track-item-lyrics"
+            onClick={() => onMicrophoneClick()}
+          >
+            <img
+              src="https://img.icons8.com/emoji/48/null/microphone-emoji.png"
+              height={30}
+              width={30}
+              alt="mic"
+            ></img>
+          </div>
           <div className="track-item-additional-info">
-            <audio controls="true" class="audio-1" className="track-preview-audio">
+            <audio
+              controls
+              // class="audio-1"
+              className="track-preview-audio"
+            >
               <source src={track.preview_url}></source>
             </audio>
             <div>Explicit: {track.explicit ? 'Explicit' : 'Not explicit'}</div>
@@ -55,6 +92,15 @@ const TrackInfo = ({ track }) => {
           </div>
         </div>
       </div>
+      <AppModal visible={modal} setVisible={setModal} notHideOnClick={false}>
+        <div className="track-lyrics">
+          {lyrics.map((value, index) => (
+            <div key={index} className="chunk-of-lyrics">
+              {value}
+            </div>
+          ))}
+        </div>
+      </AppModal>
     </div>
   );
 };

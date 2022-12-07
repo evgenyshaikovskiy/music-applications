@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { AppController } from './controllers/app.controller';
-import { AppService } from './app.service';
+import { GeniusService } from './genius.service';
 
 import { Neo4jModule, Neo4jScheme } from 'nest-neo4j/dist';
 import { ApplicationConfig } from '../../../config/config';
@@ -30,6 +30,6 @@ import { NetworkController } from './controllers/network.controller';
     ArtistController,
     NetworkController,
   ],
-  providers: [AppService, DatabaseManager, SpotifyService],
+  providers: [GeniusService, DatabaseManager, SpotifyService],
 })
 export class AppModule {}
