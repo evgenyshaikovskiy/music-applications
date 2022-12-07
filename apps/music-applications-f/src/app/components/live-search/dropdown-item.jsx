@@ -1,7 +1,11 @@
-import { capitalize } from '../../utility/utils';
-
 const InteractiveItemList = ({ item, onItemClickCallback }) => {
   console.log(item);
+
+  function capitalize(string) {
+    if (string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+  }
 
   // consider using different print strategies for different objects
   return (
