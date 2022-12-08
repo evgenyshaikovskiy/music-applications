@@ -3,7 +3,7 @@ import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
 import AboutPage from '../pages/about';
 import HomePage from '../pages/home';
 import ItemPage from '../pages/item';
-import NeuralNetworksPage from '../pages/neural-networks';
+import RankingNeuralNetworkPage from '../pages/ranking-network';
 import SearchPage from '../pages/search';
 import SearchWebPage from '../pages/search-web';
 import './navbar-styles.scss';
@@ -17,8 +17,11 @@ function ApplicationRouter() {
             <Link className="router-link" to="/">
               Home
             </Link>
-            <Link className="router-link" to="/neural-networks">
-              Neural Networks
+            <Link className="router-link" to="/ranking">
+              Ranking Neural Network
+            </Link>
+            <Link className="router-link" to="/lyrics-generator">
+              Lyrics generator network
             </Link>
             <Link className="router-link" to="/search">
               Explore graph base
@@ -31,11 +34,15 @@ function ApplicationRouter() {
             </Link>
           </div>
           <Routes>
+            <Route
+              path="/lyrics-generator"
+              element={<RankingNeuralNetworkPage />}
+            ></Route>
             <Route path="/" element={<HomePage />}></Route>
             <Route path="/about" element={<AboutPage />}></Route>
             <Route
-              path="/neural-networks"
-              element={<NeuralNetworksPage />}
+              path="/ranking"
+              element={<RankingNeuralNetworkPage />}
             ></Route>
             <Route path="/search" element={<SearchPage />}></Route>
             <Route path="/search-web" element={<SearchWebPage />}></Route>
