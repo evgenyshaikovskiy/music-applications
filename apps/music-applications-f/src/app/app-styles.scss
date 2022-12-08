@@ -265,15 +265,33 @@ p {
 
 .track-lyrics {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-content: center;
-  justify-content: flex-start;
+  overflow:scroll;
+  overflow-x: hidden;
+  height:400px;
 }
 
 .chunk-of-lyrics {
   white-space: pre-wrap;
   padding: 0.4%;
+  padding-bottom: 5%;
+}
+
+.track-lyrics::-webkit-scrollbar {
+  width: 10px;
+}
+
+.track-lyrics::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #808080;
+  box-shadow: inset;
+  border-radius: 10px;
+}
+
+.track-lyrics::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset;
+  -webkit-box-shadow: inset 0 0 6px #808080;
 }
 
 .track-item-additional-info {
