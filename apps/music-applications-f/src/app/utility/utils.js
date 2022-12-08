@@ -5,6 +5,10 @@ export function convertDuration(ms) {
 }
 
 export function translateLyricsToChunks(lyrics) {
+  if (lyrics === 'Lyrics was not found') {
+    return [lyrics];
+  }
+
   const rawLyrics = lyrics
     .split(/\r?\n/)
     .filter((line) => (line ? true : false));

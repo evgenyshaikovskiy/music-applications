@@ -1,5 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { convertDuration, getLyricsFromGenius, translateLyricsToChunks } from '../utils';
+import {
+  convertDuration,
+  getLyricsFromGenius,
+  translateLyricsToChunks,
+} from '../utils';
 import { ArtistTrackName } from './page-utils';
 import { useState } from 'react';
 import AppModal from '../modal';
@@ -28,7 +32,7 @@ const TrackInfo = ({ track }) => {
 
     await wrapper();
   };
-  
+
   return (
     <div className="item-page-content">
       <div className="track-page-content-wrapper">
@@ -93,13 +97,17 @@ const TrackInfo = ({ track }) => {
         </div>
       </div>
       <AppModal visible={modal} setVisible={setModal} notHideOnClick={false}>
-        <div className="track-lyrics">
-          {lyrics.map((value, index) => (
-            <div key={index} className="chunk-of-lyrics">
-              {value}
-            </div>
-          ))}
-        </div>
+        {lyrics.length === 1 ? (
+          <div style={{ textAlign: 'center' }}>{lyrics[0]}</div>
+        ) : (
+          <div className="track-lyrics">
+            {lyrics.map((value, index) => (
+              <div key={index} className="chunk-of-lyrics">
+                {value}
+              </div>
+            ))}
+          </div>
+        )}
       </AppModal>
     </div>
   );
