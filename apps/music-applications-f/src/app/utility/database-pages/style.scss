@@ -4,6 +4,7 @@
   // fix later to auto adjust
   width: 100vh;
   height: 30vw;
+  height: 600px;
 }
 
 .database-item-page-sidebar-menu {
@@ -21,14 +22,63 @@
   overflow: hidden;
   white-space: nowrap;
   cursor: pointer;
+
   &:hover {
     color: #A0A0A0;
   }
 }
 
 .database-item-page-content {
-  display: flex;
+  text-overflow: clip;
   justify-content: space-around;
   width: 100%;
   height: 100%;
+}
+
+.database-item-page-text {
+  height: 100%;
+  margin-left: 5%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.database-item-name-text {
+  font-size: xx-large;
+  padding-left: 1%;
+}
+
+.database-item-contains-text,
+.database-item-perfomsin-genre-artists-text {
+  padding-left: 1%;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  padding-top: 1%;
+  font-size:large;
+  &:hover {
+    background-color: #A0A0A0;
+    border-radius: 2%;
+  }
+}
+
+.database-item-perfomsin-artist-genres-text {
+  display: flex;
+  font-size:large;
+  justify-content: flex-end;
+  padding-left: 1%;
+  &:hover {
+    background-color: #A0A0A0;
+    border-radius: 2%;
+  }
+}
+
+.database-item-author-text {
+  font-size: x-large;
+  padding-left: 1%;
+  justify-content: flex-end;
+  display: flex;
+  &:hover {
+    color: #A0A0A0
+  }
 }
