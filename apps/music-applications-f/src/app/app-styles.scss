@@ -93,8 +93,10 @@ p {
   border: 4px solid black;
   border-radius: 5px;
   margin: 20px;
-  background: rgb(0, 0, 0);
-  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 23%, rgba(0, 255, 111, 1) 93%);
+  background: rgb(0,0,0);
+  background: linear-gradient(0deg, rgba(0,0,0,1) 30%, rgba(29,185,84,1) 100%);
+  //background: rgb(0,0,0);
+  //background: linear-gradient(0deg, rgba(0,0,0,1) 53%, rgba(29,185,84,1) 100%);
 }
 
 .item-page-details {
