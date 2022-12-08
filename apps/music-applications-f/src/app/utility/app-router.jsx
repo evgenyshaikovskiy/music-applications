@@ -20,9 +20,9 @@ function ApplicationRouter() {
             <Link className="router-link" to="/ranking">
               Ranking Neural Network
             </Link>
-            <Link className="router-link" to="/lyrics-generator">
+            {/* <Link className="router-link" to="/lyrics-generator">
               Lyrics generator network
-            </Link>
+            </Link> */}
             <Link className="router-link" to="/search">
               Explore graph base
             </Link>
