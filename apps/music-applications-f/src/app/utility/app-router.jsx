@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
 import AboutPage from '../pages/about';
 import { LyricsGeneratorNetwork } from '../pages/generator-network';
