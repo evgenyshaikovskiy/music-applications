@@ -5,7 +5,7 @@ import './pages.scss';
 import GoldStar from '../../gold-star.png';
 import Star from '../../star.png';
 
-export function NeuralNetworksPage() {
+export function RankingNeuralNetworkPage() {
   const [comment, setComment] = useState('');
   const [stars, setStars] = useState([false, false, false, false, false]);
   const [accuracy, setAccuracy] = useState(0);
@@ -76,4 +76,4 @@ const StarPng = ({ isActive }) => {
   );
 };
 
-export default NeuralNetworksPage;
+export default RankingNeuralNetworkPage;
