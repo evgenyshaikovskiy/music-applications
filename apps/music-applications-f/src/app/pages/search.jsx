@@ -19,7 +19,7 @@ export function SearchPage() {
   const searchWordInitialState = 'All';
 
   const [modal, setModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState({});
+  const [selectedItem, setSelectedItem] = useState();
 
   // callbacks to pass
   function callbackOnInstanceClick(instance) {
@@ -51,10 +51,16 @@ export function SearchPage() {
         selectorClassName="livesearch-selector"
       ></LiveSearch>
       <div>
-        <AppModal visible={modal} setVisible={setModal} notHideOnClick={false}>
-          {/* Write Classes That decompose item */}
-          <DatabaseItemPage item={selectedItem}></DatabaseItemPage>
-        </AppModal>
+        {selectedItem && (
+          <AppModal
+            visible={modal}
+            setVisible={setModal}
+            notHideOnClick={false}
+          >
+            {/* Write Classes That decompose item */}
+            <DatabaseItemPage item={selectedItem}></DatabaseItemPage>
+          </AppModal>
+        )}
       </div>
     </div>
   );

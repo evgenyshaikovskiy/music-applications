@@ -4,6 +4,7 @@
   // fix later to auto adjust
   width: 100vh;
   height: 30vw;
+  height: 600px;
 }
 
 .database-item-page-sidebar-menu {
@@ -12,6 +13,7 @@
   justify-content: space-around;
   align-items: stretch;
   flex-wrap: nowrap;
+  padding-right: 1%;
 }
 
 .database-item-page-menu {
@@ -21,14 +23,88 @@
   overflow: hidden;
   white-space: nowrap;
   cursor: pointer;
+
   &:hover {
-    color: #A0A0A0;
+    color: #a0a0a0;
   }
 }
 
 .database-item-page-content {
-  display: flex;
+  text-overflow: clip;
   justify-content: space-around;
   width: 100%;
   height: 100%;
+  border-left: 3px solid #1fdf64;
+}
+
+.database-item-page-text {
+  height: 100%;
+  margin-left: 1.5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.database-item-name-author-text {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 3%;
+}
+
+.database-item-author-toartist-relation {
+  display: flex;
+  width: 150px;
+  font-size: large;
+}
+
+.database-item-by {
+  padding-right: 4%;
+  color: #1fdf64;
+}
+
+.database-item-contains-head-text {
+  font-size: x-large;
+  color: #1fdf64;
+}
+
+.database-item-author-totrack-text {
+  display: flex;
+}
+
+.database-item-description-text {
+  display: flex;
+}
+
+.database-item-name-text {
+  font-size: xx-large;
+}
+
+.database-item-scroll {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 530px;
+  width: 250px;
+}
+
+.database-item-torelation {
+  padding: 1%;
+}
+
+.database-item-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.database-item-scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #000000;
+  box-shadow: inset;
+  border-radius: 10px;
+}
+
+.database-item-scroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset;
+  -webkit-box-shadow: inset 0 0 6px #808080;
+}
+
+.database-item-coloumn-settings {
+  margin-right: 2%;
 }
