@@ -174,11 +174,6 @@ p {
   font-weight: bold;
 }
 
-.symbol {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
 .featured-tracks-label,
 .playlist-tracks-label {
   margin-bottom: 10px;
@@ -208,6 +203,12 @@ p {
   flex-direction: column;
   width: 60%
 }
+
+.artist-track-name, .symbol {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 
 .album-track-name,
 .playlist-track-name {
@@ -328,6 +329,8 @@ p {
 .track-preview-audio {
   margin-bottom: 1rem;
 }
+
+
 
 .track-artist-name,
 .artist-track-name {
