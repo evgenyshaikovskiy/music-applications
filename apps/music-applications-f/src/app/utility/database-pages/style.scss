@@ -40,45 +40,45 @@
   margin-left: 5%;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+}
+
+.database-item-name-author-text {
+  display: flex;
+  justify-content: space-between;
+}
+
+.database-item-author-toartist-relation {
+  display: flex;
+  width: 20%;
+  font-size: large;
+}
+
+.database-item-by {
+  padding-right: 2%;
+}
+
+.database-item-contains-head-text {
+  font-size: x-large;
+}
+
+.database-item-author-totrack-text {
+  display: flex;
+}
+
+.database-item-description-text {
+  display: flex;
 }
 
 .database-item-name-text {
   font-size: xx-large;
-  padding-left: 1%;
 }
 
-.database-item-contains-text,
-.database-item-perfomsin-genre-artists-text {
-  padding-left: 1%;
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  padding-top: 1%;
-  font-size:large;
-  &:hover {
-    background-color: #A0A0A0;
-    border-radius: 2%;
-  }
+.database-item-scroll {
+  overflow: scroll;
+  height: 550px;
+  width: 250px;
 }
 
-.database-item-perfomsin-artist-genres-text {
-  display: flex;
-  font-size:large;
-  justify-content: flex-end;
-  padding-left: 1%;
-  &:hover {
-    background-color: #A0A0A0;
-    border-radius: 2%;
-  }
-}
-
-.database-item-author-text {
-  font-size: x-large;
-  padding-left: 1%;
-  justify-content: flex-end;
-  display: flex;
-  &:hover {
-    color: #A0A0A0
-  }
+.database-item-torelation {
+  padding: 2%;
 }
