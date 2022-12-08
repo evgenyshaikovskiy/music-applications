@@ -8,8 +8,13 @@ const RelationViewPage = ({ item }) => {
     (relation) =>
       relation.type === 'Author' && relation.target.type === 'Artist'
   );
-  const appearedAtRelations = item.relations.filter(
-    (relation) => relation.type === 'AppearedAt'
+  const appearedAtToTrackRelations = item.relations.filter(
+    (relation) =>
+      relation.type === 'AppearedAt' && relation.target.type === 'Track'
+  );
+  const appearedAtToArtistRelations = item.relations.filter(
+    (relation) =>
+      relation.type === 'AppearedAt' && relation.target.type === 'Artist'
   );
   const performsInGenreToGenreRelations = item.relations.filter(
     (relation) =>
@@ -35,7 +40,8 @@ const RelationViewPage = ({ item }) => {
   console.log(
     authorToTrackRelations,
     authorToArtistRelations,
-    appearedAtRelations,
+    appearedAtToArtistRelations,
+    appearedAtToTrackRelations,
     performsInGenreToGenreRelations,
     performsInGenreToArtistRelations,
     containsToTrackRelations,
@@ -49,17 +55,23 @@ const RelationViewPage = ({ item }) => {
         <div className="database-item-name-text">
           {item.properties.name.toUpperCase()}
         </div>
-        <div className="database-item-author-toartist-relation">
-          <div className="database-item-by">By</div>
-          {authorToArtistRelations.map((relation, index) => {
-            return (
-              <ToRelation target={relation.target} key={index}></ToRelation>
-            );
-          })}
+        <div>
+          {authorToArtistRelations.length > 0 ? (
+            <div className="database-item-author-toartist-relation">
+              <div className="database-item-by">By</div>
+              {authorToArtistRelations.map((relation, index) => {
+                return (
+                  <ToRelation target={relation.target} key={index}></ToRelation>
+                );
+              })}
+            </div>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
       <div className="database-item-description-text">
-        <div>
+        <div className="database-item-coloumn-settings">
           {authorToTrackRelations.length > 0 ? (
             <div>
               <div className="database-item-contains-head-text">Tracks</div>
@@ -82,11 +94,16 @@ const RelationViewPage = ({ item }) => {
           {containsToTrackRelations.length > 0 ? (
             <div>
               <div className="database-item-contains-head-text">Tracks</div>
-              {containsToTrackRelations.map((relation, index) => {
-                return (
-                  <ToRelation target={relation.target} key={index}></ToRelation>
-                );
-              })}
+              <div className="database-item-scroll">
+                {containsToTrackRelations.map((relation, index) => {
+                  return (
+                    <ToRelation
+                      target={relation.target}
+                      key={index}
+                    ></ToRelation>
+                  );
+                })}
+              </div>
             </div>
           ) : (
             <div></div>
@@ -108,7 +125,7 @@ const RelationViewPage = ({ item }) => {
         </div>
         <div className="database-item-contains-toplaylist-text">
           {containsToPlaylistRelations.length > 0 ? (
-            <div>
+            <div className="database-item-scroll">
               <div className="database-item-contains-head-text">Playlists</div>
               {containsToPlaylistRelations.map((relation, index) => {
                 return (
@@ -139,6 +156,38 @@ const RelationViewPage = ({ item }) => {
             <div>
               <div className="database-item-contains-head-text">Artists</div>
               {performsInGenreToArtistRelations.map((relation, index) => {
+                return (
+                  <ToRelation target={relation.target} key={index}></ToRelation>
+                );
+              })}
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
+        <div className="database-item-appearedat-totrack-text">
+          {appearedAtToTrackRelations.length > 0 ? (
+            <div>
+              <div className="database-item-contains-head-text">
+                AppearedTracks
+              </div>
+              {appearedAtToTrackRelations.map((relation, index) => {
+                return (
+                  <ToRelation target={relation.target} key={index}></ToRelation>
+                );
+              })}
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
+        <div className="database-item-appearedat-toartist-text">
+          {appearedAtToArtistRelations.length > 0 ? (
+            <div>
+              <div className="database-item-contains-head-text">
+                AppearedArtists
+              </div>
+              {appearedAtToArtistRelations.map((relation, index) => {
                 return (
                   <ToRelation target={relation.target} key={index}></ToRelation>
                 );
