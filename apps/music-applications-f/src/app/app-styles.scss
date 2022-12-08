@@ -253,6 +253,29 @@ p {
   font-size: xx-large;
 }
 
+.track-item-lyrics {
+  font-size: medium;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    color: #A0A0A0;
+  }
+}
+
+.track-lyrics {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+}
+
+.chunk-of-lyrics {
+  white-space: pre-wrap;
+  padding: 0.4%;
+}
+
 .track-item-additional-info {
   display: flex;
   flex-direction: column;
@@ -278,7 +301,6 @@ p {
 .track-artistlist {
   display: flex;
   flex-direction: row;
-  margin: 0 -5px;
 }
 
 .artist-track-name {
