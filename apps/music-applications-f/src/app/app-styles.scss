@@ -175,8 +175,8 @@ p {
 }
 
 .symbol {
-  padding-left: 3px;
-  padding-right: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .featured-tracks-label,
@@ -319,10 +319,6 @@ p {
 .track-artistlist {
   display: flex;
   flex-direction: row;
-}
-
-.artist-track-name {
-  padding-right: 5px;
 }
 
 .track-item-footer p {
