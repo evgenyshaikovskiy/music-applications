@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
 import AboutPage from '../pages/about';
+import { LyricsGeneratorNetwork } from '../pages/generator-network';
 import HomePage from '../pages/home';
 import ItemPage from '../pages/item';
 import RankingNeuralNetworkPage from '../pages/ranking-network';
@@ -36,7 +37,7 @@ function ApplicationRouter() {
           <Routes>
             <Route
               path="/lyrics-generator"
-              element={<RankingNeuralNetworkPage />}
+              element={<LyricsGeneratorNetwork />}
             ></Route>
             <Route path="/" element={<HomePage />}></Route>
             <Route path="/about" element={<AboutPage />}></Route>
