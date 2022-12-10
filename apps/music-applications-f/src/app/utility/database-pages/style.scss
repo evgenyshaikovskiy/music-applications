@@ -52,10 +52,18 @@
 
 .database-item-author-toartist-relation {
   display: flex;
-  width: 150px;
+  flex-direction: column;
+  width: 230px;
   font-size: large;
 }
 
+.database-item-author-description-text,
+.database-item-author-text {
+  display: flex;
+}
+
+.database-item-explicit,
+.database-item-release,
 .database-item-by {
   padding-right: 4%;
   color: #1fdf64;

@@ -56,14 +56,47 @@ const RelationViewPage = ({ item }) => {
           {item.properties.name.toUpperCase()}
         </div>
         <div>
+          <div className="database-item-author-toartist-relation">
+            {item.type === 'Playlist' ? (
+              <div className="database-item-author-description-text">
+                <div className="database-item-by">Owner-name:</div>
+                {item.properties.owner_name}
+              </div>
+            ) : (
+              <div></div>
+            )}
+          </div>
           {authorToArtistRelations.length > 0 ? (
             <div className="database-item-author-toartist-relation">
-              <div className="database-item-by">By</div>
-              {authorToArtistRelations.map((relation, index) => {
-                return (
-                  <ToRelation target={relation.target} key={index}></ToRelation>
-                );
-              })}
+              <div className="database-item-author-text">
+                <div className="database-item-by">By</div>
+                {authorToArtistRelations.map((relation, index) => {
+                  return (
+                    <ToRelation
+                      target={relation.target}
+                      key={index}
+                    ></ToRelation>
+                  );
+                })}
+              </div>
+              <div>
+                {item.properties.explicit ? (
+                  <div className="database-item-author-description-text">
+                    <div className="database-item-explicit">Explicit:</div>{' '}
+                    {item.properties.explicit ? <div>Yes</div> : <div>No</div>}
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+                {item.properties.release ? (
+                  <div className="database-item-author-description-text">
+                    <div className="database-item-release">Release:</div>{' '}
+                    {item.properties.release}
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+              </div>
             </div>
           ) : (
             <div></div>
