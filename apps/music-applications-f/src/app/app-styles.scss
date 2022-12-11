@@ -527,9 +527,11 @@ audio {
 .about-item-name-command-text {
   font-weight: 600;
   text-align: center;
-  margin-bottom: 30px;
+  margin-top: 3%;
+  margin-bottom: 3%;
   font-family: serif;
   font-size: 40px;
+  color:#808080;
 }
 
 .about-item-people {
@@ -551,13 +553,9 @@ audio {
 }
 
 .about-item-people-text {
-  margin-right: 30px;
-  margin-left: 15%;
+  margin-left: 5%;
   font-family: cursive;
   font-size: x-large;
   font-weight: 600;
 }
 
-.about-item-peple-img {
-  margin-right: 20%;
-}
