@@ -74,7 +74,7 @@ export function AboutPage() {
           </div>
         </div>
         <div className="about-item-people">
-          <div className="about-item-people-text">&#129299; 7.Самчук Е.У.</div>
+          <div className="about-item-people-text">&#129299; 7.Самчук Е.А.</div>
           <div className="about-item-peple-img">
             <img
               src="https://psv4.userapi.com/c237131/u204889733/docs/d54/7bba66cf9d78/zhenyasamchuk.jpg?extra=w46hKtUHzODE_d45_IkVIhMu8NH1TxN0uTVA_NnNOMx2e8rixd4PHWiiJmrMg-CMDYvbiQlAwBFEP4IG6qObLfJkktB6mRtVuDeKUN9SHeEapw_A8x6L2aS_q6ULigaZciaBAl9cags5pYxrLt1cNdnKsno"
