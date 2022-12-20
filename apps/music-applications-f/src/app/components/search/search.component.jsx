@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import ApplicationSelect from '../ui-elements/select';
-import InteractiveDropdown from '../live-search/interactive-dropdown/interactive-dropdown.component';
+import InteractiveDropdown from '../interactive-dropdown/interactive-dropdown.component';
 import './search.styles.scss';
 
 // refactor this component later on
