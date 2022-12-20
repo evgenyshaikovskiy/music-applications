@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import './pages.scss';
 
-import GoldStar from '../../gold-star.png';
-import Star from '../../star.png';
+import './network.styles.scss'
+import GoldStar from '../../../assets/gold-star.png';
+import Star from '../../../assets/star.png'
 
 export function RankingNeuralNetworkPage() {
   const [comment, setComment] = useState('');
@@ -14,6 +14,8 @@ export function RankingNeuralNetworkPage() {
     // add spinner and popup window
     const requestDelay = setTimeout(() => {
       if (comment !== '') {
+
+        // need refactoring
         axios
           .get(`http://localhost:4200/api/network/comment/${comment}`)
           .then((response) => {
@@ -37,13 +39,13 @@ export function RankingNeuralNetworkPage() {
             setAccuracy(response.data.score);
           });
       }
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(requestDelay);
   }, [comment]);
   return (
-    <div className="neural-network-page-wrapper">
-      <div className="neural-network-fetch-comments-section">
+    <div className="ranking-neural-network-page-wrapper">
+      <div className="ranking-neural-network-fetch-comments-section">
         <input
           type="text"
           className="fetch-comments-input"
@@ -52,7 +54,7 @@ export function RankingNeuralNetworkPage() {
           onChange={(e) => setComment(e.target.value)}
         ></input>
       </div>
-      <div className="neural-network-rating">
+      <div className="ranking-neural-network-rating">
         {stars.map((value, index) => (
           <StarPng isActive={value} key={index}></StarPng>
         ))}

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import Search from '../components/search/search.component';
-import { Strategy } from '../utility/parsing-strategy';
+import Search from '../../components/search/search.component';
+import { Strategy } from '../../utility/parsing-strategy';
 
 export function SearchWebPage() {
   const router = useNavigate();

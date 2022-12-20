@@ -1,0 +1,38 @@
+.about-page-wrapper {
+  font-size: x-large;
+
+  .about-page-header-text {
+    font-weight: 600;
+    text-align: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    font-family: serif;
+    font-size: 40px;
+    color: #808080;
+  }
+
+  .about-page-members-list-wrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .about-page-team-member {
+      margin-right: 1%;
+      margin-left: 1%;
+      margin-bottom: 2%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-style: double;
+      width: 48%;
+      justify-content: space-between;
+
+      .about-page-team-member-text {
+        margin-left: 5%;
+        font-family: cursive;
+        font-size: x-large;
+        font-weight: 600;
+      }
+    }
+  }
+}

@@ -1,11 +1,12 @@
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
-import AboutPage from '../pages/about';
-import { LyricsGeneratorNetwork } from '../pages/generator-network';
-import HomePage from '../pages/home';
+import HomePage from '../pages/home/home';
+import AboutPage from '../pages/about/about';
+import RankingNeuralNetworkPage from '../pages/networks/ranking-network';
+import { LyricsGeneratorNetwork } from '../pages/networks/generator-network';
+import SearchPageDb from '../pages/search/search-db';
+import SearchWebPage from '../pages/search/search-web';
 import ItemPage from '../pages/item';
-import RankingNeuralNetworkPage from '../pages/ranking-network';
-import SearchPage from '../pages/search';
-import SearchWebPage from '../pages/search-web';
+
 import './navbar-styles.scss';
 
 function ApplicationRouter() {
@@ -20,9 +21,9 @@ function ApplicationRouter() {
             <Link className="router-link" to="/ranking">
               Ranking Neural Network
             </Link>
-            {/* <Link className="router-link" to="/lyrics-generator">
+            <Link className="router-link" to="/lyrics-generator">
               Lyrics generator network
-            </Link> */}
+            </Link>
             <Link className="router-link" to="/search">
               Explore graph base
             </Link>
@@ -44,7 +45,7 @@ function ApplicationRouter() {
               path="/ranking"
               element={<RankingNeuralNetworkPage />}
             ></Route>
-            <Route path="/search" element={<SearchPage />}></Route>
+            <Route path="/search" element={<SearchPageDb />}></Route>
             <Route path="/search-web" element={<SearchWebPage />}></Route>
             <Route path="/:type/:id" element={<ItemPage />}></Route>
           </Routes>

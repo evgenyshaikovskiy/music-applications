@@ -1,11 +1,12 @@
-import Search from '../components/search/search.component';
-import { Strategy } from '../utility/parsing-strategy';
-import AppModal from '../utility/modal';
 import { useState } from 'react';
 import axios from 'axios';
-import DatabaseItemPage from '../utility/database-pages/item-view';
 
-export function SearchPage() {
+import Search from '../../components/search/search.component';
+import { Strategy } from '../../utility/parsing-strategy';
+import AppModal from '../../utility/modal';
+import DatabaseItemPage from '../../utility/database-pages/item-view';
+
+export function SearchPageDb() {
   // props to pass
   const selectorParamsArray = [
     { value: 'artist', name: 'Artists' },
@@ -66,4 +67,4 @@ export function SearchPage() {
   );
 }
 
-export default SearchPage;
+export default SearchPageDb;

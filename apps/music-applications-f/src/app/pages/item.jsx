@@ -12,6 +12,8 @@ import {
 } from '../utility/spotify-pages/page-utils';
 import AppModal from '../utility/modal';
 
+
+// todo: refactoring
 function ItemPage() {
   const urlToLogin = 'http://localhost:4200/api/login';
 
