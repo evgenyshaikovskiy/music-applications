@@ -39,7 +39,9 @@ export function AboutPage() {
           </div>
         </div>
         <div className="about-item-people">
-          <div className="about-item-people-text">&#129313; 4.Старостин П.Г.</div>
+          <div className="about-item-people-text">
+            &#129313; 4.Старостин П.Г.
+          </div>
           <div className="about-item-peple-img">
             <img
               src="https://sun9-1.userapi.com/impg/Ia0NpTitDRu0Cc97kYM24U1CXbvwy-l3vnXw9A/ALvmN-El81M.jpg?size=960x1280&quality=96&sign=d28a851ac6bf38f7fa067b4d52805e4d&type=album"

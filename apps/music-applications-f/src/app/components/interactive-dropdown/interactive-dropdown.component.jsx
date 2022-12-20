@@ -1,5 +1,5 @@
 import InteractiveItemList from '../dropdown-item/dropdown-item.component';
-import './interactive-dropdown-item.styles.scss'
+import './interactive-dropdown-item.styles.scss';
 
 const InteractiveDropdown = ({
   list,

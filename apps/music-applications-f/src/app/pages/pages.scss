@@ -30,7 +30,7 @@
 }
 
 .fetch-comments-input {
-  color:white;
+  color: white;
   background-color: black;
   border: 0;
   height: 40px;
@@ -42,7 +42,7 @@
 
   &:focus,
   &:hover {
-    background-color: #A0A0A0;
+    background-color: #a0a0a0;
   }
 
   &:focus-visible {
@@ -87,6 +87,6 @@
   border-radius: 10px;
   cursor: pointer;
   &:hover {
-    background-color: #A0A0A0;
+    background-color: #a0a0a0;
   }
 }

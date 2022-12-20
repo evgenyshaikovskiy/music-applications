@@ -1,4 +1,4 @@
-import './dropdown-item.styles.scss'
+import './dropdown-item.styles.scss';
 
 const InteractiveItemList = ({ item, onItemClickCallback }) => {
   // consider using different print strategies for different objects
