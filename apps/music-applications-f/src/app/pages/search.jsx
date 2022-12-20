@@ -1,4 +1,4 @@
-import LiveSearch from '../components/live-search/search-component';
+import Search from '../components/search/search.component';
 import { Strategy } from '../utility/parsing-strategy';
 import AppModal from '../utility/modal';
 import { useState } from 'react';
@@ -39,7 +39,7 @@ export function SearchPage() {
       <div className="search-page-title">
         <p>Type to search from graph database...</p>
       </div>
-      <LiveSearch
+      <Search
         isInputDisabled={false}
         selectorParamsArray={selectorParamsArray}
         instanceClickCallback={callbackOnInstanceClick}
@@ -49,7 +49,7 @@ export function SearchPage() {
         endpointUrl={endpointUrl}
         parsingStrategy={parsingStrategy}
         selectorClassName="livesearch-selector"
-      ></LiveSearch>
+      ></Search>
       <div>
         {selectedItem && (
           <AppModal

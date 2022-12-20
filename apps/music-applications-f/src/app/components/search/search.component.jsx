@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import ApplicationSelect from '../ui-elements/select';
-import InteractiveDropdown from './interactive-dropdown';
-import './styles.scss';
+import InteractiveDropdown from '../live-search/interactive-dropdown/interactive-dropdown.component';
+import './search.styles.scss';
 
-export function LiveSearch({
+// refactor this component later on
+export function Search({
   isInputDisabled,
   isSelectorDefaultValueDisabled,
   selectorParamsArray,
@@ -85,4 +86,4 @@ export function LiveSearch({
   );
 }
 
-export default LiveSearch;
+export default Search;

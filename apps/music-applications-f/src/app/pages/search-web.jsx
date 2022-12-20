@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import LiveSearch from '../components/live-search/search-component';
+import Search from '../components/search/search.component';
 import { Strategy } from '../utility/parsing-strategy';
 
 export function SearchWebPage() {
@@ -35,7 +35,7 @@ export function SearchWebPage() {
           Click to receive authenticity token from Spotify
         </button>
       </div>
-      <LiveSearch
+      <Search
         isInputDisabled={false}
         selectorParamsArray={selectorParamsArray}
         isSelectorDefaultValueDisabled={false}
@@ -45,7 +45,7 @@ export function SearchWebPage() {
         parsingStrategy={Strategy.ParseWebSpotifyObj}
         instanceClickCallback={callbackDetailsView}
         selectorClassName="livesearch-selector"
-      ></LiveSearch>
+      ></Search>
     </div>
   );
 }

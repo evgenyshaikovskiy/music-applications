@@ -1,0 +1,40 @@
+.clickable-dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-content: stretch;
+  flex-direction: row;
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+
+  .clickable-dropdown-item-text {
+    font-size: larger;
+    font-weight: 600;
+    margin-top: 1%;
+    margin-left: 2%;
+
+    .dropdown-item-type {
+      font-weight: 300;
+    }
+  }
+
+  .view-details-btn {
+    color: #ffffff;
+    border-radius: 5px;
+    border: none;
+    padding: 7px;
+    font-size: larger;
+    font-weight: 400;
+    background-color: black;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #1fdf64;
+    }
+  }
+
+
+  &:hover {
+    background-color: #A0A0A0;
+  }
+}
