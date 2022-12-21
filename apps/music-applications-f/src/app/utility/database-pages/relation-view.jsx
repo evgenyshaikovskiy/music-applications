@@ -37,18 +37,6 @@ const RelationViewPage = ({ item }) => {
       relation.type === 'Contains' && relation.target.type === 'Playlist'
   );
 
-  console.log(
-    authorToTrackRelations,
-    authorToArtistRelations,
-    appearedAtToArtistRelations,
-    appearedAtToTrackRelations,
-    performsInGenreToGenreRelations,
-    performsInGenreToArtistRelations,
-    containsToTrackRelations,
-    containsToAlbumRelations,
-    containsToPlaylistRelations
-  );
-
   return (
     <div className="database-item-page-text">
       <div className="database-item-name-author-text">
