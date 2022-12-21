@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import './about.styles.scss'
+import './about.styles.scss';
 
 export function AboutPage() {
   return (
@@ -20,7 +20,9 @@ export function AboutPage() {
           </div>
         </div>
         <div className="about-page-team-member">
-          <div className="about-page-team-member-text">&#129321; 2.Дятел К.Д.</div>
+          <div className="about-page-team-member-text">
+            &#129321; 2.Дятел К.Д.
+          </div>
           <div className="about-page-team-member-img">
             <img
               src="https://psv4.userapi.com/c237131/u204889733/docs/d26/80b99e93e023/kirilldyatel.jpg?extra=ymhw70zjYIFNXH9AUhZt0knV4kDCSeyuW-urT7envgRbE0pIJQhGmzOjEdx6vKtio9NnH2LdzlQo2egt-lefl4i18x0gr3wgfzQLizTBV9T5P72s2NAUUpD8b-px-hhUY8-fCl7OilUDiauUwn5m661rg5o"
@@ -31,7 +33,9 @@ export function AboutPage() {
           </div>
         </div>
         <div className="about-page-team-member">
-          <div className="about-page-team-member-text">&#128526; 3.Карачун И.В.</div>
+          <div className="about-page-team-member-text">
+            &#128526; 3.Карачун И.В.
+          </div>
           <div className="about-page-team-member-img">
             <img
               src="https://sun9-34.userapi.com/impg/3aQOetFPwKSJZfuz4G_9enPv6Yo9_DaZnNGoJw/e85gIAqOjG8.jpg?size=606x1280&quality=95&sign=d47fc63d589892911acd70d3096608de&type=album"
@@ -68,7 +72,9 @@ export function AboutPage() {
           </div>
         </div>
         <div className="about-page-team-member">
-          <div className="about-page-team-member-text">&#129312; 6.Лаптев К.Д.</div>
+          <div className="about-page-team-member-text">
+            &#129312; 6.Лаптев К.Д.
+          </div>
           <div className="about-page-team-member-img">
             <img
               src="https://sun9-55.userapi.com/impf/c853424/v853424550/df666/w2OPuwrtm8s.jpg?size=997x1500&quality=96&sign=fa55325922a0a667f9b2cbef03eaed52&type=album"
@@ -79,7 +85,9 @@ export function AboutPage() {
           </div>
         </div>
         <div className="about-page-team-member">
-          <div className="about-page-team-member-text">&#129299; 7.Самчук Е.А.</div>
+          <div className="about-page-team-member-text">
+            &#129299; 7.Самчук Е.А.
+          </div>
           <div className="about-page-team-member-img">
             <img
               src="https://psv4.userapi.com/c237131/u204889733/docs/d54/7bba66cf9d78/zhenyasamchuk.jpg?extra=w46hKtUHzODE_d45_IkVIhMu8NH1TxN0uTVA_NnNOMx2e8rixd4PHWiiJmrMg-CMDYvbiQlAwBFEP4IG6qObLfJkktB6mRtVuDeKUN9SHeEapw_A8x6L2aS_q6ULigaZciaBAl9cags5pYxrLt1cNdnKsno"

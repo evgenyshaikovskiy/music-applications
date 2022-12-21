@@ -1,20 +1,21 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import TrackInfo from '../utility/spotify-pages/track-info';
-import { Strategy } from '../utility/parsing-strategy';
-import AlbumInfo from '../utility/spotify-pages/album-info';
-import ArtistInfo from '../utility/spotify-pages/artist-info';
-import PlaylistInfo from '../utility/spotify-pages/playlist-info';
+import TrackInfo from '../../utility/spotify-pages/track-info';
+import { Strategy } from '../../utility/parsing-strategy';
+import AlbumInfo from '../../utility/spotify-pages/album-info';
+import ArtistInfo from '../../utility/spotify-pages/artist-info';
+import PlaylistInfo from '../../utility/spotify-pages/playlist-info';
 import {
   LoadingSpinner,
   PopupMessage,
-} from '../utility/spotify-pages/page-utils';
-import AppModal from '../utility/modal';
+} from '../../utility/spotify-pages/page-utils';
+import AppModal from '../../utility/modal';
 
+import './spotify-content.styles.scss';
 
 // todo: refactoring
-function ItemPage() {
+function SpotifyContentPage() {
   const urlToLogin = 'http://localhost:4200/api/login';
 
   const router = useNavigate();
@@ -162,4 +163,4 @@ function ItemPage() {
   );
 }
 
-export default ItemPage;
+export default SpotifyContentPage;

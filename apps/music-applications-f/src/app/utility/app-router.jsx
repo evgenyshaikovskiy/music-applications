@@ -5,7 +5,7 @@ import RankingNeuralNetworkPage from '../pages/networks/ranking-network';
 import { LyricsGeneratorNetwork } from '../pages/networks/generator-network';
 import SearchPageDb from '../pages/search/search-db';
 import SearchWebPage from '../pages/search/search-web';
-import ItemPage from '../pages/item';
+import SpotifyContentPage from '../pages/spotify-content/spotify-content';
 
 import './navbar-styles.scss';
 
@@ -47,7 +47,7 @@ function ApplicationRouter() {
             ></Route>
             <Route path="/search" element={<SearchPageDb />}></Route>
             <Route path="/search-web" element={<SearchWebPage />}></Route>
-            <Route path="/:type/:id" element={<ItemPage />}></Route>
+            <Route path="/:type/:id" element={<SpotifyContentPage />}></Route>
           </Routes>
         </BrowserRouter>
       </div>

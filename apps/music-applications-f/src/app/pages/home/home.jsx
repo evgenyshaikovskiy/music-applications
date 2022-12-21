@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-import './home.styles.scss'
+import './home.styles.scss';
 
 export function HomePage() {
   const [stats, setStats] = useState({});

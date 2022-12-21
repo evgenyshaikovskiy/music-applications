@@ -6,6 +6,8 @@ import { Strategy } from '../../utility/parsing-strategy';
 import AppModal from '../../utility/modal';
 import DatabaseItemPage from '../../utility/database-pages/item-view';
 
+import './search.styles.scss';
+
 export function SearchPageDb() {
   // props to pass
   const selectorParamsArray = [

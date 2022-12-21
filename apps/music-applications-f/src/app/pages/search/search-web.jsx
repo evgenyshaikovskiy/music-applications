@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import Search from '../../components/search/search.component';
 import { Strategy } from '../../utility/parsing-strategy';
 
+import './search.styles.scss';
+
 export function SearchWebPage() {
   const router = useNavigate();
 
@@ -30,7 +32,7 @@ export function SearchWebPage() {
       <div className="search-web-page-title">
         <p>Type to search from web...</p>
       </div>
-      <div className="search-web-conn-block">
+      <div>
         <button className="receive-token-btn" onClick={onUnlockButtonClick}>
           Click to receive authenticity token from Spotify
         </button>

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-import './network.styles.scss'
+import './network.styles.scss';
 import GoldStar from '../../../assets/gold-star.png';
-import Star from '../../../assets/star.png'
+import Star from '../../../assets/star.png';
 
 export function RankingNeuralNetworkPage() {
   const [comment, setComment] = useState('');
@@ -14,7 +14,6 @@ export function RankingNeuralNetworkPage() {
     // add spinner and popup window
     const requestDelay = setTimeout(() => {
       if (comment !== '') {
-
         // need refactoring
         axios
           .get(`http://localhost:4200/api/network/comment/${comment}`)

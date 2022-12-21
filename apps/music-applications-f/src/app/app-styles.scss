@@ -12,79 +12,6 @@ body {
   color: #ffffff;
 }
 
-.search-page-wrapper,
-.search-web-page-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 50px;
-}
-
-.search-page-title,
-.search-web-page-title {
-  margin-top: 10px;
-  margin-bottom: 50px;
-  font-weight: 700;
-  font-size: xx-large;
-}
-
-.receive-token-btn {
-  border: 3px solid black;
-  background-color: #1fdf64;
-  color: black;
-  font-size: medium;
-  cursor: pointer;
-  padding: 5px;
-  border-radius: 10px;
-}
-
-.item-page-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.item-page-btns {
-  width: 25%;
-  display: flex;
-  justify-content: space-around;
-  padding-bottom: 7%;
-  padding-top: 2%;
-}
-
-.go-back-btn {
-  width: 100%;
-  margin-right: 10%;
-}
-
-.save-to-db-btn {
-  width: 100%;
-}
-
-.go-back-btn,
-.save-to-db-btn {
-  padding: 3%;
-  font-size: medium;
-  background-color: #000000;
-  color: #a0a0a0;
-  border-radius: 4%;
-  border-color: #000000;
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    color: #ffffff;
-    border-color: #808080;
-    background-color: #808080;
-  }
-}
-
-p {
-  display: block;
-}
-
 .item-page-content {
   display: flex;
   flex-direction: column;
@@ -99,8 +26,6 @@ p {
     rgba(0, 0, 0, 1) 30%,
     rgba(29, 185, 84, 1) 100%
   );
-  //background: rgb(0,0,0);
-  //background: linear-gradient(0deg, rgba(0,0,0,1) 53%, rgba(29,185,84,1) 100%);
 }
 
 .item-page-details {
@@ -345,32 +270,6 @@ p {
   }
 }
 
-.item-error-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.item-error-text {
-  font-weight: bold;
-  font-size: xx-large;
-  padding-top: 5%;
-  color: darkred;
-}
-
-.item-error-link-to-token {
-  font-weight: 700;
-  font-size: x-large;
-  margin-top: 30%;
-  cursor: pointer;
-  color: darkred;
-
-  &:hover {
-    color: blue;
-  }
-}
-
 audio {
   &::-webkit-media-controls-panel {
     background-color: #202020;
@@ -460,16 +359,7 @@ audio {
   -ms-animation: fadeOut ease 10s;
 }
 
-.ranking-neural-network-fetch-comments-section {
-  display: flex;
-  flex-direction: column;
-}
-
-.ranking-neural-network-rating-label {
-  margin: 5%;
-  font-size: x-large;
-}
-
+// for popup message
 @keyframes fadeOut {
   0% {
     opacity: 1;
