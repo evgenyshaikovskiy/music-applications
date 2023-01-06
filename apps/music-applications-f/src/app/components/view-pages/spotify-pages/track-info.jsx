@@ -1,12 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import {
-  convertDuration,
-  getLyricsFromGenius,
-  translateLyricsToChunks,
-} from '../utils';
+import { convertDuration, translateLyricsToChunks } from '../utils';
 import { ArtistTrackName } from './page-utils';
 import { useState } from 'react';
-import AppModal from '../modal';
+import AppModal from '../../ui-elements/modal';
 import axios from 'axios';
 
 const TrackInfo = ({ track }) => {

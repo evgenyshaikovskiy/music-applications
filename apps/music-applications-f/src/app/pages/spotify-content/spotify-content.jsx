@@ -1,16 +1,16 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import TrackInfo from '../../utility/spotify-pages/track-info';
-import { Strategy } from '../../utility/parsing-strategy';
-import AlbumInfo from '../../utility/spotify-pages/album-info';
-import ArtistInfo from '../../utility/spotify-pages/artist-info';
-import PlaylistInfo from '../../utility/spotify-pages/playlist-info';
+import TrackInfo from '../../components/view-pages/spotify-pages/track-info';
+import { Strategy } from '../../components/view-pages/parsing-strategy';
+import AlbumInfo from '../../components/view-pages/spotify-pages/album-info';
+import ArtistInfo from '../../components/view-pages/spotify-pages/artist-info';
+import PlaylistInfo from '../../components/view-pages/spotify-pages/playlist-info';
 import {
   LoadingSpinner,
   PopupMessage,
-} from '../../utility/spotify-pages/page-utils';
-import AppModal from '../../utility/modal';
+} from '../../components/view-pages/spotify-pages/page-utils';
+import AppModal from '../../components/ui-elements/modal';
 
 import './spotify-content.styles.scss';
 

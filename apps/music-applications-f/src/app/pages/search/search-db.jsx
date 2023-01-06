@@ -2,9 +2,9 @@ import { useState } from 'react';
 import axios from 'axios';
 
 import Search from '../../components/search/search.component';
-import { Strategy } from '../../utility/parsing-strategy';
-import AppModal from '../../utility/modal';
-import DatabaseItemPage from '../../utility/database-pages/item-view';
+import { Strategy } from '../../components/view-pages/parsing-strategy';
+import AppModal from '../../components/ui-elements/modal';
+import DatabaseItemPage from '../../components/view-pages/database-pages/item-view';
 
 import './search.styles.scss';
 
